@@ -499,29 +499,6 @@ def type_of_furnace(furnace):
     return furnace
 
 def save_xrd_plots(search_results, final_results, interpretation_number, pattern_path, missing_peaks, extra_peaks, target): 
-    # Extract the project number from the pattern path
-    # base_name = os.path.basename(pattern_path)
-    # try:
-    #     if "-" in base_name and "_" in base_name:
-    #         # Split by '-' first, then split the second part by '_'
-    #         first_part = base_name.split('-')[0]
-    #         second_part = base_name.split('-')[1].split('_')[0]
-    #         project_number = first_part + "_" + second_part
-    #     elif "_" in base_name:
-    #         # Split by '_'
-    #         first_part = base_name.split('_')[0]
-    #         second_part = base_name.split('_')[1].split('-')[0]
-    #         project_number = first_part + "_" + second_part
-    #     elif "-" in base_name:
-    #         # Split by '-'
-    #         first_part = base_name.split('-')[0]
-    #         second_part = base_name.split('-')[1].split('.')[0]
-    #         project_number = first_part + "_" + second_part
-    #     else:
-    #         # Default to the first part if no delimiters are present
-    #         project_number = base_name.split('.')[0]
-    # except IndexError:
-    #     project_number = "Invalid format"
     base_name = os.path.basename(pattern_path)
     base_name = os.path.splitext(base_name)[0]
     try:
@@ -2265,32 +2242,6 @@ def normalize_scores_for_sample(interpretations, k=3, center=0.3):
             interp["normalized_score"] = float(scaled_sigmoid(score, k=k, center=center))
         else:
             interp["normalized_score"] = None
-    # k_values = [3, 5, 7, 10, 15]
-
-    # # Print header
-    # header = ["Key", "Score"] + [f"k={k}" for k in k_values]
-    # print("\n" + "-" * 80)
-    # print("{:<20} {:<10} {}".format(header[0], header[1], "  ".join(f"{kval:<10}" for kval in header[2:])))
-    # print("-" * 80)
-
-    # for key, interp in interpretations.items():
-    #     score = interp.get("score")
-    #     if score is not None:
-    #         # Compute normalized scores for all k values
-    #         norm_values = [scaled_sigmoid(score, k=k, center=center) for k in k_values]
-    #         interp["normalized_score"] = float(norm_values[2])  # Set default normalized_score using k=7
-
-    #         # Print row
-    #         print("{:<20} {:<10.4f} {}".format(
-    #             key,
-    #             score,
-    #             "  ".join(f"{val:<10.4f}" for val in norm_values)
-    #         ))
-    #     else:
-    #         interp["normalized_score"] = None
-    #         print("{:<20} {:<10} {}".format(key, "None", "  ".join("N/A".ljust(10) for _ in k_values)))
-
-    # print("-" * 80)
 
     return interpretations
 
@@ -3667,18 +3618,7 @@ def plot_contribution_decomposition_dual_normalized_right_v4(
             f"Balance {bal_pp:.1f}%, "
             f"LLM {llm_pp:.1f}%"
         )
-        
-
-        # ax.text(
-        #     max_posterior * 1.05,
-        #     y_positions[idx],
-        #     summary_text,
-        #     va="center",
-        #     ha="left",
-        #     fontsize=9,
-        #     color="black",
-        # )
-
+    
     # Formatting
     ax.set_yticks([])
     ax.set_xlim(0, max_posterior)  # extra room on the right for text
@@ -3691,14 +3631,6 @@ def plot_contribution_decomposition_dual_normalized_right_v4(
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
 
-    # Legend
-    # ax.legend(
-    #     components,
-    #     loc="center left",
-    #     bbox_to_anchor=(1.01, 0.5),
-    #     fontsize=11,
-    #     # title="Components",
-    # )
     ax.legend(
     components,
     loc="upper center",
