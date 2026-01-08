@@ -1,0 +1,46 @@
+TRI,Original Best AIF,New Best AIF (Weighted),Same AIF Selection?,Chemist Preference,Score A,Score B
+TRI_27,I_2,I_2,True,B,0.0,1.0
+TRI_28,I_13,I_2,False,A,1.0,0.5
+TRI_31,I_4,I_2,False,A,1.0,1.0
+TRI_32,I_3,I_2,False,B,1.0,1.0
+TRI_38,I_2,I_2,True,neither A nor B,1.0,1.0
+TRI_39,I_2,I_2,True,A,1.0,1.0
+TRI_62,I_3,I_2,False,both A & B,1.0,1.0
+TRI_63,I_3,I_2,False,both A & B,1.0,1.0
+TRI_64,I_2,I_2,True,both A & B,1.0,1.0
+TRI_78,I_2,I_2,True,B,1.0,1.0
+TRI_79,I_4,I_2,False,A,1.0,1.0
+TRI_80,I_3,I_2,False,A,1.0,1.0
+TRI_81,I_2,I_2,True,A,1.0,1.0
+TRI_82,I_3,I_2,False,neither A nor B,0.5,0.5
+TRI_83,I_4,I_2,False,both A & B,1.0,1.0
+TRI_84,I_3,I_2,False,neither A nor B,1.0,1.0
+TRI_86,I_2,I_2,True,both A & B,1.0,1.0
+TRI_90,I_3,I_2,False,both A & B,0.5,1.0
+TRI_91,I_2,I_2,True,A,1.0,1.0
+TRI_92,I_3,I_2,False,A,1.0,1.0
+TRI_94,I_7,I_2,False,A,0.5,0.5
+TRI_99,I_11,I_2,False,A,1.0,1.0
+TRI_100,I_3,I_2,False,A,1.0,1.0
+TRI_101,I_4,I_2,False,A,1.0,1.0
+TRI_102,I_4,I_2,False,A,1.0,1.0
+TRI_103,I_2,I_2,True,both A & B,0.5,0.5
+TRI_104,I_2,I_2,True,A,0.5,0.5
+TRI_105,I_3,I_2,False,B,1.0,1.0
+TRI_106,I_4,I_2,False,A,0.5,0.0
+TRI_112,I_4,I_2,False,neither A nor B,0.0,0.0
+TRI_113,I_5,I_2,False,neither A nor B,0.0,0.0
+TRI_130,I_4,I_4,True,A,1.0,0.0
+TRI_172,I_7,I_2,False,B,1.0,1.0
+TRI_180,I_2,I_2,True,B,1.0,1.0
+TRI_181,I_8,I_2,False,neither A nor B,0.0,0.0
+TRI_182,I_2,I_2,True,both A & B,1.0,1.0
+TRI_183,I_3,I_2,False,A,0.5,0.5
+TRI_184,I_7,I_2,False,A,0.5,0.5
+TRI_185,I_3,I_2,False,B,1.0,1.0
+TRI_186,I_5,I_2,False,B,1.0,1.0
+TRI_189,I_3,I_2,False,neither A nor B,0.5,0.5
+TRI_191,I_2,I_2,True,both A & B,1.0,1.0
+TRI_192,I_2,I_2,True,A,,
+TRI_194,I_3,I_2,False,A,1.0,0.5
+TRI_197,I_4,I_4,True,B,0.0,0.5

@@ -1,0 +1,98 @@
+[
+    {
+        "pattern_path": "../../XRD_Likelihood_ML/XRD_all/MINES_12.xy",
+        "chemical_system": "Al-C-Cr-Li-O-Si"
+    },
+    {
+        "pattern_path": "../../XRD_Likelihood_ML/XRD_all/MINES_3.xy",
+        "chemical_system": "Al-C-Fe-Li-O-Si"
+    },
+    {
+        "pattern_path": "../../XRD_Likelihood_ML/XRD_all/MINES_21.xy",
+        "chemical_system": "Al-C-Ga-Li-O-Si"
+    },
+    {
+        "pattern_path": "../../XRD_Likelihood_ML/XRD_all/MINES_18.xy",
+        "chemical_system": "Al-C-In-Li-O-Si"
+    },
+    {
+        "pattern_path": "../../XRD_Likelihood_ML/XRD_all/MINES_15.xy",
+        "chemical_system": "Al-C-Li-Mn-O-Si"
+    },
+    {
+        "pattern_path": "../../XRD_Likelihood_ML/XRD_all/MINES_6.xy",
+        "chemical_system": "Al-C-Li-O-Sc-Si"
+    },
+    {
+        "pattern_path": "../../XRD_Likelihood_ML/XRD_all/MINES_9.xy",
+        "chemical_system": "Al-C-Li-O-Si-V"
+    },
+    {
+        "pattern_path": "../../XRD_Likelihood_ML/XRD_all/MINES_24.xy",
+        "chemical_system": "Al-C-Li-O-Si-Y"
+    },
+    {
+        "pattern_path": "../../XRD_Likelihood_ML/XRD_all/MINES_11.xy",
+        "chemical_system": "Al-C-Cr-Li-O-Si"
+    },
+    {
+        "pattern_path": "../../XRD_Likelihood_ML/XRD_all/MINES_2.xy",
+        "chemical_system": "Al-C-Fe-Li-O-Si"
+    },
+    {
+        "pattern_path": "../../XRD_Likelihood_ML/XRD_all/MINES_20.xy",
+        "chemical_system": "Al-C-Ga-Li-O-Si"
+    },
+    {
+        "pattern_path": "../../XRD_Likelihood_ML/XRD_all/MINES_17.xy",
+        "chemical_system": "Al-C-In-Li-O-Si"
+    },
+    {
+        "pattern_path": "../../XRD_Likelihood_ML/XRD_all/MINES_14.xy",
+        "chemical_system": "Al-C-Li-Mn-O-Si"
+    },
+    {
+        "pattern_path": "../../XRD_Likelihood_ML/XRD_all/MINES_5.xy",
+        "chemical_system": "Al-C-Li-O-Sc-Si"
+    },
+    {
+        "pattern_path": "../../XRD_Likelihood_ML/XRD_all/MINES_8.xy",
+        "chemical_system": "Al-C-Li-O-Si-V"
+    },
+    {
+        "pattern_path": "../../XRD_Likelihood_ML/XRD_all/MINES_23.xy",
+        "chemical_system": "Al-C-Li-O-Si-Y"
+    },
+    {
+        "pattern_path": "../../XRD_Likelihood_ML/XRD_all/MINES_10.xy",
+        "chemical_system": "C-Cr-Li-O-Si"
+    },
+    {
+        "pattern_path": "../../XRD_Likelihood_ML/XRD_all/MINES_1.xy",
+        "chemical_system": "C-Fe-Li-O-Si"
+    },
+    {
+        "pattern_path": "../../XRD_Likelihood_ML/XRD_all/MINES_19.xy",
+        "chemical_system": "C-Ga-Li-O-Si"
+    },
+    {
+        "pattern_path": "../../XRD_Likelihood_ML/XRD_all/MINES_16.xy",
+        "chemical_system": "C-In-Li-O-Si"
+    },
+    {
+        "pattern_path": "../../XRD_Likelihood_ML/XRD_all/MINES_13.xy",
+        "chemical_system": "C-Li-Mn-O-Si"
+    },
+    {
+        "pattern_path": "../../XRD_Likelihood_ML/XRD_all/MINES_4.xy",
+        "chemical_system": "C-Li-O-Sc-Si"
+    },
+    {
+        "pattern_path": "../../XRD_Likelihood_ML/XRD_all/MINES_7.xy",
+        "chemical_system": "C-Li-O-Si-V"
+    },
+    {
+        "pattern_path": "../../XRD_Likelihood_ML/XRD_all/MINES_22.xy",
+        "chemical_system": "C-Li-O-Si-Y"
+    }
+]

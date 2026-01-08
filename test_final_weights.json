@@ -1,0 +1,3356 @@
+{
+  "PG_1048_1": {
+    "I_1": {
+      "phases": [
+        "V20CrO52_59",
+        "V3Cr7O15_167",
+        "Cr2O3_167",
+        "V2O5_59"
+      ],
+      "weight_fraction": [
+        4.340845880744318,
+        46.839575795088415,
+        0.0,
+        48.819578324167274
+      ],
+      "rwp": 4.6,
+      "search_result_rwp": 5.85,
+      "score": 0.8275528246819571,
+      "search_result_score": 0.5133332054349679,
+      "dara_score": 0.8275528246819571,
+      "normalized_rwp": 0.9233333333333333,
+      "missing_peaks": 3,
+      "extra_peaks": 11,
+      "peaks_calculated": 91,
+      "peaks_observed": 68,
+      "flag": 30712.6,
+      "normalized_flag": 0.39406223757336717,
+      "excess_bkg_high_intesity_peaks": 5.839170506912444,
+      "excess_bkg_low_angle_region": 7.2312083729781165,
+      "excess_bkg_high_angle_region": 12.768976897689768,
+      "interpretation_importance": 99.68250361650914,
+      "balance_score": 0.9711,
+      "LLM_phases_likelihood": {
+        "V20CrO52 (space group 59)": 0.3,
+        "V3Cr7O15 (space group 167)": 0.7,
+        "Cr2O3 (space group 167)": 0.6,
+        "V2O5 (space group 59)": 0.8
+      },
+      "LLM_phases_explanation": {
+        "V20CrO52 (space group 59)": "V5O13 is a metastable phase and unlikely to form under the given conditions. The low temperature and short dwell time make its formation less probable.",
+        "V3Cr7O15 (space group 167)": "This phase is plausible as a mixed oxide of vanadium and chromium, potentially forming under the synthesis conditions.",
+        "Cr2O3 (space group 167)": "Cr2O3 is a stable oxide and may remain unreacted due to its inertness at the given temperature.",
+        "V2O5 (space group 59)": "V2O5 is stable at the synthesis temperature and likely to persist as an unreacted precursor."
+      },
+      "LLM_interpretation_likelihood": 0.55,
+      "LLM_interpretation_explanation": "The presence of V2O5 and Cr2O3 as unreacted precursors is plausible, but the formation of V20CrO52 is unlikely. The interpretation is somewhat consistent with the synthesis conditions, but the composition balance score is not optimal.",
+      "normalized_score": 0.9311681819346004,
+      "prior_probability": 0.7956416666666667,
+      "fit_quality": 0.9259449495337556,
+      "trustworthy": true,
+      "posterior_probability": 0.13617179168724883,
+      "adjusted_posterior_probability": 0.13617179168724883,
+      "unnormalized_posterior": 0.7367203828886199
+    },
+    "I_2": {
+      "phases": [
+        "V20CrO52_59",
+        "V3Cr7O15_167",
+        "VCrO3_167"
+      ],
+      "weight_fraction": [
+        53.64114686872832,
+        46.35885313127168,
+        0.0
+      ],
+      "rwp": 4.6,
+      "search_result_rwp": 6.49,
+      "score": 0.8296024821525843,
+      "search_result_score": 0.47083148601435715,
+      "dara_score": 0.8296024821525843,
+      "normalized_rwp": 0.9233333333333333,
+      "missing_peaks": 3,
+      "extra_peaks": 11,
+      "peaks_calculated": 88,
+      "peaks_observed": 68,
+      "flag": 31812.19,
+      "normalized_flag": 0.408170678272406,
+      "excess_bkg_high_intesity_peaks": 5.185533306089083,
+      "excess_bkg_low_angle_region": 7.419600380589916,
+      "excess_bkg_high_angle_region": 12.995049504950495,
+      "interpretation_importance": 99.96527355249812,
+      "balance_score": 0.9775,
+      "LLM_phases_likelihood": {
+        "V20CrO52 (space group 59)": 0.3,
+        "V3Cr7O15 (space group 167)": 0.7,
+        "VCrO3 (space group 167)": 0.1
+      },
+      "LLM_phases_explanation": {
+        "V20CrO52 (space group 59)": "Similar to I_1, V5O13 is unlikely to form under these conditions.",
+        "V3Cr7O15 (space group 167)": "This phase is plausible as a mixed oxide of vanadium and chromium.",
+        "VCrO3 (space group 167)": "VCrO3 is not a known stable phase under these conditions, making its formation unlikely."
+      },
+      "LLM_interpretation_likelihood": 0.5,
+      "LLM_interpretation_explanation": "The interpretation includes unlikely phases such as VCrO3, reducing its overall plausibility. The composition balance score is slightly better than I_1, but the phase set is not fully consistent with the synthesis conditions.",
+      "normalized_score": 0.9321419798887806,
+      "prior_probability": 0.7785416666666667,
+      "fit_quality": 0.9262695488518157,
+      "trustworthy": true,
+      "posterior_probability": 0.1332918861167342,
+      "adjusted_posterior_probability": 0.1332918861167342,
+      "unnormalized_posterior": 0.7211394383456741
+    },
+    "I_3": {
+      "phases": [
+        "V2O5_59",
+        "V3Cr7O15_167",
+        "Cr2O3_167"
+      ],
+      "weight_fraction": [
+        51.18777532726988,
+        48.81222467273012,
+        0.0
+      ],
+      "rwp": 4.74,
+      "search_result_rwp": 6.46,
+      "score": 0.8194400992492177,
+      "search_result_score": 0.4716071790141622,
+      "dara_score": 0.8194400992492177,
+      "normalized_rwp": 0.9209999999999999,
+      "missing_peaks": 3,
+      "extra_peaks": 10,
+      "peaks_calculated": 85,
+      "peaks_observed": 68,
+      "flag": 33451.780000000006,
+      "normalized_flag": 0.42920766322655896,
+      "excess_bkg_high_intesity_peaks": 6.018894009216596,
+      "excess_bkg_low_angle_region": 7.040913415794481,
+      "excess_bkg_high_angle_region": 13.455445544554449,
+      "interpretation_importance": 95.22425653342458,
+      "balance_score": 0.9744,
+      "LLM_phases_likelihood": {
+        "V2O5 (space group 59)": 0.8,
+        "V3Cr7O15 (space group 167)": 0.7,
+        "Cr2O3 (space group 167)": 0.6
+      },
+      "LLM_phases_explanation": {
+        "V2O5 (space group 59)": "V2O5 is stable at the synthesis temperature and likely to persist as an unreacted precursor.",
+        "V3Cr7O15 (space group 167)": "This phase is plausible as a mixed oxide of vanadium and chromium.",
+        "Cr2O3 (space group 167)": "Cr2O3 is a stable oxide and may remain unreacted due to its inertness at the given temperature."
+      },
+      "LLM_interpretation_likelihood": 0.7,
+      "LLM_interpretation_explanation": "This interpretation is more plausible due to the presence of stable phases like V2O5 and Cr2O3. The composition balance score is reasonable, and the phase set aligns well with the synthesis conditions.",
+      "normalized_score": 0.927274943178774,
+      "prior_probability": 0.8600666666666668,
+      "fit_quality": 0.923091647726258,
+      "trustworthy": true,
+      "posterior_probability": 0.14674435499670774,
+      "adjusted_posterior_probability": 0.14674435499670774,
+      "unnormalized_posterior": 0.7939203564877637
+    },
+    "I_4": {
+      "phases": [
+        "V2O5_59",
+        "V3Cr7O15_167",
+        "VCrO3_167"
+      ],
+      "weight_fraction": [
+        51.18744853713642,
+        48.81255146286358,
+        0.0
+      ],
+      "rwp": 4.74,
+      "search_result_rwp": 6.55,
+      "score": 0.8193260780417773,
+      "search_result_score": 0.46661141297451697,
+      "dara_score": 0.8193260780417773,
+      "normalized_rwp": 0.9209999999999999,
+      "missing_peaks": 3,
+      "extra_peaks": 10,
+      "peaks_calculated": 85,
+      "peaks_observed": 68,
+      "flag": 33463.06,
+      "normalized_flag": 0.42935239281766574,
+      "excess_bkg_high_intesity_peaks": 6.022119815668195,
+      "excess_bkg_low_angle_region": 7.0485252140818195,
+      "excess_bkg_high_angle_region": 13.45874587458745,
+      "interpretation_importance": 95.20899082126134,
+      "balance_score": 0.9744,
+      "LLM_phases_likelihood": {
+        "V2O5 (space group 59)": 0.8,
+        "V3Cr7O15 (space group 167)": 0.7,
+        "VCrO3 (space group 167)": 0.1
+      },
+      "LLM_phases_explanation": {
+        "V2O5 (space group 59)": "V2O5 is stable at the synthesis temperature and likely to persist as an unreacted precursor.",
+        "V3Cr7O15 (space group 167)": "This phase is plausible as a mixed oxide of vanadium and chromium.",
+        "VCrO3 (space group 167)": "VCrO3 is not a known stable phase under these conditions, making its formation unlikely."
+      },
+      "LLM_interpretation_likelihood": 0.6,
+      "LLM_interpretation_explanation": "The inclusion of VCrO3 reduces the plausibility of this interpretation. While V2O5 and V3Cr7O15 are plausible, the overall phase set is not fully consistent with the synthesis conditions.",
+      "normalized_score": 0.927219782070154,
+      "prior_probability": 0.8184000000000001,
+      "fit_quality": 0.9230732606900514,
+      "trustworthy": true,
+      "posterior_probability": 0.13963241758259423,
+      "adjusted_posterior_probability": 0.13963241758259423,
+      "unnormalized_posterior": 0.7554431565487382
+    },
+    "I_5": {
+      "phases": [
+        "V20CrO52_59",
+        "V3Cr7O15_167",
+        "Cr2O3_167"
+      ],
+      "weight_fraction": [
+        53.638478886360375,
+        46.361521113639625,
+        0.0
+      ],
+      "rwp": 4.6,
+      "search_result_rwp": 6.39,
+      "score": 0.8295806180869914,
+      "search_result_score": 0.47640086472642373,
+      "dara_score": 0.8295806180869914,
+      "normalized_rwp": 0.9233333333333333,
+      "missing_peaks": 3,
+      "extra_peaks": 11,
+      "peaks_calculated": 88,
+      "peaks_observed": 68,
+      "flag": 31824.86,
+      "normalized_flag": 0.40833324244965097,
+      "excess_bkg_high_intesity_peaks": 5.185941969758892,
+      "excess_bkg_low_angle_region": 7.419600380589916,
+      "excess_bkg_high_angle_region": 12.995049504950495,
+      "interpretation_importance": 99.96225719463506,
+      "balance_score": 0.9775,
+      "LLM_phases_likelihood": {
+        "V20CrO52 (space group 59)": 0.3,
+        "V3Cr7O15 (space group 167)": 0.7,
+        "Cr2O3 (space group 167)": 0.6
+      },
+      "LLM_phases_explanation": {
+        "V20CrO52 (space group 59)": "Similar to I_1, V5O13 is unlikely to form under these conditions.",
+        "V3Cr7O15 (space group 167)": "This phase is plausible as a mixed oxide of vanadium and chromium.",
+        "Cr2O3 (space group 167)": "Cr2O3 is a stable oxide and may remain unreacted due to its inertness at the given temperature."
+      },
+      "LLM_interpretation_likelihood": 0.55,
+      "LLM_interpretation_explanation": "The interpretation is similar to I_1, with unlikely phases such as V20CrO52 reducing its overall plausibility. The composition balance score is slightly better, but the phase set is not fully consistent with the synthesis conditions.",
+      "normalized_score": 0.9321316130599991,
+      "prior_probability": 0.7993750000000001,
+      "fit_quality": 0.926266093242222,
+      "trustworthy": true,
+      "posterior_probability": 0.13685819079755482,
+      "adjusted_posterior_probability": 0.13685819079755482,
+      "unnormalized_posterior": 0.7404339582855013
+    },
+    "I_6": {
+      "phases": [
+        "V20CrO52_59",
+        "Cr2O3_167",
+        "VCrO3_167"
+      ],
+      "weight_fraction": [
+        54.312066823832104,
+        45.687933176167896,
+        0.0
+      ],
+      "rwp": 4.6,
+      "search_result_rwp": 6.76,
+      "score": 0.8298541967569024,
+      "search_result_score": 0.476884244421856,
+      "dara_score": 0.8298541967569024,
+      "normalized_rwp": 0.9233333333333333,
+      "missing_peaks": 3,
+      "extra_peaks": 11,
+      "peaks_calculated": 88,
+      "peaks_observed": 68,
+      "flag": 31741.2,
+      "normalized_flag": 0.40725983131560867,
+      "excess_bkg_high_intesity_peaks": 5.18798528810788,
+      "excess_bkg_low_angle_region": 7.3786869647954285,
+      "excess_bkg_high_angle_region": 13.023102310231017,
+      "interpretation_importance": 100.0,
+      "balance_score": 0.9996,
+      "LLM_phases_likelihood": {
+        "V20CrO52 (space group 59)": 0.3,
+        "Cr2O3 (space group 167)": 0.6,
+        "VCrO3 (space group 167)": 0.1
+      },
+      "LLM_phases_explanation": {
+        "V20CrO52 (space group 59)": "Similar to I_1, V5O13 is unlikely to form under these conditions.",
+        "Cr2O3 (space group 167)": "Cr2O3 is a stable oxide and may remain unreacted due to its inertness at the given temperature.",
+        "VCrO3 (space group 167)": "VCrO3 is not a known stable phase under these conditions, making its formation unlikely."
+      },
+      "LLM_interpretation_likelihood": 0.4,
+      "LLM_interpretation_explanation": "The interpretation includes unlikely phases such as VCrO3, reducing its overall plausibility. The composition balance score is perfect, but the phase set is not fully consistent with the synthesis conditions.",
+      "normalized_score": 0.9322612977954848,
+      "prior_probability": 0.7497666666666668,
+      "fit_quality": 0.9263093214873838,
+      "trustworthy": true,
+      "posterior_probability": 0.12837091270437373,
+      "adjusted_posterior_probability": 0.12837091270437373,
+      "unnormalized_posterior": 0.6945158522738576
+    },
+    "I_7": {
+      "phases": [
+        "VCrO3_167"
+      ],
+      "weight_fraction": [
+        100.0
+      ],
+      "rwp": 9.8,
+      "search_result_rwp": 12.27,
+      "score": 0.30046848288501743,
+      "search_result_score": 0.1313439069090482,
+      "dara_score": 0.30046848288501743,
+      "normalized_rwp": 0.8366666666666667,
+      "missing_peaks": 37,
+      "extra_peaks": 2,
+      "peaks_calculated": 26,
+      "peaks_observed": 68,
+      "flag": 150467.75,
+      "normalized_flag": 1.930597157115647,
+      "excess_bkg_high_intesity_peaks": 6.180220678381692,
+      "excess_bkg_low_angle_region": 16.483349191246432,
+      "excess_bkg_high_angle_region": 17.8793388429752,
+      "interpretation_importance": 4.970944629741566,
+      "balance_score": 1,
+      "LLM_phases_likelihood": {
+        "VCrO3 (space group 167)": 0.1
+      },
+      "LLM_phases_explanation": {
+        "VCrO3 (space group 167)": "VCrO3 is not a known stable phase under these conditions, making its formation unlikely."
+      },
+      "LLM_interpretation_likelihood": 0.1,
+      "LLM_interpretation_explanation": "The interpretation is implausible due to the presence of only VCrO3, which is not expected to form under the given synthesis conditions.",
+      "normalized_score": 0.5616226027809325,
+      "prior_probability": 0.625,
+      "fit_quality": 0.7449853120380886,
+      "trustworthy": false,
+      "posterior_probability": 0.08606215047555536,
+      "adjusted_posterior_probability": 0.008606215047555536,
+      "unnormalized_posterior": 0.46561582002380536
+    },
+    "I_8": {
+      "phases": [
+        "V2O5_59"
+      ],
+      "weight_fraction": [
+        100.0
+      ],
+      "rwp": 12.69,
+      "search_result_rwp": 14.17,
+      "score": 0.28967502102639736,
+      "search_result_score": 0.1522886563310292,
+      "dara_score": 0.28967502102639736,
+      "normalized_rwp": 0.7885000000000001,
+      "missing_peaks": 25,
+      "extra_peaks": 9,
+      "peaks_calculated": 65,
+      "peaks_observed": 68,
+      "flag": 125241.62,
+      "normalized_flag": 1.606929827318865,
+      "excess_bkg_high_intesity_peaks": 6.098487944421741,
+      "excess_bkg_low_angle_region": 15.27812113720643,
+      "excess_bkg_high_angle_region": 17.829752066115702,
+      "interpretation_importance": 0.0,
+      "balance_score": 0.375,
+      "LLM_phases_likelihood": {
+        "V2O5 (space group 59)": 0.8
+      },
+      "LLM_phases_explanation": {
+        "V2O5 (space group 59)": "V2O5 is stable at the synthesis temperature and likely to persist as an unreacted precursor."
+      },
+      "LLM_interpretation_likelihood": 0.3,
+      "LLM_interpretation_explanation": "While V2O5 is plausible, the interpretation lacks other expected phases such as Cr2O3 or mixed oxides, reducing its overall plausibility.",
+      "normalized_score": 0.5525369047540268,
+      "prior_probability": 0.34375,
+      "fit_quality": 0.709845634918009,
+      "trustworthy": false,
+      "posterior_probability": 0.04510151069123837,
+      "adjusted_posterior_probability": 0.004510151069123837,
+      "unnormalized_posterior": 0.2440094370030656
+    },
+    "I_9": {
+      "phases": [
+        "Cr2O3_167"
+      ],
+      "weight_fraction": [
+        100.0
+      ],
+      "rwp": 9.65,
+      "search_result_rwp": 11.86,
+      "score": 0.3187975294183034,
+      "search_result_score": 0.1478393909860401,
+      "dara_score": 0.3187975294183034,
+      "normalized_rwp": 0.8391666666666667,
+      "missing_peaks": 37,
+      "extra_peaks": 1,
+      "peaks_calculated": 25,
+      "peaks_observed": 68,
+      "flag": 148484.86,
+      "normalized_flag": 1.9051554143044926,
+      "excess_bkg_high_intesity_peaks": 6.026563138536976,
+      "excess_bkg_low_angle_region": 16.309229305423415,
+      "excess_bkg_high_angle_region": 17.752066115702476,
+      "interpretation_importance": 6.478765176038961,
+      "balance_score": 0.375,
+      "LLM_phases_likelihood": {
+        "Cr2O3 (space group 167)": 0.6
+      },
+      "LLM_phases_explanation": {
+        "Cr2O3 (space group 167)": "Cr2O3 is a stable oxide and may remain unreacted due to its inertness at the given temperature."
+      },
+      "LLM_interpretation_likelihood": 0.3,
+      "LLM_interpretation_explanation": "While Cr2O3 is plausible, the interpretation lacks other expected phases such as V2O5 or mixed oxides, reducing its overall plausibility.",
+      "normalized_score": 0.5770485775870179,
+      "prior_probability": 0.34375,
+      "fit_quality": 0.7517939703067839,
+      "trustworthy": false,
+      "posterior_probability": 0.04776678494799281,
+      "adjusted_posterior_probability": 0.004776678494799281,
+      "unnormalized_posterior": 0.25842917729295695
+    }
+  },
+  "ARR_39": {
+    "I_1": {
+      "phases": [
+        "Ga33O50_12"
+      ],
+      "weight_fraction": [
+        100.0
+      ],
+      "rwp": 20.11,
+      "search_result_rwp": 21.76,
+      "score": 0.309419829407354,
+      "search_result_score": 0.10477326964159916,
+      "dara_score": 0.309419829407354,
+      "normalized_rwp": 0.6648333333333334,
+      "missing_peaks": 22,
+      "extra_peaks": 4,
+      "peaks_calculated": 59,
+      "peaks_observed": 62,
+      "flag": 236102.54,
+      "normalized_flag": 2.77471550364129,
+      "excess_bkg_high_intesity_peaks": 18.799528301886802,
+      "excess_bkg_low_angle_region": 31.428697962798932,
+      "excess_bkg_high_angle_region": 30.969827586206904,
+      "signal_above_bkg": 87.11122280684347,
+      "interpretation_importance": 0.0,
+      "balance_score": 0.375,
+      "LLM_phases_likelihood": {
+        "Ga33O50 (space group 12)": 0.4
+      },
+      "LLM_phases_explanation": {
+        "Ga33O50 (space group 12)": "Ga33O50 is approximately equal to Ga2O3, which is a precursor in the synthesis. The space group 12 (C2/m) is a known polymorph for Ga2O3, but the synthesis conditions (600\u00b0C in ambient air) are not conducive to forming GaSbO4. Ga2O3 is likely to remain unreacted due to insufficient temperature or reaction time for complete conversion to GaSbO4."
+      },
+      "LLM_interpretation_likelihood": 0.35,
+      "LLM_interpretation_explanation": "This interpretation suggests the presence of unreacted Ga2O3, which is plausible given the synthesis conditions. However, it does not account for the formation of GaSbO4, the target phase, leading to a low likelihood score.",
+      "normalized_score": 0.5691576974807714,
+      "prior_probability": 0.3645833333333333,
+      "fit_quality": 0.6329414547158128,
+      "trustworthy": false,
+      "unnormalized_posterior": 0.23075990536514004,
+      "posterior_probability": 0.5000659137617277,
+      "adjusted_posterior_probability": 0.050006591376172776
+    },
+    "I_2": {
+      "phases": [
+        "Ga2O3_12"
+      ],
+      "weight_fraction": [
+        100.0
+      ],
+      "rwp": 20.14,
+      "search_result_rwp": 21.8,
+      "score": 0.3100132154621804,
+      "search_result_score": 0.10653843848529677,
+      "dara_score": 0.3100132154621804,
+      "normalized_rwp": 0.6643333333333333,
+      "missing_peaks": 23,
+      "extra_peaks": 5,
+      "peaks_calculated": 59,
+      "peaks_observed": 62,
+      "flag": 236525.77,
+      "normalized_flag": 2.7796893715319366,
+      "excess_bkg_high_intesity_peaks": 18.860062893081768,
+      "excess_bkg_low_angle_region": 31.558015943312665,
+      "excess_bkg_high_angle_region": 30.523706896551722,
+      "signal_above_bkg": 87.0829564566178,
+      "interpretation_importance": 100.0,
+      "balance_score": 0.375,
+      "LLM_phases_likelihood": {
+        "Ga2O3 (space group 12)": 0.4
+      },
+      "LLM_phases_explanation": {
+        "Ga2O3 (space group 12)": "Ga2O3 is a precursor and likely remains unreacted under the given synthesis conditions. The space group 12 (C2/m) is a stable polymorph for Ga2O3, and its persistence is expected due to the moderate temperature and short dwell time."
+      },
+      "LLM_interpretation_likelihood": 0.35,
+      "LLM_interpretation_explanation": "Similar to I_1, this interpretation indicates the presence of unreacted Ga2O3. The absence of GaSbO4 formation reduces the likelihood of this interpretation being correct, as it does not align with the target phase.",
+      "normalized_score": 0.5696571288426906,
+      "prior_probability": 0.3645833333333333,
+      "fit_quality": 0.6327745985031191,
+      "trustworthy": false,
+      "unnormalized_posterior": 0.23069907237092885,
+      "posterior_probability": 0.4999340862382723,
+      "adjusted_posterior_probability": 0.04999340862382723
+    }
+  },
+  "TRI_62": {
+    "I_1": {
+      "phases": [
+        "LiV3O8_11",
+        "LiVO3_15"
+      ],
+      "weight_fraction": [
+        78.47963871770452,
+        21.52036128229548
+      ],
+      "rwp": 4.4,
+      "score": 0.8470156158435889,
+      "dara_score": 0.8470156158435889,
+      "normalized_rwp": 0.9266666666666666,
+      "missing_peaks": 1,
+      "extra_peaks": 0,
+      "peaks_calculated": 106,
+      "peaks_observed": 116,
+      "flag": 21136.409999999996,
+      "normalized_flag": 0.26831034028392914,
+      "interpretation_importance": 99.21087373160175,
+      "balance_score": 0.9988888888888889,
+      "LLM_phases_likelihood": {
+        "LiV3O8 (space group 11)": 0.9,
+        "LiVO3 (space group 15)": 0.5
+      },
+      "LLM_phases_explanation": {
+        "LiV3O8 (space group 11)": "LiV3O8 is a known phase that can form under oxidizing conditions at moderate temperatures. The space group 11 (P2\u2081/c) is consistent with its stable polymorph at 500\u00b0C. The high weight fraction suggests it is the dominant phase.",
+        "LiVO3 (space group 15)": "LiVO3 can form under these conditions, but space group 15 (P2\u2081/c) is less common for this compound. It may be kinetically trapped or metastable, reducing its likelihood."
+      },
+      "LLM_interpretation_likelihood": 0.75,
+      "LLM_interpretation_explanation": "This interpretation is plausible with LiV3O8 as the dominant phase, but the presence of LiVO3 in a less common polymorph reduces overall confidence. The composition balance score is excellent, supporting the interpretation.",
+      "normalized_score": 0.9402563058906973,
+      "prior_probability": 0.8951851851851852,
+      "fit_quality": 0.9311965464080102,
+      "trustworthy": true,
+      "posterior_probability": 0.1282791706953507,
+      "adjusted_posterior_probability": 0.1282791706953507,
+      "unnormalized_posterior": 0.8335933528400595
+    },
+    "I_2": {
+      "phases": [
+        "LiV3O8_11",
+        "LiVO3_9"
+      ],
+      "weight_fraction": [
+        77.51151873687252,
+        22.48848126312748
+      ],
+      "rwp": 4.73,
+      "score": 0.8394485463164554,
+      "dara_score": 0.8394485463164554,
+      "normalized_rwp": 0.9211666666666666,
+      "missing_peaks": 1,
+      "extra_peaks": 0,
+      "peaks_calculated": 110,
+      "peaks_observed": 116,
+      "flag": 21435.559999999998,
+      "normalized_flag": 0.2721078176367974,
+      "interpretation_importance": 91.3804636758945,
+      "balance_score": 0.9994555555555555,
+      "LLM_phases_likelihood": {
+        "LiV3O8 (space group 11)": 0.9,
+        "LiVO3 (space group 9)": 0.5
+      },
+      "LLM_phases_explanation": {
+        "LiV3O8 (space group 11)": "Same as I_1: LiV3O8 is expected to form under these conditions and is the dominant phase.",
+        "LiVO3 (space group 9)": "LiVO3 with space group 9 (C2/c) is less stable at 500\u00b0C, suggesting it may be kinetically trapped or metastable. This reduces its likelihood."
+      },
+      "LLM_interpretation_likelihood": 0.75,
+      "LLM_interpretation_explanation": "Similar to I_1, this interpretation is plausible with LiV3O8 as the main phase. The presence of LiVO3 in a less stable polymorph reduces overall confidence, but the composition balance score is excellent.",
+      "normalized_score": 0.9367649220142802,
+      "prior_probability": 0.8955157407407407,
+      "fit_quality": 0.9263660851158712,
+      "trustworthy": true,
+      "posterior_probability": 0.12766086171174335,
+      "adjusted_posterior_probability": 0.12766086171174335,
+      "unnormalized_posterior": 0.8295754109096394
+    },
+    "I_3": {
+      "phases": [
+        "LiV3O8_11",
+        "C_166"
+      ],
+      "weight_fraction": [
+        97.46145602091903,
+        2.538543979080967
+      ],
+      "rwp": 9.3,
+      "score": 0.689610522010957,
+      "dara_score": 0.689610522010957,
+      "normalized_rwp": 0.8450000000000001,
+      "missing_peaks": 11,
+      "extra_peaks": 0,
+      "peaks_calculated": 83,
+      "peaks_observed": 116,
+      "flag": 67172.45,
+      "normalized_flag": 0.852702181553311,
+      "interpretation_importance": 37.55243890576156,
+      "balance_score": 0.9930555555555556,
+      "LLM_phases_likelihood": {
+        "LiV3O8 (space group 11)": 0.9,
+        "C (space group 166)": 0.1
+      },
+      "LLM_phases_explanation": {
+        "LiV3O8 (space group 11)": "LiV3O8 is expected to form under these conditions and is the dominant phase.",
+        "C (space group 166)": "Carbon is unlikely to be present as a solid phase under these conditions. It is more likely to be oxidized or absent, reducing its likelihood significantly."
+      },
+      "LLM_interpretation_likelihood": 0.6,
+      "LLM_interpretation_explanation": "While LiV3O8 is plausible, the presence of carbon as a solid phase is highly unlikely, reducing the overall interpretation likelihood despite a good composition balance score.",
+      "normalized_score": 0.8563598929859655,
+      "prior_probability": 0.8292824074074073,
+      "fit_quality": 0.8487866309953219,
+      "trustworthy": true,
+      "posterior_probability": 0.10831856141979333,
+      "adjusted_posterior_probability": 0.10831856141979333,
+      "unnormalized_posterior": 0.7038838207270233
+    },
+    "I_4": {
+      "phases": [
+        "LiV3O8_11",
+        "C_191"
+      ],
+      "weight_fraction": [
+        98.54440654469839,
+        1.455593455301607
+      ],
+      "rwp": 9.37,
+      "score": 0.6830194897207661,
+      "dara_score": 0.6830194897207661,
+      "normalized_rwp": 0.8438333333333333,
+      "missing_peaks": 11,
+      "extra_peaks": 0,
+      "peaks_calculated": 83,
+      "peaks_observed": 116,
+      "flag": 70199.08,
+      "normalized_flag": 0.8911229031996809,
+      "interpretation_importance": 36.89737476010116,
+      "balance_score": 0.9930555555555556,
+      "LLM_phases_likelihood": {
+        "LiV3O8 (space group 11)": 0.9,
+        "C (space group 191)": 0.1
+      },
+      "LLM_phases_explanation": {
+        "LiV3O8 (space group 11)": "LiV3O8 is expected to form under these conditions and is the dominant phase.",
+        "C (space group 191)": "Carbon is unlikely to be present as a solid phase under these conditions. It is more likely to be oxidized or absent, reducing its likelihood significantly."
+      },
+      "LLM_interpretation_likelihood": 0.6,
+      "LLM_interpretation_explanation": "Similar to I_3, the presence of carbon as a solid phase is highly unlikely, reducing the overall interpretation likelihood despite a good composition balance score.",
+      "normalized_score": 0.8523248300652448,
+      "prior_probability": 0.8292824074074073,
+      "fit_quality": 0.8466638322439705,
+      "trustworthy": true,
+      "posterior_probability": 0.10804765881773362,
+      "adjusted_posterior_probability": 0.10804765881773362,
+      "unnormalized_posterior": 0.7021234210680611
+    },
+    "I_5": {
+      "phases": [
+        "LiV3O8_11",
+        "C_194"
+      ],
+      "weight_fraction": [
+        98.36578369833373,
+        1.6342163016662687
+      ],
+      "rwp": 9.37,
+      "score": 0.6843542829789498,
+      "dara_score": 0.6843542829789498,
+      "normalized_rwp": 0.8438333333333333,
+      "missing_peaks": 11,
+      "extra_peaks": 0,
+      "peaks_calculated": 83,
+      "peaks_observed": 116,
+      "flag": 69112.72,
+      "normalized_flag": 0.877332405131615,
+      "interpretation_importance": 36.971589769954704,
+      "balance_score": 0.9930555555555556,
+      "LLM_phases_likelihood": {
+        "LiV3O8 (space group 11)": 0.9,
+        "C (space group 194)": 0.1
+      },
+      "LLM_phases_explanation": {
+        "LiV3O8 (space group 11)": "LiV3O8 is expected to form under these conditions and is the dominant phase.",
+        "C (space group 194)": "Carbon is unlikely to be present as a solid phase under these conditions. It is more likely to be oxidized or absent, reducing its likelihood significantly."
+      },
+      "LLM_interpretation_likelihood": 0.6,
+      "LLM_interpretation_explanation": "Similar to I_3 and I_4, the presence of carbon as a solid phase is highly unlikely, reducing the overall interpretation likelihood despite a good composition balance score.",
+      "normalized_score": 0.853145360963119,
+      "prior_probability": 0.8292824074074073,
+      "fit_quality": 0.8469373425432618,
+      "trustworthy": true,
+      "posterior_probability": 0.10808256304580563,
+      "adjusted_posterior_probability": 0.10808256304580563,
+      "unnormalized_posterior": 0.7023502383475081
+    },
+    "I_6": {
+      "phases": [
+        "LiV3O8_11",
+        "V4O7_2"
+      ],
+      "weight_fraction": [
+        90.96643374932103,
+        9.03356625067897
+      ],
+      "rwp": 8.59,
+      "score": 0.7255714179815804,
+      "dara_score": 0.7255714179815804,
+      "normalized_rwp": 0.8568333333333332,
+      "missing_peaks": 7,
+      "extra_peaks": 0,
+      "peaks_calculated": 95,
+      "peaks_observed": 116,
+      "flag": 46906.710000000014,
+      "normalized_flag": 0.5954443219874892,
+      "interpretation_importance": 42.92646725838558,
+      "balance_score": 0.9893222222222222,
+      "LLM_phases_likelihood": {
+        "LiV3O8 (space group 11)": 0.9,
+        "V4O7 (space group 2)": 0.4
+      },
+      "LLM_phases_explanation": {
+        "LiV3O8 (space group 11)": "LiV3O8 is expected to form under these conditions and is the dominant phase.",
+        "V4O7 (space group 2)": "V4O7 is a reduced vanadium oxide that may form under slightly reducing conditions. Its presence is plausible but less likely than LiV3O8."
+      },
+      "LLM_interpretation_likelihood": 0.7,
+      "LLM_interpretation_explanation": "This interpretation is plausible with LiV3O8 as the main phase and V4O7 as a minor phase. The composition balance score is slightly lower, but the phase set is reasonable.",
+      "normalized_score": 0.8776374013542414,
+      "prior_probability": 0.8687712962962962,
+      "fit_quality": 0.8637680226736361,
+      "trustworthy": true,
+      "posterior_probability": 0.11547939143099473,
+      "adjusted_posterior_probability": 0.11547939143099473,
+      "unnormalized_posterior": 0.7504168647574634
+    },
+    "I_7": {
+      "phases": [
+        "Li14V43O114_11",
+        "LiVO3_15"
+      ],
+      "weight_fraction": [
+        78.1177977697351,
+        21.882202230264888
+      ],
+      "rwp": 4.36,
+      "score": 0.8459196045176604,
+      "dara_score": 0.8459196045176604,
+      "normalized_rwp": 0.9273333333333333,
+      "missing_peaks": 1,
+      "extra_peaks": 0,
+      "peaks_calculated": 110,
+      "peaks_observed": 116,
+      "flag": 21686.48,
+      "normalized_flag": 0.2752930525269251,
+      "interpretation_importance": 100.0,
+      "balance_score": 0.9988888888888889,
+      "LLM_phases_likelihood": {
+        "LiV3O8 (space group 11)": 0.9,
+        "LiVO3 (space group 15)": 0.5
+      },
+      "LLM_phases_explanation": {
+        "LiV3O8 (space group 11)": "LiV3O8 is expected to form under these conditions and is the dominant phase.",
+        "LiVO3 (space group 15)": "LiVO3 can form under these conditions, but space group 15 (P2\u2081/c) is less common for this compound. It may be kinetically trapped or metastable, reducing its likelihood."
+      },
+      "LLM_interpretation_likelihood": 0.75,
+      "LLM_interpretation_explanation": "Similar to I_1, this interpretation is plausible with LiV3O8 as the main phase. The presence of LiVO3 in a less common polymorph reduces overall confidence, but the composition balance score is excellent.",
+      "normalized_score": 0.9397539126411545,
+      "prior_probability": 0.8951851851851852,
+      "fit_quality": 0.9314735264359403,
+      "trustworthy": true,
+      "posterior_probability": 0.1283173267306357,
+      "adjusted_posterior_probability": 0.1283173267306357,
+      "unnormalized_posterior": 0.8338413012576547
+    },
+    "I_8": {
+      "phases": [
+        "LiVO3_9"
+      ],
+      "weight_fraction": [
+        100.0
+      ],
+      "rwp": 25.47,
+      "score": 0.052739901181441534,
+      "dara_score": 0.052739901181441534,
+      "normalized_rwp": 0.5755,
+      "missing_peaks": 45,
+      "extra_peaks": 0,
+      "peaks_calculated": 93,
+      "peaks_observed": 116,
+      "flag": 250419.51,
+      "normalized_flag": 3.1788815575509184,
+      "interpretation_importance": 0.0,
+      "balance_score": 0.9722222222222222,
+      "LLM_phases_likelihood": {
+        "LiVO3 (space group 9)": 0.5
+      },
+      "LLM_phases_explanation": {
+        "LiVO3 (space group 9)": "LiVO3 with space group 9 (C2/c) is less stable at 500\u00b0C, suggesting it may be kinetically trapped or metastable. This reduces its likelihood."
+      },
+      "LLM_interpretation_likelihood": 0.4,
+      "LLM_interpretation_explanation": "The single-phase interpretation with LiVO3 is less plausible given the synthesis conditions, which favor LiV3O8 formation. The composition balance score is lower, further reducing confidence.",
+      "normalized_score": 0.362121240954383,
+      "prior_probability": 0.7337962962962963,
+      "fit_quality": 0.5043737469847943,
+      "trustworthy": true,
+      "posterior_probability": 0.05695474205627218,
+      "adjusted_posterior_probability": 0.05695474205627218,
+      "unnormalized_posterior": 0.3701075874865273
+    },
+    "I_9": {
+      "phases": [
+        "LiV3O8_11"
+      ],
+      "weight_fraction": [
+        100.0
+      ],
+      "rwp": 10.5,
+      "score": 0.6513388447438027,
+      "dara_score": 0.6513388447438027,
+      "normalized_rwp": 0.825,
+      "missing_peaks": 13,
+      "extra_peaks": 0,
+      "peaks_calculated": 81,
+      "peaks_observed": 116,
+      "flag": 82097.95000000001,
+      "normalized_flag": 1.0421698340027,
+      "interpretation_importance": 31.238528902298956,
+      "balance_score": 0.9930555555555556,
+      "LLM_phases_likelihood": {
+        "LiV3O8 (space group 11)": 0.9
+      },
+      "LLM_phases_explanation": {
+        "LiV3O8 (space group 11)": "LiV3O8 is expected to form under these conditions and is the dominant phase."
+      },
+      "LLM_interpretation_likelihood": 0.85,
+      "LLM_interpretation_explanation": "This interpretation is highly plausible with LiV3O8 as the sole phase, consistent with the synthesis conditions and a good composition balance score. The absence of other phases is acceptable given the dominance of LiV3O8.",
+      "normalized_score": 0.8323524434904658,
+      "prior_probability": 0.9334490740740741,
+      "fit_quality": 0.8274508144968219,
+      "trustworthy": true,
+      "posterior_probability": 0.11885972409167081,
+      "adjusted_posterior_probability": 0.11885972409167081,
+      "unnormalized_posterior": 0.7723831966338969
+    }
+  },
+  "TRI_84": {
+    "I_1": {
+      "phases": [
+        "K2V3O8_100"
+      ],
+      "weight_fraction": [
+        100.0
+      ],
+      "rwp": 15.25,
+      "search_result_rwp": 16.73,
+      "score": 0.5244306350040886,
+      "search_result_score": 0.3794559306870835,
+      "dara_score": 0.5244306350040886,
+      "normalized_rwp": 0.7458333333333333,
+      "missing_peaks": 24,
+      "extra_peaks": 1,
+      "peaks_calculated": 54,
+      "peaks_observed": 102,
+      "flag": 83473.98,
+      "normalized_flag": 1.3894237387215613,
+      "interpretation_importance": 87.52265131544549,
+      "balance_score": 0.99,
+      "LLM_phases_likelihood": {
+        "K2V3O8 (space group 100)": 0.3
+      },
+      "LLM_phases_explanation": {
+        "K2V3O8 (space group 100)": "K2V3O8 is not the expected phase for the target KVO2. The synthesis conditions (temperature and atmosphere) are not conducive to forming this phase, which is more complex and requires different stoichiometry. The space group 100 is not typically associated with K2V3O8, suggesting a misidentification or a less stable polymorph."
+      },
+      "LLM_interpretation_likelihood": 0.2,
+      "LLM_interpretation_explanation": "The interpretation suggests a single phase that is not aligned with the target composition or expected phases under the given conditions. The composition balance score is high, but the phase itself is unlikely to form, reducing the overall plausibility.",
+      "normalized_score": 0.7433354097481276,
+      "prior_probability": 0.6608333333333333,
+      "fit_quality": 0.7450006921382647,
+      "trustworthy": false,
+      "posterior_probability": 0.24414903007868904,
+      "adjusted_posterior_probability": 0.024414903007868905,
+      "unnormalized_posterior": 0.4923212907213699
+    },
+    "I_2": {
+      "phases": [
+        "K10V21O57_100",
+        "V2O5_11",
+        "KV3O8_11"
+      ],
+      "weight_fraction": [
+        62.94707333468581,
+        19.203699263746792,
+        17.84922740156739
+      ],
+      "rwp": 14.07,
+      "search_result_rwp": 17.57,
+      "score": 0.5447687453826457,
+      "search_result_score": 0.34979598783175,
+      "dara_score": 0.5447687453826457,
+      "normalized_rwp": 0.7655,
+      "missing_peaks": 20,
+      "extra_peaks": 3,
+      "peaks_calculated": 84,
+      "peaks_observed": 102,
+      "flag": 48800.71000000001,
+      "normalized_flag": 0.8122874330476,
+      "interpretation_importance": 100.0,
+      "balance_score": 0.9375,
+      "LLM_phases_likelihood": {
+        "K10V21O57 (space group 100)": 0.4,
+        "V2O5 (space group 11)": 0.7,
+        "KV3O8 (space group 11)": 0.5
+      },
+      "LLM_phases_explanation": {
+        "K10V21O57 (space group 100)": "This phase is complex and not typically expected from the given precursors and conditions. It may form under specific conditions but is less likely here due to the mismatch in stoichiometry and synthesis environment.",
+        "V2O5 (space group 11)": "V2O5 is a plausible phase as it can form from the oxidation of V2O3, especially if there is any oxygen leakage in the argon atmosphere. Its presence is reasonable as a minor phase.",
+        "KV3O8 (space group 11)": "KV3O8 is a possible phase, but its formation is less favored compared to simpler vanadium oxides or potassium vanadates. It may form under kinetic trapping or specific conditions."
+      },
+      "LLM_interpretation_likelihood": 0.5,
+      "LLM_interpretation_explanation": "This interpretation includes a mix of plausible and less likely phases. The presence of V2O5 is reasonable, but the complex K10V21O57 phase and KV3O8 reduce the overall likelihood. The composition balance is moderate, reflecting the mixed plausibility of the phases.",
+      "normalized_score": 0.7584994085618787,
+      "prior_probability": 0.7552083333333334,
+      "fit_quality": 0.7631664695206263,
+      "trustworthy": true,
+      "posterior_probability": 0.28581988510436446,
+      "adjusted_posterior_probability": 0.28581988510436446,
+      "unnormalized_posterior": 0.5763496775025563
+    },
+    "I_3": {
+      "phases": [
+        "K10V21O57_100",
+        "KV3O8_11"
+      ],
+      "weight_fraction": [
+        63.67738180050089,
+        36.32261819949912
+      ],
+      "rwp": 15.0,
+      "search_result_rwp": 18.74,
+      "score": 0.5606242205379829,
+      "search_result_score": 0.3203263985120141,
+      "dara_score": 0.5606242205379829,
+      "normalized_rwp": 0.75,
+      "missing_peaks": 16,
+      "extra_peaks": 5,
+      "peaks_calculated": 96,
+      "peaks_observed": 102,
+      "flag": 46822.729999999996,
+      "normalized_flag": 0.7793639715483821,
+      "interpretation_importance": 96.12813947869343,
+      "balance_score": 0.96,
+      "LLM_phases_likelihood": {
+        "K10V21O57 (space group 100)": 0.4,
+        "KV3O8 (space group 11)": 0.5
+      },
+      "LLM_phases_explanation": {
+        "K10V21O57 (space group 100)": "As in I_2, this phase is complex and not typically expected from the given precursors and conditions. It may form under specific conditions but is less likely here due to the mismatch in stoichiometry and synthesis environment.",
+        "KV3O8 (space group 11)": "KV3O8 is a possible phase, but its formation is less favored compared to simpler vanadium oxides or potassium vanadates. It may form under kinetic trapping or specific conditions."
+      },
+      "LLM_interpretation_likelihood": 0.45,
+      "LLM_interpretation_explanation": "This interpretation lacks the presence of V2O5, which is a plausible phase under the conditions. The phases included are not the most expected, and the composition balance is moderate, reflecting the mixed plausibility of the phases.",
+      "normalized_score": 0.7700989190589154,
+      "prior_probability": 0.7474999999999999,
+      "fit_quality": 0.756699639686305,
+      "trustworthy": true,
+      "posterior_probability": 0.28050532490206703,
+      "adjusted_posterior_probability": 0.28050532490206703,
+      "unnormalized_posterior": 0.5656329806655129
+    },
+    "I_4": {
+      "phases": [
+        "KV3O8_11"
+      ],
+      "weight_fraction": [
+        100.0
+      ],
+      "rwp": 23.61,
+      "search_result_rwp": 27.09,
+      "score": 0.0948897056969529,
+      "search_result_score": 0.01617694322730479,
+      "dara_score": 0.0948897056969529,
+      "normalized_rwp": 0.6065,
+      "missing_peaks": 51,
+      "extra_peaks": 11,
+      "peaks_calculated": 34,
+      "peaks_observed": 102,
+      "flag": 108040.98999999999,
+      "normalized_flag": 1.798341426405915,
+      "interpretation_importance": 0.0,
+      "balance_score": 0.9375,
+      "LLM_phases_likelihood": {
+        "KV3O8 (space group 11)": 0.5
+      },
+      "LLM_phases_explanation": {
+        "KV3O8 (space group 11)": "KV3O8 is a possible phase, but its formation is less favored compared to simpler vanadium oxides or potassium vanadates. It may form under kinetic trapping or specific conditions."
+      },
+      "LLM_interpretation_likelihood": 0.4,
+      "LLM_interpretation_explanation": "This single-phase interpretation lacks the complexity expected from the synthesis conditions. The absence of other plausible phases like V2O5 reduces the overall likelihood. The composition balance is moderate, but the phase set is incomplete.",
+      "normalized_score": 0.3938072295249295,
+      "prior_probability": 0.7135416666666666,
+      "fit_quality": 0.5356024098416432,
+      "trustworthy": true,
+      "posterior_probability": 0.18952575991487955,
+      "adjusted_posterior_probability": 0.18952575991487955,
+      "unnormalized_posterior": 0.38217463618908915
+    }
+  },
+  "TRI_80": {
+    "I_1": {
+      "phases": [
+        "V2O3_167",
+        "CaCO3_167"
+      ],
+      "weight_fraction": [
+        59.69431605979752,
+        40.30568394020248
+      ],
+      "rwp": 6.18,
+      "score": 0.8824756033526107,
+      "dara_score": 0.8824756033526107,
+      "normalized_rwp": 0.897,
+      "missing_peaks": 0,
+      "extra_peaks": 0,
+      "peaks_calculated": 50,
+      "peaks_observed": 59,
+      "flag": 27187.979999999996,
+      "normalized_flag": 0.43614311754649576,
+      "interpretation_importance": 94.53299388947312,
+      "balance_score": 0.9955555555555555,
+      "LLM_phases_likelihood": {
+        "V2O3 (space group 167)": 0.8,
+        "CaCO3 (space group 167)": 0.7
+      },
+      "LLM_phases_explanation": {
+        "V2O3 (space group 167)": "V2O3 is stable under reducing conditions, such as those provided by flowing argon. The space group 167 is consistent with the known structure of V2O3, making its formation likely.",
+        "CaCO3 (space group 167)": "CaCO3 is stable at lower temperatures and may persist as an unreacted precursor. The space group 167 is typical for calcite, which is stable at room temperature but can persist at 500\u00b0C if not fully decomposed."
+      },
+      "LLM_interpretation_likelihood": 0.65,
+      "LLM_interpretation_explanation": "This interpretation includes plausible phases given the synthesis conditions. V2O3 is expected under the reducing atmosphere, and CaCO3 may remain unreacted. However, the presence of CaCO3 suggests incomplete reaction towards the target phase CaV2O3.",
+      "normalized_score": 0.9559152708833835,
+      "prior_probability": 0.851574074074074,
+      "fit_quality": 0.9166384236277945,
+      "trustworthy": true,
+      "posterior_probability": 0.28987662903198386,
+      "adjusted_posterior_probability": 0.28987662903198386,
+      "unnormalized_posterior": 0.7805855168615579
+    },
+    "I_2": {
+      "phases": [
+        "V2O3_167",
+        "CaCO3_14"
+      ],
+      "weight_fraction": [
+        58.922933129407774,
+        41.07706687059224
+      ],
+      "rwp": 7.01,
+      "score": 0.8862843333109346,
+      "dara_score": 0.8862843333109346,
+      "normalized_rwp": 0.8831666666666667,
+      "missing_peaks": 0,
+      "extra_peaks": 2,
+      "peaks_calculated": 59,
+      "peaks_observed": 59,
+      "flag": 24433.549999999996,
+      "normalized_flag": 0.39195720571105985,
+      "interpretation_importance": 83.03032127855975,
+      "balance_score": 0.9941222222222222,
+      "LLM_phases_likelihood": {
+        "V2O3 (space group 167)": 0.8,
+        "CaCO3 (space group 14)": 0.6
+      },
+      "LLM_phases_explanation": {
+        "V2O3 (space group 167)": "As above, V2O3 is stable under the synthesis conditions and is likely to form.",
+        "CaCO3 (space group 14)": "Space group 14 is less common for CaCO3, which typically forms in space group 167. This suggests a possible misidentification or distortion, reducing its likelihood slightly."
+      },
+      "LLM_interpretation_likelihood": 0.6,
+      "LLM_interpretation_explanation": "While V2O3 is plausible, the unusual space group for CaCO3 suggests potential misidentification. The interpretation is less likely due to this structural inconsistency, despite a good composition balance.",
+      "normalized_score": 0.9575293574337259,
+      "prior_probability": 0.8299046296296296,
+      "fit_quality": 0.9079542302556863,
+      "trustworthy": true,
+      "posterior_probability": 0.2798239333391965,
+      "adjusted_posterior_probability": 0.2798239333391965,
+      "unnormalized_posterior": 0.7535154191810008
+    },
+    "I_3": {
+      "phases": [
+        "V2O3_15",
+        "CaCO3_167"
+      ],
+      "weight_fraction": [
+        61.16460709919267,
+        38.83539290080732
+      ],
+      "rwp": 5.86,
+      "score": 0.8823571771044125,
+      "dara_score": 0.8823571771044125,
+      "normalized_rwp": 0.9023333333333333,
+      "missing_peaks": 0,
+      "extra_peaks": 0,
+      "peaks_calculated": 50,
+      "peaks_observed": 59,
+      "flag": 25971.050000000003,
+      "normalized_flag": 0.41662141552832993,
+      "interpretation_importance": 100.0,
+      "balance_score": 0.9967888888888888,
+      "LLM_phases_likelihood": {
+        "V2O3 (space group 15)": 0.5,
+        "CaCO3 (space group 167)": 0.7
+      },
+      "LLM_phases_explanation": {
+        "V2O3 (space group 15)": "Space group 15 is not typical for V2O3, which usually forms in space group 167. This suggests a metastable or kinetically trapped phase, reducing its likelihood.",
+        "CaCO3 (space group 167)": "As above, CaCO3 may persist as an unreacted precursor, and space group 167 is typical for calcite."
+      },
+      "LLM_interpretation_likelihood": 0.55,
+      "LLM_interpretation_explanation": "The presence of a less stable V2O3 polymorph reduces the likelihood of this interpretation. While CaCO3 is plausible, the overall phase set is less consistent with expected synthesis outcomes.",
+      "normalized_score": 0.9558648750112247,
+      "prior_probability": 0.8106268518518518,
+      "fit_quality": 0.9201771805592971,
+      "trustworthy": true,
+      "posterior_probability": 0.2770034370515096,
+      "adjusted_posterior_probability": 0.2770034370515096,
+      "unnormalized_posterior": 0.745920331022696
+    },
+    "I_4": {
+      "phases": [
+        "CaCO3_167"
+      ],
+      "weight_fraction": [
+        100.0
+      ],
+      "rwp": 30.75,
+      "score": 0.2555489503158156,
+      "dara_score": 0.2555489503158156,
+      "normalized_rwp": 0.4875,
+      "missing_peaks": 19,
+      "extra_peaks": 1,
+      "peaks_calculated": 31,
+      "peaks_observed": 59,
+      "flag": 151319.32,
+      "normalized_flag": 2.427428590495352,
+      "interpretation_importance": 0.0,
+      "balance_score": 0.18518518518518523,
+      "LLM_phases_likelihood": {
+        "CaCO3 (space group 167)": 0.7
+      },
+      "LLM_phases_explanation": {
+        "CaCO3 (space group 167)": "CaCO3 is stable at lower temperatures and may persist as an unreacted precursor. However, its presence as the sole phase suggests incomplete reaction."
+      },
+      "LLM_interpretation_likelihood": 0.2,
+      "LLM_interpretation_explanation": "This interpretation is unlikely as it only includes CaCO3, which suggests no reaction towards the target phase. The low composition balance score further indicates a significant deviation from the expected product.",
+      "normalized_score": 0.5238627955071916,
+      "prior_probability": 0.19135802469135804,
+      "fit_quality": 0.49962093183573053,
+      "trustworthy": false,
+      "posterior_probability": 0.03550422340035662,
+      "adjusted_posterior_probability": 0.003550422340035662,
+      "unnormalized_posterior": 0.09560647461054103
+    },
+    "I_5": {
+      "phases": [
+        "V2O3_15"
+      ],
+      "weight_fraction": [
+        100.0
+      ],
+      "rwp": 21.55,
+      "score": 0.5200680166482692,
+      "dara_score": 0.5200680166482692,
+      "normalized_rwp": 0.6408333333333334,
+      "missing_peaks": 21,
+      "extra_peaks": 1,
+      "peaks_calculated": 25,
+      "peaks_observed": 59,
+      "flag": 98755.03,
+      "normalized_flag": 1.5842047352395332,
+      "interpretation_importance": 11.122092611679003,
+      "balance_score": 0.5925925925925926,
+      "LLM_phases_likelihood": {
+        "V2O3 (space group 15)": 0.5
+      },
+      "LLM_phases_explanation": {
+        "V2O3 (space group 15)": "As in I_3, space group 15 is not typical for V2O3, suggesting a metastable or kinetically trapped phase. Its presence as the sole phase is unlikely given the synthesis target."
+      },
+      "LLM_interpretation_likelihood": 0.3,
+      "LLM_interpretation_explanation": "The interpretation is unlikely due to the presence of a less stable V2O3 polymorph and the absence of CaCO3 or other phases. The composition balance score indicates a significant deviation from the target phase.",
+      "normalized_score": 0.7400425092614085,
+      "prior_probability": 0.470679012345679,
+      "fit_quality": 0.6739030586426917,
+      "trustworthy": false,
+      "posterior_probability": 0.11779177717695351,
+      "adjusted_posterior_probability": 0.011779177717695351,
+      "unnormalized_posterior": 0.31719202605867436
+    }
+  },
+  "PG_0849_1": {
+    "I_1": {
+      "phases": [
+        "WO3_2",
+        "CoWO4_13"
+      ],
+      "weight_fraction": [
+        69.27617338167306,
+        30.72382661832693
+      ],
+      "rwp": 6.3,
+      "search_result_rwp": 10.11,
+      "score": 0.7683353896289897,
+      "search_result_score": 0.4902684713002265,
+      "dara_score": 0.7683353896289897,
+      "normalized_rwp": 0.895,
+      "missing_peaks": 6,
+      "extra_peaks": 3,
+      "peaks_calculated": 124,
+      "peaks_observed": 97,
+      "flag": 18584.260000000002,
+      "normalized_flag": 0.2406327527359551,
+      "excess_bkg_high_intesity_peaks": 0.0,
+      "excess_bkg_low_angle_region": 6.311300639658853,
+      "excess_bkg_high_angle_region": 23.150197628458493,
+      "signal_above_bkg": 99.20924426793411,
+      "interpretation_importance": 100.0,
+      "balance_score": 0.8775000000000001,
+      "LLM_phases_likelihood": {
+        "WO3 (space group 2)": 0.7,
+        "CoWO4 (space group 13)": 0.9
+      },
+      "LLM_phases_explanation": {
+        "WO3 (space group 2)": "Space group 2 (P1) is not the typical structure for WO3 at high temperatures. The stable polymorph at elevated temperatures is usually monoclinic (P21/c, SG 14). However, WO3 is a precursor and may remain unreacted, so its presence is plausible.",
+        "CoWO4 (space group 13)": "P2/c (SG 13) is the correct and stable structure for CoWO4 at 900\u00b0C. Its formation is expected under the synthesis conditions."
+      },
+      "LLM_interpretation_likelihood": 0.75,
+      "LLM_interpretation_explanation": "This interpretation includes the correct CoWO4 phase but uses an unusual WO3 polymorph. The composition balance score is moderate, suggesting some unreacted WO3, which is plausible.",
+      "normalized_score": 0.9013067968099872,
+      "prior_probability": 0.824375,
+      "fit_quality": 0.8971022656033291,
+      "trustworthy": true,
+      "unnormalized_posterior": 0.7395486802067444,
+      "posterior_probability": 0.2357588707990961,
+      "adjusted_posterior_probability": 0.2357588707990961
+    },
+    "I_2": {
+      "phases": [
+        "WO3_14",
+        "CoWO4_13"
+      ],
+      "weight_fraction": [
+        63.777505317024804,
+        36.22249468297519
+      ],
+      "rwp": 7.32,
+      "search_result_rwp": 10.65,
+      "score": 0.7227401672283221,
+      "search_result_score": 0.48443209998878345,
+      "dara_score": 0.7227401672283221,
+      "normalized_rwp": 0.878,
+      "missing_peaks": 7,
+      "extra_peaks": 4,
+      "peaks_calculated": 132,
+      "peaks_observed": 97,
+      "flag": 27361.21,
+      "normalized_flag": 0.35427847439104604,
+      "excess_bkg_high_intesity_peaks": 0.12988505747126383,
+      "excess_bkg_low_angle_region": 6.577825159914717,
+      "excess_bkg_high_angle_region": 24.760869565217384,
+      "signal_above_bkg": 98.85161527532591,
+      "interpretation_importance": 79.57491793580552,
+      "balance_score": 0.8976,
+      "LLM_phases_likelihood": {
+        "WO3 (space group 14)": 0.8,
+        "CoWO4 (space group 13)": 0.9
+      },
+      "LLM_phases_explanation": {
+        "WO3 (space group 14)": "P21/c (SG 14) is the stable high-temperature polymorph for WO3, making its presence likely as unreacted precursor or due to incomplete reaction.",
+        "CoWO4 (space group 13)": "As above, CoWO4 in P2/c (SG 13) is expected to form under the synthesis conditions."
+      },
+      "LLM_interpretation_likelihood": 0.85,
+      "LLM_interpretation_explanation": "This interpretation is plausible, with CoWO4 in its correct structure and WO3 in a stable high-temperature polymorph. The composition balance score is high, indicating a realistic phase set.",
+      "normalized_score": 0.8760076218544464,
+      "prior_probability": 0.8777666666666666,
+      "fit_quality": 0.8773358739514822,
+      "trustworthy": true,
+      "unnormalized_posterior": 0.7700961856254792,
+      "posterior_probability": 0.24549703351373567,
+      "adjusted_posterior_probability": 0.24549703351373567
+    },
+    "I_3": {
+      "phases": [
+        "WO3_2"
+      ],
+      "weight_fraction": [
+        100.0
+      ],
+      "rwp": 13.51,
+      "search_result_rwp": 17.45,
+      "score": 0.5385002718735736,
+      "search_result_score": 0.3186805614507582,
+      "dara_score": 0.5385002718735736,
+      "normalized_rwp": 0.7748333333333334,
+      "missing_peaks": 30,
+      "extra_peaks": 1,
+      "peaks_calculated": 112,
+      "peaks_observed": 97,
+      "flag": 61334.35,
+      "normalized_flag": 0.7941695541157154,
+      "excess_bkg_high_intesity_peaks": 7.627005347593577,
+      "excess_bkg_low_angle_region": 17.67086330935252,
+      "excess_bkg_high_angle_region": 28.56324110671936,
+      "signal_above_bkg": 96.82794098504807,
+      "interpretation_importance": 27.79267359792859,
+      "balance_score": 0.375,
+      "LLM_phases_likelihood": {
+        "WO3 (space group 2)": 0.7
+      },
+      "LLM_phases_explanation": {
+        "WO3 (space group 2)": "As in I_1, space group 2 (P1) is not typical for WO3 at high temperatures. However, WO3 is a precursor and may remain unreacted, so its presence is plausible."
+      },
+      "LLM_interpretation_likelihood": 0.4,
+      "LLM_interpretation_explanation": "This interpretation lacks CoWO4, which is expected to form under the synthesis conditions. The composition balance score is low, indicating a significant deviation from the target composition.",
+      "normalized_score": 0.7538591326642252,
+      "prior_probability": 0.38541666666666663,
+      "fit_quality": 0.7678419331102972,
+      "trustworthy": false,
+      "unnormalized_posterior": 0.2959390783862604,
+      "posterior_probability": 0.09434167731347358,
+      "adjusted_posterior_probability": 0.009434167731347358
+    },
+    "I_4": {
+      "phases": [
+        "WO3_14"
+      ],
+      "weight_fraction": [
+        100.0
+      ],
+      "rwp": 14.76,
+      "search_result_rwp": 17.74,
+      "score": 0.47639197792207894,
+      "search_result_score": 0.3173543465143239,
+      "dara_score": 0.47639197792207894,
+      "normalized_rwp": 0.754,
+      "missing_peaks": 35,
+      "extra_peaks": 5,
+      "peaks_calculated": 97,
+      "peaks_observed": 97,
+      "flag": 90660.92,
+      "normalized_flag": 1.1738959068143797,
+      "excess_bkg_high_intesity_peaks": 5.306149732620328,
+      "excess_bkg_low_angle_region": 8.801705756929632,
+      "excess_bkg_high_angle_region": 31.448616600790515,
+      "signal_above_bkg": 95.2110217772791,
+      "interpretation_importance": 21.1228342610084,
+      "balance_score": 0.375,
+      "LLM_phases_likelihood": {
+        "WO3 (space group 14)": 0.8
+      },
+      "LLM_phases_explanation": {
+        "WO3 (space group 14)": "As in I_2, P21/c (SG 14) is the stable high-temperature polymorph for WO3, making its presence likely as unreacted precursor or due to incomplete reaction."
+      },
+      "LLM_interpretation_likelihood": 0.45,
+      "LLM_interpretation_explanation": "This interpretation lacks CoWO4, which is expected to form under the synthesis conditions. The composition balance score is low, indicating a significant deviation from the target composition.",
+      "normalized_score": 0.7063516059583522,
+      "prior_probability": 0.40624999999999994,
+      "fit_quality": 0.7381172019861174,
+      "trustworthy": false,
+      "unnormalized_posterior": 0.29986011330686013,
+      "posterior_probability": 0.09559165421152713,
+      "adjusted_posterior_probability": 0.009559165421152713
+    },
+    "I_5": {
+      "phases": [
+        "CoWO4_13"
+      ],
+      "weight_fraction": [
+        100.0
+      ],
+      "rwp": 21.9,
+      "search_result_rwp": 28.43,
+      "score": 0.18088399179162823,
+      "search_result_score": 0.06375371917651608,
+      "dara_score": 0.18088399179162823,
+      "normalized_rwp": 0.635,
+      "missing_peaks": 66,
+      "extra_peaks": 7,
+      "peaks_calculated": 51,
+      "peaks_observed": 97,
+      "flag": 237355.28,
+      "normalized_flag": 3.0733241142135004,
+      "excess_bkg_high_intesity_peaks": 26.8168449197861,
+      "excess_bkg_low_angle_region": 30.691520467836252,
+      "excess_bkg_high_angle_region": 38.6600790513834,
+      "signal_above_bkg": 85.43159788011296,
+      "interpretation_importance": 0.0,
+      "balance_score": 1,
+      "LLM_phases_likelihood": {
+        "CoWO4 (space group 13)": 0.9
+      },
+      "LLM_phases_explanation": {
+        "CoWO4 (space group 13)": "As in previous interpretations, CoWO4 in P2/c (SG 13) is expected to form under the synthesis conditions."
+      },
+      "LLM_interpretation_likelihood": 0.8,
+      "LLM_interpretation_explanation": "This interpretation is plausible, with CoWO4 in its correct structure. However, the absence of WO3 suggests a complete reaction, which may not be entirely realistic given the synthesis conditions.",
+      "normalized_score": 0.46200495793329077,
+      "prior_probability": 0.9166666666666667,
+      "fit_quality": 0.5773349859777636,
+      "trustworthy": true,
+      "unnormalized_posterior": 0.5292237371462833,
+      "posterior_probability": 0.1687099091770478,
+      "adjusted_posterior_probability": 0.1687099091770478
+    },
+    "I_6": {
+      "phases": [
+        "WO3_11"
+      ],
+      "weight_fraction": [
+        100.0
+      ],
+      "rwp": 16.63,
+      "search_result_rwp": 21.48,
+      "score": 0.3558503866992256,
+      "search_result_score": 0.17263377241995623,
+      "dara_score": 0.3558503866992256,
+      "normalized_rwp": 0.7228333333333334,
+      "missing_peaks": 50,
+      "extra_peaks": 8,
+      "peaks_calculated": 63,
+      "peaks_observed": 97,
+      "flag": 131988.72999999998,
+      "normalized_flag": 1.7090167394355618,
+      "excess_bkg_high_intesity_peaks": 10.660427807486633,
+      "excess_bkg_low_angle_region": 23.66187050359711,
+      "excess_bkg_high_angle_region": 33.77272727272727,
+      "signal_above_bkg": 92.2324429243557,
+      "interpretation_importance": 11.555615235097331,
+      "balance_score": 0.375,
+      "LLM_phases_likelihood": {
+        "WO3 (space group 11)": 0.5
+      },
+      "LLM_phases_explanation": {
+        "WO3 (space group 11)": "Space group 11 (P21) is not typical for WO3 at high temperatures. This polymorph is less stable, but WO3 may remain unreacted, so its presence is plausible."
+      },
+      "LLM_interpretation_likelihood": 0.35,
+      "LLM_interpretation_explanation": "This interpretation lacks CoWO4, which is expected to form under the synthesis conditions. The composition balance score is low, indicating a significant deviation from the target composition.",
+      "normalized_score": 0.6081357468224532,
+      "prior_probability": 0.3645833333333333,
+      "fit_quality": 0.6846008044963733,
+      "trustworthy": false,
+      "unnormalized_posterior": 0.2495940433059694,
+      "posterior_probability": 0.07956745969926675,
+      "adjusted_posterior_probability": 0.007956745969926675
+    },
+    "I_7": {
+      "phases": [
+        "WO3_62"
+      ],
+      "weight_fraction": [
+        100.0
+      ],
+      "rwp": 15.9,
+      "search_result_rwp": 20.06,
+      "score": 0.3565675690982325,
+      "search_result_score": 0.24501714914965894,
+      "dara_score": 0.3565675690982325,
+      "normalized_rwp": 0.735,
+      "missing_peaks": 49,
+      "extra_peaks": 14,
+      "peaks_calculated": 71,
+      "peaks_observed": 97,
+      "flag": 112555.67,
+      "normalized_flag": 1.4573935528312538,
+      "excess_bkg_high_intesity_peaks": 9.33689839572193,
+      "excess_bkg_low_angle_region": 17.383093525179852,
+      "excess_bkg_high_angle_region": 32.333992094861664,
+      "signal_above_bkg": 93.66600233608227,
+      "interpretation_importance": 12.459351573590258,
+      "balance_score": 0.375,
+      "LLM_phases_likelihood": {
+        "WO3 (space group 62)": 0.5
+      },
+      "LLM_phases_explanation": {
+        "WO3 (space group 62)": "Space group 62 (Pnma) is not typical for WO3 at high temperatures. This polymorph is less stable, but WO3 may remain unreacted, so its presence is plausible."
+      },
+      "LLM_interpretation_likelihood": 0.35,
+      "LLM_interpretation_explanation": "This interpretation lacks CoWO4, which is expected to form under the synthesis conditions. The composition balance score is low, indicating a significant deviation from the target composition.",
+      "normalized_score": 0.6087352295737818,
+      "prior_probability": 0.3645833333333333,
+      "fit_quality": 0.6929117431912606,
+      "trustworthy": false,
+      "unnormalized_posterior": 0.2526240730384804,
+      "posterior_probability": 0.08053339528585285,
+      "adjusted_posterior_probability": 0.008053339528585285
+    }
+  },
+  "TRI_81": {
+    "I_1": {
+      "phases": [
+        "LiV3O8_11",
+        "Li4CO5_15"
+      ],
+      "weight_fraction": [
+        85.85953949022648,
+        14.14046050977352
+      ],
+      "rwp": 5.47,
+      "score": 0.8284663522960355,
+      "dara_score": 0.8284663522960355,
+      "normalized_rwp": 0.9088333333333334,
+      "missing_peaks": 7,
+      "extra_peaks": 0,
+      "peaks_calculated": 83,
+      "peaks_observed": 86,
+      "flag": 26574.169999999995,
+      "normalized_flag": 0.33118056129349766,
+      "interpretation_importance": 98.92677566676619,
+      "balance_score": 0.9804,
+      "LLM_phases_likelihood": {
+        "LiV3O8 (space group 11)": 0.8,
+        "Li4CO5 (space group 15)": 0.1
+      },
+      "LLM_phases_explanation": {
+        "LiV3O8 (space group 11)": "LiV3O8 is a plausible phase under the given synthesis conditions. It is a known phase that can form from Li2CO3 and V2O5 at moderate temperatures. The space group 11 (P2/c) is consistent with known structures of LiV3O8, and its formation is likely given the temperature and atmosphere.",
+        "Li4CO5 (space group 15)": "Li4CO5 is highly unlikely to form under these conditions. The presence of carbonates suggests incomplete decomposition, but the formation of a complex carbonate phase like Li4CO5 is not expected at 400\u00b0C in an inert atmosphere. This phase is penalized due to its implausibility."
+      },
+      "LLM_interpretation_likelihood": 0.6,
+      "LLM_interpretation_explanation": "While LiV3O8 is a plausible phase, the presence of Li4CO5 significantly reduces the credibility of this interpretation. The composition balance score is high, but the inclusion of an unlikely carbonate phase suggests misidentification or incomplete reaction.",
+      "normalized_score": 0.9316026896458179,
+      "prior_probability": 0.8219000000000001,
+      "fit_quality": 0.9164231187708283,
+      "trustworthy": true,
+      "posterior_probability": 0.3311799333918138,
+      "adjusted_posterior_probability": 0.3311799333918138,
+      "unnormalized_posterior": 0.7532081613177438
+    },
+    "I_2": {
+      "phases": [
+        "LiV3O8_11"
+      ],
+      "weight_fraction": [
+        100.0
+      ],
+      "rwp": 6.91,
+      "score": 0.7855957355834607,
+      "dara_score": 0.7855957355834607,
+      "normalized_rwp": 0.8848333333333334,
+      "missing_peaks": 9,
+      "extra_peaks": 0,
+      "peaks_calculated": 78,
+      "peaks_observed": 86,
+      "flag": 35054.060000000005,
+      "normalized_flag": 0.4368611801014273,
+      "interpretation_importance": 0.0,
+      "balance_score": 0.9375,
+      "LLM_phases_likelihood": {
+        "LiV3O8 (space group 11)": 0.8
+      },
+      "LLM_phases_explanation": {
+        "LiV3O8 (space group 11)": "LiV3O8 is a plausible phase under the given synthesis conditions. It is a known phase that can form from Li2CO3 and V2O5 at moderate temperatures. The space group 11 (P2/c) is consistent with known structures of LiV3O8, and its formation is likely given the temperature and atmosphere."
+      },
+      "LLM_interpretation_likelihood": 0.75,
+      "LLM_interpretation_explanation": "This interpretation is plausible as it includes a likely phase, LiV3O8, which matches the synthesis conditions. However, the absence of other phases or unreacted precursors slightly reduces the likelihood, as a single-phase product is less common in solid-state synthesis.",
+      "normalized_score": 0.910357953407867,
+      "prior_probability": 0.859375,
+      "fit_quality": 0.8933415400248444,
+      "trustworthy": true,
+      "posterior_probability": 0.3375586503748273,
+      "adjusted_posterior_probability": 0.3375586503748273,
+      "unnormalized_posterior": 0.7677153859588507
+    },
+    "I_3": {
+      "phases": [
+        "Li14V43O114_11",
+        "Li4CO5_15"
+      ],
+      "weight_fraction": [
+        85.11995168013054,
+        14.880048319869466
+      ],
+      "rwp": 5.46,
+      "score": 0.8291888513115595,
+      "dara_score": 0.8291888513115595,
+      "normalized_rwp": 0.909,
+      "missing_peaks": 6,
+      "extra_peaks": 0,
+      "peaks_calculated": 83,
+      "peaks_observed": 86,
+      "flag": 25327.640000000007,
+      "normalized_flag": 0.3156456826850903,
+      "interpretation_importance": 100.0,
+      "balance_score": 0.9804,
+      "LLM_phases_likelihood": {
+        "Li14V43O114 (space group 11)": 0.8,
+        "Li4CO5 (space group 15)": 0.1
+      },
+      "LLM_phases_explanation": {
+        "Li14V43O114 (space group 11)": "Li14V43O114 is approximately equal to LiV3O8, which is a plausible phase under the given synthesis conditions. The space group 11 (P2/c) is consistent with known structures of LiV3O8, and its formation is likely given the temperature and atmosphere.",
+        "Li4CO5 (space group 15)": "Li4CO5 is highly unlikely to form under these conditions. The presence of carbonates suggests incomplete decomposition, but the formation of a complex carbonate phase like Li4CO5 is not expected at 400\u00b0C in an inert atmosphere. This phase is penalized due to its implausibility."
+      },
+      "LLM_interpretation_likelihood": 0.6,
+      "LLM_interpretation_explanation": "Similar to I_1, while LiV3O8 is a plausible phase, the presence of Li4CO5 significantly reduces the credibility of this interpretation. The composition balance score is high, but the inclusion of an unlikely carbonate phase suggests misidentification or incomplete reaction.",
+      "normalized_score": 0.931945780989037,
+      "prior_probability": 0.8219000000000001,
+      "fit_quality": 0.9166485936630124,
+      "trustworthy": true,
+      "posterior_probability": 0.3312614162333589,
+      "adjusted_posterior_probability": 0.3312614162333589,
+      "unnormalized_posterior": 0.75339347913163
+    }
+  },
+  "TRI_90": {
+    "I_1": {
+      "phases": [
+        "V2O3_167",
+        "Ca5V3O13_176"
+      ],
+      "weight_fraction": [
+        81.77126958224387,
+        18.228730417756122
+      ],
+      "rwp": 10.19,
+      "score": 0.8431069891391657,
+      "dara_score": 0.8431069891391657,
+      "normalized_rwp": 0.8301666666666667,
+      "missing_peaks": 10,
+      "extra_peaks": 1,
+      "peaks_calculated": 45,
+      "peaks_observed": 49,
+      "flag": 64107.54,
+      "normalized_flag": 0.9835452744290202,
+      "interpretation_importance": 100.0,
+      "balance_score": 0.9501222222222222,
+      "LLM_phases_likelihood": {
+        "V2O3 (space group 167)": 0.8,
+        "Ca5V3O13 (space group 176)": 0.5
+      },
+      "LLM_phases_explanation": {
+        "V2O3 (space group 167)": "V2O3 is a stable phase under reducing conditions, such as those provided by an argon atmosphere. It is likely to remain as an unreacted precursor or form due to incomplete reaction.",
+        "Ca5V3O13 (space group 176)": "Ca5V3O13 is a less common phase and may form under specific conditions. Its formation is plausible but not highly likely given the target of CaV2O3. The presence of this phase suggests incomplete reaction or a deviation from the target stoichiometry."
+      },
+      "LLM_interpretation_likelihood": 0.6,
+      "LLM_interpretation_explanation": "This interpretation includes plausible phases, but the presence of Ca5V3O13 suggests incomplete reaction or deviation from the target. The composition balance score is relatively high, indicating a reasonable match to the target composition, but the phase set is not ideal for the intended synthesis.",
+      "normalized_score": 0.9384595506862675,
+      "prior_probability": 0.804237962962963,
+      "fit_quality": 0.8662642946732003,
+      "trustworthy": true,
+      "posterior_probability": 0.31704619885679564,
+      "adjusted_posterior_probability": 0.31704619885679564,
+      "unnormalized_posterior": 0.6966826317355226
+    },
+    "I_2": {
+      "phases": [
+        "V2O3_167"
+      ],
+      "weight_fraction": [
+        100.0
+      ],
+      "rwp": 11.92,
+      "score": 0.7232833690811952,
+      "dara_score": 0.7232833690811952,
+      "normalized_rwp": 0.8013333333333333,
+      "missing_peaks": 15,
+      "extra_peaks": 0,
+      "peaks_calculated": 24,
+      "peaks_observed": 49,
+      "flag": 136609.02000000002,
+      "normalized_flag": 2.0958713447026596,
+      "interpretation_importance": 4.804820921661814,
+      "balance_score": 0.5925925925925926,
+      "LLM_phases_likelihood": {
+        "V2O3 (space group 167)": 0.8
+      },
+      "LLM_phases_explanation": {
+        "V2O3 (space group 167)": "V2O3 is a stable phase under the given conditions and is likely to remain as an unreacted precursor or form due to incomplete reaction. However, the absence of any calcium-containing phases suggests a significant deviation from the target composition."
+      },
+      "LLM_interpretation_likelihood": 0.4,
+      "LLM_interpretation_explanation": "This interpretation is unlikely because it only includes V2O3, with no calcium-containing phases present. The composition balance score is low, indicating a poor match to the target composition. The absence of expected phases like CaV2O3 or other calcium vanadates significantly reduces the plausibility of this interpretation.",
+      "normalized_score": 0.8763209136957052,
+      "prior_probability": 0.5123456790123456,
+      "fit_quality": 0.826329193454124,
+      "trustworthy": false,
+      "posterior_probability": 0.19266540558233294,
+      "adjusted_posterior_probability": 0.019266540558233295,
+      "unnormalized_posterior": 0.42336619170797707
+    },
+    "I_3": {
+      "phases": [
+        "V2O3_15",
+        "Ca5V3O13_176"
+      ],
+      "weight_fraction": [
+        66.50964558097803,
+        33.49035441902198
+      ],
+      "rwp": 9.99,
+      "score": 0.6687326538162822,
+      "dara_score": 0.6687326538162822,
+      "normalized_rwp": 0.8335,
+      "missing_peaks": 13,
+      "extra_peaks": 10,
+      "peaks_calculated": 55,
+      "peaks_observed": 49,
+      "flag": 45301.07,
+      "normalized_flag": 0.6950142420856931,
+      "interpretation_importance": 31.826789570558788,
+      "balance_score": 0.9847888888888888,
+      "LLM_phases_likelihood": {
+        "V2O3 (space group 15)": 0.5,
+        "Ca5V3O13 (space group 176)": 0.5
+      },
+      "LLM_phases_explanation": {
+        "V2O3 (space group 15)": "This space group is less common for V2O3 and may indicate a metastable or kinetically trapped phase. Its presence is plausible but less likely than the more stable polymorph.",
+        "Ca5V3O13 (space group 176)": "As in I_1, Ca5V3O13 is a less common phase and may form under specific conditions. Its formation is plausible but not highly likely given the target of CaV2O3."
+      },
+      "LLM_interpretation_likelihood": 0.55,
+      "LLM_interpretation_explanation": "This interpretation includes plausible phases, but the presence of a less stable polymorph of V2O3 and Ca5V3O13 suggests incomplete reaction or deviation from the target. The composition balance score is high, indicating a reasonable match to the target composition, but the phase set is not ideal for the intended synthesis.",
+      "normalized_score": 0.8434357767859957,
+      "prior_probability": 0.8036268518518518,
+      "fit_quality": 0.8368119255953319,
+      "trustworthy": true,
+      "posterior_probability": 0.30603413287352094,
+      "adjusted_posterior_probability": 0.30603413287352094,
+      "unnormalized_posterior": 0.6724845333582626
+    },
+    "I_4": {
+      "phases": [
+        "V2O3_15"
+      ],
+      "weight_fraction": [
+        100.0
+      ],
+      "rwp": 11.92,
+      "score": 0.7100108171205157,
+      "dara_score": 0.7100108171205157,
+      "normalized_rwp": 0.8013333333333333,
+      "missing_peaks": 15,
+      "extra_peaks": 0,
+      "peaks_calculated": 22,
+      "peaks_observed": 49,
+      "flag": 136252.65,
+      "normalized_flag": 2.0904038750501304,
+      "interpretation_importance": 0.0,
+      "balance_score": 0.5925925925925926,
+      "LLM_phases_likelihood": {
+        "V2O3 (space group 15)": 0.5
+      },
+      "LLM_phases_explanation": {
+        "V2O3 (space group 15)": "This space group is less common for V2O3 and may indicate a metastable or kinetically trapped phase. Its presence is plausible but less likely than the more stable polymorph."
+      },
+      "LLM_interpretation_likelihood": 0.35,
+      "LLM_interpretation_explanation": "This interpretation is unlikely because it only includes a less stable polymorph of V2O3, with no calcium-containing phases present. The composition balance score is low, indicating a poor match to the target composition. The absence of expected phases like CaV2O3 or other calcium vanadates significantly reduces the plausibility of this interpretation.",
+      "normalized_score": 0.8685840082024746,
+      "prior_probability": 0.49151234567901236,
+      "fit_quality": 0.8237502249563805,
+      "trustworthy": false,
+      "posterior_probability": 0.18425426268735032,
+      "adjusted_posterior_probability": 0.018425426268735032,
+      "unnormalized_posterior": 0.4048834053219247
+    }
+  },
+  "TRI_106": {
+    "I_1": {
+      "phases": [
+        "V2O3_167",
+        "CO_194"
+      ],
+      "weight_fraction": [
+        59.175737445053834,
+        40.824262554946166
+      ],
+      "rwp": 15.59,
+      "score": 0.538376242052905,
+      "dara_score": 0.538376242052905,
+      "normalized_rwp": 0.7401666666666666,
+      "missing_peaks": 29,
+      "extra_peaks": 2,
+      "peaks_calculated": 31,
+      "peaks_observed": 78,
+      "flag": 178572.42,
+      "normalized_flag": 2.1875982488670753,
+      "interpretation_importance": 99.72456327313249,
+      "balance_score": 0.375,
+      "LLM_phases_likelihood": {
+        "V2O3 (space group 167)": 0.8,
+        "CO (space group 194)": 0.1
+      },
+      "LLM_phases_explanation": {
+        "V2O3 (space group 167)": "V2O3 is a plausible phase under reducing conditions, such as those provided by carbon and argon atmosphere. Space group 167 (R-3c) is a known stable polymorph for V2O3 at elevated temperatures.",
+        "CO (space group 194)": "CO is a gas-phase species and not expected to form as a solid under these conditions. Its presence as a solid phase is physically implausible."
+      },
+      "LLM_interpretation_likelihood": 0.25,
+      "LLM_interpretation_explanation": "While V2O3 is a plausible phase, the inclusion of CO as a solid phase significantly reduces the credibility of this interpretation. The composition balance score is low, indicating a mismatch with the target composition.",
+      "normalized_score": 0.7537670139320252,
+      "prior_probability": 0.32291666666666663,
+      "fit_quality": 0.7447001157551195,
+      "trustworthy": false,
+      "posterior_probability": 0.24258238964172987,
+      "adjusted_posterior_probability": 0.02425823896417299,
+      "unnormalized_posterior": 0.240476079045924
+    },
+    "I_2": {
+      "phases": [
+        "V2O3_167"
+      ],
+      "weight_fraction": [
+        100.0
+      ],
+      "rwp": 18.5,
+      "score": 0.4231971441894869,
+      "dara_score": 0.4231971441894869,
+      "normalized_rwp": 0.6916666666666667,
+      "missing_peaks": 35,
+      "extra_peaks": 0,
+      "peaks_calculated": 23,
+      "peaks_observed": 78,
+      "flag": 227052.65,
+      "normalized_flag": 2.781504442514857,
+      "interpretation_importance": 3.395936178708525,
+      "balance_score": 0.375,
+      "LLM_phases_likelihood": {
+        "V2O3 (space group 167)": 0.8
+      },
+      "LLM_phases_explanation": {
+        "V2O3 (space group 167)": "V2O3 is expected to form under reducing conditions at 700\u00b0C, especially with carbon present. Space group 167 is a stable polymorph for V2O3 at this temperature."
+      },
+      "LLM_interpretation_likelihood": 0.5,
+      "LLM_interpretation_explanation": "This interpretation is plausible due to the presence of V2O3, but it lacks completeness as it does not account for other potential phases or unreacted precursors. The composition balance score is low, indicating a mismatch with the target composition.",
+      "normalized_score": 0.6637761145301736,
+      "prior_probability": 0.4270833333333333,
+      "fit_quality": 0.6823698159545023,
+      "trustworthy": false,
+      "posterior_probability": 0.293981376722106,
+      "adjusted_posterior_probability": 0.0293981376722106,
+      "unnormalized_posterior": 0.291428775563902
+    },
+    "I_3": {
+      "phases": [
+        "V2O3_15",
+        "CO_194"
+      ],
+      "weight_fraction": [
+        58.66625158878149,
+        41.33374841121851
+      ],
+      "rwp": 15.33,
+      "score": 0.5299085591738198,
+      "dara_score": 0.5299085591738198,
+      "normalized_rwp": 0.7445,
+      "missing_peaks": 30,
+      "extra_peaks": 2,
+      "peaks_calculated": 30,
+      "peaks_observed": 78,
+      "flag": 177766.28000000003,
+      "normalized_flag": 2.177722645163314,
+      "interpretation_importance": 100.0,
+      "balance_score": 0.375,
+      "LLM_phases_likelihood": {
+        "V2O3 (space group 15)": 0.5,
+        "CO (space group 194)": 0.1
+      },
+      "LLM_phases_explanation": {
+        "V2O3 (space group 15)": "Space group 15 (C2/c) is less commonly reported for V2O3 and may reflect a metastable or less favorable polymorph. Its presence is possible but less likely than the stable polymorph.",
+        "CO (space group 194)": "CO is a gas-phase species and not expected to form as a solid under these conditions. Its presence as a solid phase is physically implausible."
+      },
+      "LLM_interpretation_likelihood": 0.2,
+      "LLM_interpretation_explanation": "The inclusion of CO as a solid phase significantly reduces the credibility of this interpretation. The less stable polymorph of V2O3 further reduces the likelihood. The composition balance score is low, indicating a mismatch with the target composition.",
+      "normalized_score": 0.747450357586698,
+      "prior_probability": 0.3020833333333333,
+      "fit_quality": 0.7454834525288994,
+      "trustworthy": false,
+      "posterior_probability": 0.22717061852363032,
+      "adjusted_posterior_probability": 0.022717061852363035,
+      "unnormalized_posterior": 0.22519812628477168
+    },
+    "I_4": {
+      "phases": [
+        "V2O3_15"
+      ],
+      "weight_fraction": [
+        100.0
+      ],
+      "rwp": 18.29,
+      "score": 0.41087638654169895,
+      "dara_score": 0.41087638654169895,
+      "normalized_rwp": 0.6951666666666667,
+      "missing_peaks": 35,
+      "extra_peaks": 0,
+      "peaks_calculated": 23,
+      "peaks_observed": 78,
+      "flag": 227051.93,
+      "normalized_flag": 2.7814956221676885,
+      "interpretation_importance": 0.0,
+      "balance_score": 0.375,
+      "LLM_phases_likelihood": {
+        "V2O3 (space group 15)": 0.5
+      },
+      "LLM_phases_explanation": {
+        "V2O3 (space group 15)": "Space group 15 (C2/c) is less commonly reported for V2O3 and may reflect a metastable or less favorable polymorph. Its presence is possible but less likely than the stable polymorph."
+      },
+      "LLM_interpretation_likelihood": 0.3,
+      "LLM_interpretation_explanation": "This interpretation is plausible due to the presence of V2O3, but it lacks completeness as it does not account for other potential phases or unreacted precursors. The composition balance score is low, indicating a mismatch with the target composition.",
+      "normalized_score": 0.6537174497565836,
+      "prior_probability": 0.34375,
+      "fit_quality": 0.6813502610299723,
+      "trustworthy": false,
+      "posterior_probability": 0.23626561511253394,
+      "adjusted_posterior_probability": 0.023626561511253395,
+      "unnormalized_posterior": 0.23421415222905298
+    }
+  },
+  "TRI_114": {
+    "I_1": {
+      "phases": [
+        "Li3VO4_31",
+        "V2O3_167",
+        "V4O7_2"
+      ],
+      "weight_fraction": [
+        41.01302081550663,
+        35.58609642507536,
+        23.400882759418018
+      ],
+      "rwp": 6.92,
+      "score": 0.7757040473229126,
+      "dara_score": 0.7757040473229126,
+      "normalized_rwp": 0.8846666666666666,
+      "missing_peaks": 9,
+      "extra_peaks": 8,
+      "peaks_calculated": 124,
+      "peaks_observed": 94,
+      "flag": 34973.55,
+      "normalized_flag": 0.3738067082141057,
+      "interpretation_importance": 75.03472091366845,
+      "balance_score": 0.9639,
+      "LLM_phases_likelihood": {
+        "Li3VO4 (space group 31)": 0.8,
+        "V2O3 (space group 167)": 0.9,
+        "V4O7 (space group 2)": 0.85
+      },
+      "LLM_phases_explanation": {
+        "Li3VO4 (space group 31)": "Li3VO4 is a plausible phase under these synthesis conditions, especially given the presence of Li2CO3 and V2O5. Space group 31 is consistent with known structures, and the reducing atmosphere supports its formation.",
+        "V2O3 (space group 167)": "V2O3 is a reduced vanadium oxide that can form under the reducing conditions provided by the Argon and Hydrogen atmosphere. It is thermodynamically stable at the given temperature.",
+        "V4O7 (space group 2)": "V4O7 is a Magn\u00e9li phase that can form under reducing conditions. Its presence is plausible given the synthesis atmosphere and temperature."
+      },
+      "LLM_interpretation_likelihood": 0.85,
+      "LLM_interpretation_explanation": "This interpretation includes plausible phases that match the synthesis conditions and composition balance score. The presence of Li3VO4, V2O3, and V4O7 is consistent with the reducing atmosphere and temperature, making this a likely scenario.",
+      "normalized_score": 0.9052060587364841,
+      "prior_probability": 0.9164416666666666,
+      "fit_quality": 0.8915131306899391,
+      "trustworthy": true,
+      "posterior_probability": 0.21659328299160757,
+      "adjusted_posterior_probability": 0.21659328299160757,
+      "unnormalized_posterior": 0.8170197793447055
+    },
+    "I_2": {
+      "phases": [
+        "Li3VO4_31",
+        "V2O3_167",
+        "V2O3_15"
+      ],
+      "weight_fraction": [
+        47.8120028628317,
+        45.54940637915269,
+        6.638590758015615
+      ],
+      "rwp": 8.51,
+      "score": 0.6363069737586357,
+      "dara_score": 0.6363069737586357,
+      "normalized_rwp": 0.8581666666666667,
+      "missing_peaks": 19,
+      "extra_peaks": 1,
+      "peaks_calculated": 92,
+      "peaks_observed": 94,
+      "flag": 89903.56,
+      "normalized_flag": 0.9609134280142949,
+      "interpretation_importance": 0.0,
+      "balance_score": 0.9804,
+      "LLM_phases_likelihood": {
+        "Li3VO4 (space group 31)": 0.8,
+        "V2O3 (space group 167)": 0.9,
+        "V2O3 (space group 15)": 0.9
+      },
+      "LLM_phases_explanation": {
+        "Li3VO4 (space group 31)": "As in I_1, Li3VO4 is plausible under the synthesis conditions. The space group is consistent with known structures.",
+        "V2O3 (space group 167)": "V2O3 is stable under reducing conditions and is expected to form at the given temperature.",
+        "V2O3 (space group 15)": "V2O3 in space group 15 is less common but still plausible under the synthesis conditions. The reducing atmosphere supports its formation."
+      },
+      "LLM_interpretation_likelihood": 0.8,
+      "LLM_interpretation_explanation": "This interpretation is plausible, with Li3VO4 and V2O3 phases consistent with the synthesis conditions. The presence of two V2O3 polymorphs is unusual but not impossible, given the reducing atmosphere.",
+      "normalized_score": 0.8225460814786,
+      "prior_probability": 0.9052333333333333,
+      "fit_quality": 0.8462931382706445,
+      "trustworthy": true,
+      "posterior_probability": 0.20309244628083747,
+      "adjusted_posterior_probability": 0.20309244628083747,
+      "unnormalized_posterior": 0.766092758533863
+    },
+    "I_3": {
+      "phases": [
+        "Li3VO4_62",
+        "V2O3_167",
+        "V4O7_2",
+        "Li_194"
+      ],
+      "weight_fraction": [
+        17.518872416120516,
+        22.23686182300192,
+        12.118910881269377,
+        48.12535487960818
+      ],
+      "rwp": 7.48,
+      "score": 0.7116371786733239,
+      "dara_score": 0.7116371786733239,
+      "normalized_rwp": 0.8753333333333333,
+      "missing_peaks": 15,
+      "extra_peaks": 6,
+      "peaks_calculated": 116,
+      "peaks_observed": 94,
+      "flag": 43246.79,
+      "normalized_flag": 0.46223332234579284,
+      "interpretation_importance": 40.94468123528803,
+      "balance_score": 0.9879,
+      "LLM_phases_likelihood": {
+        "Li3VO4 (space group 62)": 0.5,
+        "V2O3 (space group 167)": 0.9,
+        "V4O7 (space group 2)": 0.85,
+        "Li (space group 194)": 0.1
+      },
+      "LLM_phases_explanation": {
+        "Li3VO4 (space group 62)": "Space group 62 is less common for Li3VO4 and may indicate a metastable or kinetically trapped phase. Its formation is less likely than the ground-state polymorph.",
+        "V2O3 (space group 167)": "V2O3 is stable under reducing conditions and expected to form at the given temperature.",
+        "V4O7 (space group 2)": "V4O7 is plausible under reducing conditions, consistent with the synthesis atmosphere.",
+        "Li (space group 194)": "Metallic Li is highly unlikely to form or persist under these conditions, especially given the presence of oxygen and reducing atmosphere. Its inclusion is implausible."
+      },
+      "LLM_interpretation_likelihood": 0.4,
+      "LLM_interpretation_explanation": "The presence of metallic Li significantly reduces the plausibility of this interpretation. While V2O3 and V4O7 are consistent with the synthesis conditions, the unusual Li3VO4 polymorph and implausible Li phase lower the overall likelihood.",
+      "normalized_score": 0.8695412364779946,
+      "prior_probability": 0.7429416666666666,
+      "fit_quality": 0.8734026343815536,
+      "trustworthy": true,
+      "posterior_probability": 0.1720210629057787,
+      "adjusted_posterior_probability": 0.1720210629057787,
+      "unnormalized_posterior": 0.6488872088584887
+    },
+    "I_4": {
+      "phases": [
+        "Li3VO4_31",
+        "V2O3_15",
+        "V4O7_2"
+      ],
+      "weight_fraction": [
+        42.511783873188364,
+        38.64787901800609,
+        18.840337108805546
+      ],
+      "rwp": 6.29,
+      "score": 0.7831953258020287,
+      "dara_score": 0.7831953258020287,
+      "normalized_rwp": 0.8951666666666667,
+      "missing_peaks": 8,
+      "extra_peaks": 4,
+      "peaks_calculated": 126,
+      "peaks_observed": 94,
+      "flag": 40574.759999999995,
+      "normalized_flag": 0.4336739470879383,
+      "interpretation_importance": 100.0,
+      "balance_score": 0.9676,
+      "LLM_phases_likelihood": {
+        "Li3VO4 (space group 31)": 0.8,
+        "V2O3 (space group 15)": 0.9,
+        "V4O7 (space group 2)": 0.85
+      },
+      "LLM_phases_explanation": {
+        "Li3VO4 (space group 31)": "Li3VO4 is plausible under the synthesis conditions, with space group 31 being consistent with known structures.",
+        "V2O3 (space group 15)": "V2O3 in space group 15 is less common but plausible under the reducing conditions.",
+        "V4O7 (space group 2)": "V4O7 is consistent with the reducing atmosphere and temperature, making its formation plausible."
+      },
+      "LLM_interpretation_likelihood": 0.82,
+      "LLM_interpretation_explanation": "This interpretation includes plausible phases that match the synthesis conditions. The presence of Li3VO4, V2O3, and V4O7 is consistent with the reducing atmosphere, making this a likely scenario.",
+      "normalized_score": 0.9091164187047522,
+      "prior_probability": 0.9060999999999999,
+      "fit_quality": 0.8998165840126952,
+      "trustworthy": true,
+      "posterior_probability": 0.2161436778825753,
+      "adjusted_posterior_probability": 0.2161436778825753,
+      "unnormalized_posterior": 0.815323806773903
+    },
+    "I_5": {
+      "phases": [
+        "V2O3_15",
+        "Li3VO4_62",
+        "V4O7_2"
+      ],
+      "weight_fraction": [
+        41.51832926566932,
+        30.821668128923363,
+        27.660002605407307
+      ],
+      "rwp": 7.75,
+      "score": 0.7130251975203137,
+      "dara_score": 0.7130251975203137,
+      "normalized_rwp": 0.8708333333333333,
+      "missing_peaks": 13,
+      "extra_peaks": 10,
+      "peaks_calculated": 131,
+      "peaks_observed": 94,
+      "flag": 32559.91,
+      "normalized_flag": 0.34800907476786147,
+      "interpretation_importance": 34.64142461290914,
+      "balance_score": 0.9271,
+      "LLM_phases_likelihood": {
+        "V2O3 (space group 15)": 0.9,
+        "Li3VO4 (space group 62)": 0.5,
+        "V4O7 (space group 2)": 0.85
+      },
+      "LLM_phases_explanation": {
+        "V2O3 (space group 15)": "V2O3 is stable under reducing conditions and expected to form at the given temperature.",
+        "Li3VO4 (space group 62)": "Space group 62 is less common for Li3VO4 and may indicate a metastable or kinetically trapped phase. Its formation is less likely than the ground-state polymorph.",
+        "V4O7 (space group 2)": "V4O7 is plausible under reducing conditions, consistent with the synthesis atmosphere."
+      },
+      "LLM_interpretation_likelihood": 0.7,
+      "LLM_interpretation_explanation": "While V2O3 and V4O7 are consistent with the synthesis conditions, the unusual Li3VO4 polymorph lowers the overall likelihood. The composition balance score is the lowest among interpretations, further reducing plausibility.",
+      "normalized_score": 0.8703561568023163,
+      "prior_probability": 0.832475,
+      "fit_quality": 0.870674274489661,
+      "trustworthy": true,
+      "posterior_probability": 0.192149529939201,
+      "adjusted_posterior_probability": 0.192149529939201,
+      "unnormalized_posterior": 0.7248145666557805
+    }
+  },
+  "TRI_183": {
+    "I_1": {
+      "phases": [
+        "Mg2V2O7_2",
+        "MgV2O6_12",
+        "VO2_58"
+      ],
+      "weight_fraction": [
+        31.415721429109638,
+        61.49895547928376,
+        7.085323091606596
+      ],
+      "rwp": 6.14,
+      "score": 0.6217536323265256,
+      "dara_score": 0.6217536323265256,
+      "normalized_rwp": 0.8976666666666666,
+      "missing_peaks": 12,
+      "extra_peaks": 18,
+      "peaks_calculated": 140,
+      "peaks_observed": 80,
+      "flag": 44740.69,
+      "normalized_flag": 0.3958288562925422,
+      "interpretation_importance": 100.0,
+      "balance_score": 0.9804,
+      "LLM_phases_likelihood": {
+        "Mg2V2O7 (space group 2)": 0.8,
+        "MgV2O6 (space group 12)": 0.9,
+        "VO2 (space group 58)": 0.5
+      },
+      "LLM_phases_explanation": {
+        "Mg2V2O7 (space group 2)": "Mg2V2O7 is a plausible phase under these synthesis conditions, as it can form from MgCO3 and V2O5 at 500\u00b0C. The space group 2 is consistent with known polymorphs of Mg2V2O7.",
+        "MgV2O6 (space group 12)": "MgV2O6 is a likely phase given the synthesis conditions and precursors. The space group 12 is consistent with known polymorphs of MgV2O6.",
+        "VO2 (space group 58)": "VO2 is less likely to form under these conditions due to the presence of ambient air, which favors higher oxidation states. However, kinetic trapping or incomplete oxidation could allow its presence."
+      },
+      "LLM_interpretation_likelihood": 0.75,
+      "LLM_interpretation_explanation": "This interpretation includes plausible phases with reasonable weight fractions. The presence of VO2 is less likely but not impossible, given the synthesis conditions. The composition balance score is high, supporting the overall plausibility.",
+      "normalized_score": 0.8128536345962901,
+      "prior_probability": 0.8844000000000001,
+      "fit_quality": 0.8693956559765411,
+      "trustworthy": true,
+      "posterior_probability": 0.15054083159845288,
+      "adjusted_posterior_probability": 0.15054083159845288,
+      "unnormalized_posterior": 0.768893518145653
+    },
+    "I_2": {
+      "phases": [
+        "MgV2O6_12",
+        "VO2_14",
+        "VO2_58"
+      ],
+      "weight_fraction": [
+        76.23915421260133,
+        21.1329336151936,
+        2.6279121722050833
+      ],
+      "rwp": 7.17,
+      "score": 0.5711838908456814,
+      "dara_score": 0.5711838908456814,
+      "normalized_rwp": 0.8805,
+      "missing_peaks": 21,
+      "extra_peaks": 14,
+      "peaks_calculated": 90,
+      "peaks_observed": 80,
+      "flag": 69864.40999999999,
+      "normalized_flag": 0.6181028836581028,
+      "interpretation_importance": 76.94303501664828,
+      "balance_score": 0.9375,
+      "LLM_phases_likelihood": {
+        "MgV2O6 (space group 12)": 0.9,
+        "VO2 (space group 14)": 0.4,
+        "VO2 (space group 58)": 0.5
+      },
+      "LLM_phases_explanation": {
+        "MgV2O6 (space group 12)": "MgV2O6 is a likely phase given the synthesis conditions and precursors. The space group 12 is consistent with known polymorphs of MgV2O6.",
+        "VO2 (space group 14)": "VO2 in space group 14 is less stable at 500\u00b0C in ambient air, as it typically forms under reducing conditions. Its presence is unlikely but possible due to kinetic factors.",
+        "VO2 (space group 58)": "VO2 in space group 58 is less likely to form under these conditions due to the presence of ambient air, which favors higher oxidation states. However, kinetic trapping or incomplete oxidation could allow its presence."
+      },
+      "LLM_interpretation_likelihood": 0.6,
+      "LLM_interpretation_explanation": "The interpretation is less plausible due to the presence of two VO2 polymorphs, which are unlikely to coexist under the given conditions. The composition balance score is lower, indicating potential issues with phase completeness.",
+      "normalized_score": 0.7777117018242563,
+      "prior_probability": 0.7968750000000001,
+      "fit_quality": 0.8462372339414187,
+      "trustworthy": true,
+      "posterior_probability": 0.1320293372463635,
+      "adjusted_posterior_probability": 0.1320293372463635,
+      "unnormalized_posterior": 0.6743452957970681
+    },
+    "I_3": {
+      "phases": [
+        "Mg2V2O7_2",
+        "VO2_58"
+      ],
+      "weight_fraction": [
+        95.42482083531986,
+        4.5751791646801525
+      ],
+      "rwp": 10.24,
+      "score": 0.3005701130675632,
+      "dara_score": 0.3005701130675632,
+      "normalized_rwp": 0.8293333333333333,
+      "missing_peaks": 27,
+      "extra_peaks": 33,
+      "peaks_calculated": 125,
+      "peaks_observed": 80,
+      "flag": 58732.75000000001,
+      "normalized_flag": 0.5196191042072845,
+      "interpretation_importance": 23.238469884985935,
+      "balance_score": 0.9996,
+      "LLM_phases_likelihood": {
+        "Mg2V2O7 (space group 2)": 0.8,
+        "VO2 (space group 58)": 0.5
+      },
+      "LLM_phases_explanation": {
+        "Mg2V2O7 (space group 2)": "Mg2V2O7 is a plausible phase under these synthesis conditions, as it can form from MgCO3 and V2O5 at 500\u00b0C. The space group 2 is consistent with known polymorphs of Mg2V2O7.",
+        "VO2 (space group 58)": "VO2 is less likely to form under these conditions due to the presence of ambient air, which favors higher oxidation states. However, kinetic trapping or incomplete oxidation could allow its presence."
+      },
+      "LLM_interpretation_likelihood": 0.7,
+      "LLM_interpretation_explanation": "This interpretation is plausible, with Mg2V2O7 as the dominant phase. The presence of VO2 is less likely but possible. The composition balance score is perfect, supporting the overall plausibility.",
+      "normalized_score": 0.5617081593176318,
+      "prior_probability": 0.8747666666666667,
+      "fit_quality": 0.7401249419947661,
+      "trustworthy": true,
+      "posterior_probability": 0.126760918320069,
+      "adjusted_posterior_probability": 0.126760918320069,
+      "unnormalized_posterior": 0.6474366284256216
+    },
+    "I_4": {
+      "phases": [
+        "Mg2V2O7_2",
+        "MgV2O6_12"
+      ],
+      "weight_fraction": [
+        62.34161811302818,
+        37.65838188697182
+      ],
+      "rwp": 6.34,
+      "score": 0.6231473052798148,
+      "dara_score": 0.6231473052798148,
+      "normalized_rwp": 0.8943333333333333,
+      "missing_peaks": 15,
+      "extra_peaks": 20,
+      "peaks_calculated": 121,
+      "peaks_observed": 80,
+      "flag": 46870.509999999995,
+      "normalized_flag": 0.41467175332227013,
+      "interpretation_importance": 96.82473763028216,
+      "balance_score": 0.9964,
+      "LLM_phases_likelihood": {
+        "Mg2V2O7 (space group 2)": 0.8,
+        "MgV2O6 (space group 12)": 0.9
+      },
+      "LLM_phases_explanation": {
+        "Mg2V2O7 (space group 2)": "Mg2V2O7 is a plausible phase under these synthesis conditions, as it can form from MgCO3 and V2O5 at 500\u00b0C. The space group 2 is consistent with known polymorphs of Mg2V2O7.",
+        "MgV2O6 (space group 12)": "MgV2O6 is a likely phase given the synthesis conditions and precursors. The space group 12 is consistent with known polymorphs of MgV2O6."
+      },
+      "LLM_interpretation_likelihood": 0.85,
+      "LLM_interpretation_explanation": "This interpretation is highly plausible, with both Mg2V2O7 and MgV2O6 being likely phases under the synthesis conditions. The composition balance score is very high, supporting the overall plausibility.",
+      "normalized_score": 0.8137901660395409,
+      "prior_probability": 0.9354,
+      "fit_quality": 0.8674856109020692,
+      "trustworthy": true,
+      "posterior_probability": 0.1588721439860511,
+      "adjusted_posterior_probability": 0.1588721439860511,
+      "unnormalized_posterior": 0.8114460404377956
+    },
+    "I_5": {
+      "phases": [
+        "MgV2O6_12",
+        "VO2_58"
+      ],
+      "weight_fraction": [
+        86.57418075555276,
+        13.42581924444725
+      ],
+      "rwp": 7.06,
+      "score": 0.552433597992184,
+      "dara_score": 0.552433597992184,
+      "normalized_rwp": 0.8823333333333333,
+      "missing_peaks": 28,
+      "extra_peaks": 12,
+      "peaks_calculated": 70,
+      "peaks_observed": 80,
+      "flag": 86281.6,
+      "normalized_flag": 0.7633486887906872,
+      "interpretation_importance": 75.43295905888499,
+      "balance_score": 0.9559,
+      "LLM_phases_likelihood": {
+        "MgV2O6 (space group 12)": 0.9,
+        "VO2 (space group 58)": 0.5
+      },
+      "LLM_phases_explanation": {
+        "MgV2O6 (space group 12)": "MgV2O6 is a likely phase given the synthesis conditions and precursors. The space group 12 is consistent with known polymorphs of MgV2O6.",
+        "VO2 (space group 58)": "VO2 is less likely to form under these conditions due to the presence of ambient air, which favors higher oxidation states. However, kinetic trapping or incomplete oxidation could allow its presence."
+      },
+      "LLM_interpretation_likelihood": 0.65,
+      "LLM_interpretation_explanation": "This interpretation is plausible, with MgV2O6 as the dominant phase. The presence of VO2 is less likely but possible. The composition balance score is moderate, indicating potential issues with phase completeness.",
+      "normalized_score": 0.7641317670566656,
+      "prior_probability": 0.8284416666666666,
+      "fit_quality": 0.8429328112411106,
+      "trustworthy": true,
+      "posterior_probability": 0.13672344850668527,
+      "adjusted_posterior_probability": 0.13672344850668527,
+      "unnormalized_posterior": 0.6983206630326044
+    },
+    "I_6": {
+      "phases": [
+        "MgV2O6_12",
+        "VO2_136",
+        "C_31"
+      ],
+      "weight_fraction": [
+        72.00343171820532,
+        19.280336472042812,
+        8.716231809751886
+      ],
+      "rwp": 7.01,
+      "score": 0.5325248667517439,
+      "dara_score": 0.5325248667517439,
+      "normalized_rwp": 0.8831666666666667,
+      "missing_peaks": 28,
+      "extra_peaks": 16,
+      "peaks_calculated": 72,
+      "peaks_observed": 80,
+      "flag": 86188.17,
+      "normalized_flag": 0.7625220969333999,
+      "interpretation_importance": 72.99708610228612,
+      "balance_score": 0.9424,
+      "LLM_phases_likelihood": {
+        "MgV2O6 (space group 12)": 0.9,
+        "VO2 (space group 136)": 0.4,
+        "C (space group 31)": 0.1
+      },
+      "LLM_phases_explanation": {
+        "MgV2O6 (space group 12)": "MgV2O6 is a likely phase given the synthesis conditions and precursors. The space group 12 is consistent with known polymorphs of MgV2O6.",
+        "VO2 (space group 136)": "VO2 in space group 136 is less stable at 500\u00b0C in ambient air, as it typically forms under reducing conditions. Its presence is unlikely but possible due to kinetic factors.",
+        "C (space group 31)": "Carbon is unlikely to remain as a solid phase under these conditions, as it would typically oxidize or be removed as CO2. Its presence is implausible."
+      },
+      "LLM_interpretation_likelihood": 0.4,
+      "LLM_interpretation_explanation": "The presence of carbon as a solid phase is implausible, significantly reducing the overall likelihood. The VO2 polymorph is also less likely, further lowering the interpretation's plausibility.",
+      "normalized_score": 0.7494078217735536,
+      "prior_probability": 0.7164,
+      "fit_quality": 0.8385803850356289,
+      "trustworthy": true,
+      "posterior_probability": 0.11762195347636538,
+      "adjusted_posterior_probability": 0.11762195347636538,
+      "unnormalized_posterior": 0.6007589878395246
+    },
+    "I_7": {
+      "phases": [
+        "VO2_14"
+      ],
+      "weight_fraction": [
+        100.0
+      ],
+      "rwp": 12.15,
+      "score": 0.09213022865420548,
+      "dara_score": 0.09213022865420548,
+      "normalized_rwp": 0.7975,
+      "missing_peaks": 56,
+      "extra_peaks": 9,
+      "peaks_calculated": 27,
+      "peaks_observed": 80,
+      "flag": 230713.47999999998,
+      "normalized_flag": 2.0411632659145917,
+      "interpretation_importance": 0.0,
+      "balance_score": 0.375,
+      "LLM_phases_likelihood": {
+        "VO2 (space group 14)": 0.4
+      },
+      "LLM_phases_explanation": {
+        "VO2 (space group 14)": "VO2 in space group 14 is less stable at 500\u00b0C in ambient air, as it typically forms under reducing conditions. Its presence is unlikely but possible due to kinetic factors."
+      },
+      "LLM_interpretation_likelihood": 0.3,
+      "LLM_interpretation_explanation": "A single-phase interpretation with VO2 is unlikely under the given conditions, especially with the low composition balance score. The absence of other plausible phases further reduces the likelihood.",
+      "normalized_score": 0.39169353451654937,
+      "prior_probability": 0.34375,
+      "fit_quality": 0.6622311781721831,
+      "trustworthy": false,
+      "posterior_probability": 0.04456977498822882,
+      "adjusted_posterior_probability": 0.004456977498822882,
+      "unnormalized_posterior": 0.22764196749668794
+    },
+    "I_8": {
+      "phases": [
+        "C_31"
+      ],
+      "weight_fraction": [
+        100.0
+      ],
+      "rwp": 11.01,
+      "score": 0.142930687041125,
+      "dara_score": 0.142930687041125,
+      "normalized_rwp": 0.8165,
+      "missing_peaks": 58,
+      "extra_peaks": 8,
+      "peaks_calculated": 20,
+      "peaks_observed": 80,
+      "flag": 242448.90000000002,
+      "normalized_flag": 2.144988617662914,
+      "interpretation_importance": 5.763405315871898,
+      "balance_score": 0,
+      "LLM_phases_likelihood": {
+        "C (space group 31)": 0.1
+      },
+      "LLM_phases_explanation": {
+        "C (space group 31)": "Carbon is unlikely to remain as a solid phase under these conditions, as it would typically oxidize or be removed as CO2. Its presence is implausible."
+      },
+      "LLM_interpretation_likelihood": 0.05,
+      "LLM_interpretation_explanation": "The presence of carbon as a solid phase is implausible, and the absence of other phases makes this interpretation highly unlikely. The composition balance score is zero, indicating a complete mismatch.",
+      "normalized_score": 0.4313941062257923,
+      "prior_probability": 0.020833333333333336,
+      "fit_quality": 0.6881313687419307,
+      "trustworthy": false,
+      "posterior_probability": 0.0028068436996003384,
+      "adjusted_posterior_probability": 0.00028068436996003387,
+      "unnormalized_posterior": 0.014336070182123559
+    },
+    "I_9": {
+      "phases": [
+        "MgV2O6_12"
+      ],
+      "weight_fraction": [
+        100.0
+      ],
+      "rwp": 8.7,
+      "score": 0.36114774331777755,
+      "dara_score": 0.36114774331777755,
+      "normalized_rwp": 0.855,
+      "missing_peaks": 41,
+      "extra_peaks": 9,
+      "peaks_calculated": 42,
+      "peaks_observed": 80,
+      "flag": 133699.56,
+      "normalized_flag": 1.1828638298071872,
+      "interpretation_importance": 36.21741464972451,
+      "balance_score": 0.9711,
+      "LLM_phases_likelihood": {
+        "MgV2O6 (space group 12)": 0.9
+      },
+      "LLM_phases_explanation": {
+        "MgV2O6 (space group 12)": "MgV2O6 is a likely phase given the synthesis conditions and precursors. The space group 12 is consistent with known polymorphs of MgV2O6."
+      },
+      "LLM_interpretation_likelihood": 0.7,
+      "LLM_interpretation_explanation": "A single-phase interpretation with MgV2O6 is plausible, but the absence of other phases suggests incomplete reaction or missing by-products. The composition balance score is high, supporting the plausibility.",
+      "normalized_score": 0.6125611009299664,
+      "prior_probability": 0.8581416666666668,
+      "fit_quality": 0.7741870336433222,
+      "trustworthy": true,
+      "posterior_probability": 0.1300747481781836,
+      "adjusted_posterior_probability": 0.1300747481781836,
+      "unnormalized_posterior": 0.6643621513624034
+    }
+  },
+  "TRI_41": {
+    "I_1": {
+      "phases": [
+        "LiV3O8_11"
+      ],
+      "weight_fraction": [
+        100.0
+      ],
+      "rwp": 5.81,
+      "score": 0.8054801772142101,
+      "dara_score": 0.8054801772142101,
+      "normalized_rwp": 0.9031666666666667,
+      "missing_peaks": 4,
+      "extra_peaks": 0,
+      "peaks_calculated": 53,
+      "peaks_observed": 45,
+      "flag": 41348.31,
+      "normalized_flag": 0.8634177999967008,
+      "interpretation_importance": 0.0,
+      "balance_score": 1,
+      "LLM_phases_likelihood": {
+        "LiV3O8 (space group 11)": 0.7
+      },
+      "LLM_phases_explanation": {
+        "LiV3O8 (space group 11)": "LiV\u2083O\u2088 is a known phase that can form under oxidizing conditions, such as ambient air, at moderate temperatures. However, the synthesis target is LiV\u2083O\u2084, which suggests that LiV\u2083O\u2088 may be a misidentified or over-oxidized variant. The space group 11 (C2/m) is plausible for LiV\u2083O\u2088, but the formation of this phase indicates a deviation from the intended stoichiometry."
+      },
+      "LLM_interpretation_likelihood": 0.6,
+      "LLM_interpretation_explanation": "While LiV\u2083O\u2088 is a plausible phase under the synthesis conditions, it does not match the target composition of LiV\u2083O\u2084. The interpretation lacks completeness as it does not account for the expected LiV\u2083O\u2084 phase, suggesting a deviation from the intended synthesis outcome.",
+      "normalized_score": 0.9204296854472125,
+      "prior_probability": 0.8333333333333334,
+      "fit_quality": 0.908921006260182,
+      "trustworthy": true,
+      "posterior_probability": 0.4968372690733735,
+      "adjusted_posterior_probability": 0.4968372690733735,
+      "unnormalized_posterior": 0.757434171883485
+    },
+    "I_2": {
+      "phases": [
+        "Li14V43O114_11"
+      ],
+      "weight_fraction": [
+        100.0
+      ],
+      "rwp": 5.39,
+      "score": 0.8489611212592747,
+      "dara_score": 0.8489611212592747,
+      "normalized_rwp": 0.9101666666666667,
+      "missing_peaks": 4,
+      "extra_peaks": 0,
+      "peaks_calculated": 50,
+      "peaks_observed": 45,
+      "flag": 39299.31,
+      "normalized_flag": 0.8206314546250703,
+      "interpretation_importance": 100.0,
+      "balance_score": 1,
+      "LLM_phases_likelihood": {
+        "Li14V43O114 (space group 11)": 0.7
+      },
+      "LLM_phases_explanation": {
+        "Li14V43O114 (space group 11)": "This complex formula is approximately equal to LiV\u2083O\u2088, which is plausible under the synthesis conditions. The space group 11 (C2/m) is consistent with LiV\u2083O\u2088, but the unusual stoichiometry suggests a misinterpretation or a complex phase that is not typically expected from the given precursors and conditions."
+      },
+      "LLM_interpretation_likelihood": 0.6,
+      "LLM_interpretation_explanation": "Similar to I_1, this interpretation suggests the formation of LiV\u2083O\u2088 rather than the target LiV\u2083O\u2084. The complex formula does not align with the expected synthesis outcome, indicating a deviation from the intended product. The interpretation lacks completeness and does not account for the expected LiV\u2083O\u2084 phase.",
+      "normalized_score": 0.9411453489688435,
+      "prior_probability": 0.8333333333333334,
+      "fit_quality": 0.9204928941007257,
+      "trustworthy": true,
+      "posterior_probability": 0.5031627309266264,
+      "adjusted_posterior_probability": 0.5031627309266264,
+      "unnormalized_posterior": 0.7670774117506047
+    }
+  },
+  "TRI_87": {
+    "I_1": {
+      "phases": [
+        "CaC2_2",
+        "CaO2_5",
+        "Ca_194",
+        "V5O9_2",
+        "CaC2_12"
+      ],
+      "weight_fraction": [
+        30.141516191549687,
+        25.425491826802833,
+        23.167596758995057,
+        18.616818824192457,
+        2.6485763984599697
+      ],
+      "rwp": 20.81,
+      "score": 0.31213819513324326,
+      "dara_score": 0.31213819513324326,
+      "normalized_rwp": 0.6531666666666667,
+      "missing_peaks": 47,
+      "extra_peaks": 12,
+      "peaks_calculated": 115,
+      "peaks_observed": 144,
+      "flag": 74139.42,
+      "normalized_flag": 1.1632590524746278,
+      "interpretation_importance": 0.0,
+      "balance_score": 0.9038999999999999,
+      "LLM_phases_likelihood": {
+        "CaC2 (space group 2)": 0.1,
+        "CaO2 (space group 5)": 0.1,
+        "Ca (space group 194)": 0.2,
+        "V5O9 (space group 2)": 0.5,
+        "CaC2 (space group 12)": 0.1
+      },
+      "LLM_phases_explanation": {
+        "CaC2 (space group 2)": "CaC2 is unlikely to form under these conditions due to the lack of a reducing environment necessary for carbide formation. The presence of CaC2 is thermodynamically implausible at 700\u00b0C in an inert atmosphere.",
+        "CaO2 (space group 5)": "CaO2 is not stable at high temperatures and would decompose to CaO and O2. Its presence is highly unlikely under the given conditions.",
+        "Ca (space group 194)": "Metallic Ca is unlikely to persist in the presence of V2O5, which would oxidize it. However, a small amount might remain unreacted.",
+        "V5O9 (space group 2)": "V5O9 is a plausible phase under these conditions, as it can form from V2O5 in a slightly reducing or inert atmosphere.",
+        "CaC2 (space group 12)": "Same reasoning as for CaC2 (space group 2); unlikely to form due to the lack of reducing conditions."
+      },
+      "LLM_interpretation_likelihood": 0.2,
+      "LLM_interpretation_explanation": "This interpretation includes several phases that are thermodynamically implausible under the synthesis conditions, such as CaC2 and CaO2. The presence of V5O9 is plausible, but the overall phase set is inconsistent with the expected reaction products.",
+      "normalized_score": 0.5714455314851404,
+      "prior_probability": 0.6106083333333333,
+      "fit_quality": 0.6259262882728246,
+      "trustworthy": false,
+      "posterior_probability": 0.13255459115806772,
+      "adjusted_posterior_probability": 0.013255459115806773,
+      "unnormalized_posterior": 0.38219580767178896
+    },
+    "I_2": {
+      "phases": [
+        "CaC2_2",
+        "Ca5V3O13_176",
+        "V9O17_2",
+        "CaCO3_167",
+        "CaC2_12"
+      ],
+      "weight_fraction": [
+        34.57559629246483,
+        27.87254879513433,
+        20.918890903300603,
+        10.199260241410245,
+        6.433703767689993
+      ],
+      "rwp": 19.78,
+      "score": 0.37310311957917003,
+      "dara_score": 0.37310311957917003,
+      "normalized_rwp": 0.6703333333333333,
+      "missing_peaks": 42,
+      "extra_peaks": 7,
+      "peaks_calculated": 139,
+      "peaks_observed": 144,
+      "flag": 60909.04000000001,
+      "normalized_flag": 0.9556723286685979,
+      "interpretation_importance": 44.05483427490716,
+      "balance_score": 0.9639,
+      "LLM_phases_likelihood": {
+        "CaC2 (space group 2)": 0.1,
+        "Ca5V3O13 (space group 176)": 0.7,
+        "V9O17 (space group 2)": 0.6,
+        "CaCO3 (space group 167)": 0.8,
+        "CaC2 (space group 12)": 0.1
+      },
+      "LLM_phases_explanation": {
+        "CaC2 (space group 2)": "As previously mentioned, CaC2 is unlikely to form due to the lack of reducing conditions.",
+        "Ca5V3O13 (space group 176)": "Ca5V3O13 is a plausible phase that can form from the reaction of CaO and V2O5 under these conditions.",
+        "V9O17 (space group 2)": "V9O17 is a possible phase that can form from V2O5 in an inert atmosphere, though it requires specific conditions.",
+        "CaCO3 (space group 167)": "CaCO3 may remain unreacted if the reaction is incomplete, especially given the moderate temperature and short dwell time.",
+        "CaC2 (space group 12)": "Same reasoning as for CaC2 (space group 2); unlikely to form due to the lack of reducing conditions."
+      },
+      "LLM_interpretation_likelihood": 0.65,
+      "LLM_interpretation_explanation": "This interpretation includes plausible phases such as Ca5V3O13 and V9O17, and the presence of unreacted CaCO3 is reasonable. The inclusion of CaC2 is unlikely, but the overall phase set is more consistent with the synthesis conditions.",
+      "normalized_score": 0.6225240340263031,
+      "prior_probability": 0.8331083333333333,
+      "fit_quality": 0.65439690023099,
+      "trustworthy": true,
+      "posterior_probability": 0.1890826009640454,
+      "adjusted_posterior_probability": 0.1890826009640454,
+      "unnormalized_posterior": 0.5451835108899397
+    },
+    "I_3": {
+      "phases": [
+        "CaC2_2",
+        "Ca60C20O143_62",
+        "CaC2_12",
+        "Ca_194",
+        "V5O9_2"
+      ],
+      "weight_fraction": [
+        55.26081211403374,
+        17.587469427117757,
+        15.175784362221407,
+        7.226563982010193,
+        4.7493701146169185
+      ],
+      "rwp": 19.01,
+      "score": 0.4518398016651442,
+      "dara_score": 0.4518398016651442,
+      "normalized_rwp": 0.6831666666666666,
+      "missing_peaks": 45,
+      "extra_peaks": 20,
+      "peaks_calculated": 153,
+      "peaks_observed": 144,
+      "flag": 39594.97,
+      "normalized_flag": 0.6212512491325305,
+      "interpretation_importance": 100.0,
+      "balance_score": 0.7975,
+      "LLM_phases_likelihood": {
+        "CaC2 (space group 2)": 0.1,
+        "Ca60C20O143 (space group 62)": 0.2,
+        "CaC2 (space group 12)": 0.1,
+        "Ca (space group 194)": 0.2,
+        "V5O9 (space group 2)": 0.5
+      },
+      "LLM_phases_explanation": {
+        "CaC2 (space group 2)": "As previously mentioned, CaC2 is unlikely to form due to the lack of reducing conditions.",
+        "Ca60C20O143 (space group 62)": "This complex phase is unlikely to form under the given conditions and may represent a misidentified or hypothetical phase.",
+        "CaC2 (space group 12)": "Same reasoning as for CaC2 (space group 2); unlikely to form due to the lack of reducing conditions.",
+        "Ca (space group 194)": "Metallic Ca is unlikely to persist in the presence of V2O5, which would oxidize it. However, a small amount might remain unreacted.",
+        "V5O9 (space group 2)": "V5O9 is a plausible phase under these conditions, as it can form from V2O5 in a slightly reducing or inert atmosphere."
+      },
+      "LLM_interpretation_likelihood": 0.15,
+      "LLM_interpretation_explanation": "This interpretation includes several unlikely phases, such as CaC2 and a complex hypothetical phase. The presence of V5O9 is plausible, but the overall phase set is inconsistent with the expected reaction products.",
+      "normalized_score": 0.6868880168974508,
+      "prior_probability": 0.5277083333333332,
+      "fit_quality": 0.6844071167435947,
+      "trustworthy": false,
+      "posterior_probability": 0.12526141832621807,
+      "adjusted_posterior_probability": 0.012526141832621808,
+      "unnormalized_posterior": 0.3611673388982344
+    },
+    "I_4": {
+      "phases": [
+        "CaC2_2",
+        "CaO2_5",
+        "Ca_194",
+        "V5O9_2",
+        "V2O5_15"
+      ],
+      "weight_fraction": [
+        50.767569778265496,
+        16.04534404102749,
+        15.437949313922347,
+        11.034337542410071,
+        6.7147993243745985
+      ],
+      "rwp": 21.23,
+      "score": 0.35400837103135246,
+      "dara_score": 0.35400837103135246,
+      "normalized_rwp": 0.6461666666666666,
+      "missing_peaks": 40,
+      "extra_peaks": 14,
+      "peaks_calculated": 177,
+      "peaks_observed": 144,
+      "flag": 70488.5,
+      "normalized_flag": 1.1059755487749676,
+      "interpretation_importance": 19.106622341651427,
+      "balance_score": 0.8976,
+      "LLM_phases_likelihood": {
+        "CaC2 (space group 2)": 0.1,
+        "CaO2 (space group 5)": 0.1,
+        "Ca (space group 194)": 0.2,
+        "V5O9 (space group 2)": 0.5,
+        "V2O5 (space group 15)": 0.8
+      },
+      "LLM_phases_explanation": {
+        "CaC2 (space group 2)": "As previously mentioned, CaC2 is unlikely to form due to the lack of reducing conditions.",
+        "CaO2 (space group 5)": "CaO2 is not stable at high temperatures and would decompose to CaO and O2. Its presence is highly unlikely under the given conditions.",
+        "Ca (space group 194)": "Metallic Ca is unlikely to persist in the presence of V2O5, which would oxidize it. However, a small amount might remain unreacted.",
+        "V5O9 (space group 2)": "V5O9 is a plausible phase under these conditions, as it can form from V2O5 in a slightly reducing or inert atmosphere.",
+        "V2O5 (space group 15)": "V2O5 is a stable phase and may remain unreacted if the reaction is incomplete, especially given the moderate temperature and short dwell time."
+      },
+      "LLM_interpretation_likelihood": 0.3,
+      "LLM_interpretation_explanation": "This interpretation includes plausible phases such as V5O9 and unreacted V2O5. However, the presence of CaC2 and CaO2 is unlikely, reducing the overall plausibility.",
+      "normalized_score": 0.6065955408496917,
+      "prior_probability": 0.6486,
+      "fit_quality": 0.6329762913943416,
+      "trustworthy": false,
+      "posterior_probability": 0.14238795197578366,
+      "adjusted_posterior_probability": 0.014238795197578367,
+      "unnormalized_posterior": 0.41054842259836993
+    },
+    "I_5": {
+      "phases": [
+        "CaC2_2",
+        "Ca5V3O13_176",
+        "V9O17_2",
+        "CaCO3_167",
+        "V2O5_15"
+      ],
+      "weight_fraction": [
+        29.148450852989072,
+        21.80150426380091,
+        18.773999616297456,
+        15.793563036044317,
+        14.482482230868243
+      ],
+      "rwp": 18.54,
+      "score": 0.3873745733205568,
+      "dara_score": 0.3873745733205568,
+      "normalized_rwp": 0.6910000000000001,
+      "missing_peaks": 47,
+      "extra_peaks": 15,
+      "peaks_calculated": 111,
+      "peaks_observed": 144,
+      "flag": 36838.92,
+      "normalized_flag": 0.578008395174775,
+      "interpretation_importance": 67.2196393673234,
+      "balance_score": 0.9919,
+      "LLM_phases_likelihood": {
+        "CaC2 (space group 2)": 0.1,
+        "Ca5V3O13 (space group 176)": 0.7,
+        "V9O17 (space group 2)": 0.6,
+        "CaCO3 (space group 167)": 0.8,
+        "V2O5 (space group 15)": 0.8
+      },
+      "LLM_phases_explanation": {
+        "CaC2 (space group 2)": "As previously mentioned, CaC2 is unlikely to form due to the lack of reducing conditions.",
+        "Ca5V3O13 (space group 176)": "Ca5V3O13 is a plausible phase that can form from the reaction of CaO and V2O5 under these conditions.",
+        "V9O17 (space group 2)": "V9O17 is a possible phase that can form from V2O5 in an inert atmosphere, though it requires specific conditions.",
+        "CaCO3 (space group 167)": "CaCO3 may remain unreacted if the reaction is incomplete, especially given the moderate temperature and short dwell time.",
+        "V2O5 (space group 15)": "V2O5 is a stable phase and may remain unreacted if the reaction is incomplete, especially given the moderate temperature and short dwell time."
+      },
+      "LLM_interpretation_likelihood": 0.75,
+      "LLM_interpretation_explanation": "This interpretation includes plausible phases such as Ca5V3O13, V9O17, and unreacted V2O5 and CaCO3. The inclusion of CaC2 is unlikely, but the overall phase set is consistent with the synthesis conditions.",
+      "normalized_score": 0.6343655414039203,
+      "prior_probability": 0.8911083333333333,
+      "fit_quality": 0.6721218471346401,
+      "trustworthy": true,
+      "posterior_probability": 0.20772433289497025,
+      "adjusted_posterior_probability": 0.20772433289497025,
+      "unnormalized_posterior": 0.5989333789970706
+    },
+    "I_6": {
+      "phases": [
+        "CaCO3_2",
+        "V2O5_15",
+        "V6O13_69",
+        "CaC2_12",
+        "CaCO3_167"
+      ],
+      "weight_fraction": [
+        36.01571126937062,
+        32.56327013303596,
+        13.385059794266096,
+        9.783488667329031,
+        8.252470135998287
+      ],
+      "rwp": 20.44,
+      "score": 0.34463554875903646,
+      "dara_score": 0.34463554875903646,
+      "normalized_rwp": 0.6593333333333333,
+      "missing_peaks": 36,
+      "extra_peaks": 15,
+      "peaks_calculated": 130,
+      "peaks_observed": 144,
+      "flag": 42930.280000000006,
+      "normalized_flag": 0.6735827827526905,
+      "interpretation_importance": 21.226879741462902,
+      "balance_score": 0.9984,
+      "LLM_phases_likelihood": {
+        "CaCO3 (space group 2)": 0.8,
+        "V2O5 (space group 15)": 0.8,
+        "V6O13 (space group 69)": 0.7,
+        "CaC2 (space group 12)": 0.1,
+        "CaCO3 (space group 167)": 0.8
+      },
+      "LLM_phases_explanation": {
+        "CaCO3 (space group 2)": "CaCO3 may remain unreacted if the reaction is incomplete, especially given the moderate temperature and short dwell time.",
+        "V2O5 (space group 15)": "V2O5 is a stable phase and may remain unreacted if the reaction is incomplete, especially given the moderate temperature and short dwell time.",
+        "V6O13 (space group 69)": "V6O13 is a plausible phase that can form from V2O5 in an inert atmosphere, though it requires specific conditions.",
+        "CaC2 (space group 12)": "As previously mentioned, CaC2 is unlikely to form due to the lack of reducing conditions.",
+        "CaCO3 (space group 167)": "Same reasoning as for CaCO3 (space group 2); may remain unreacted if the reaction is incomplete."
+      },
+      "LLM_interpretation_likelihood": 0.8,
+      "LLM_interpretation_explanation": "This interpretation includes plausible phases such as V6O13, unreacted V2O5, and CaCO3. The inclusion of CaC2 is unlikely, but the overall phase set is consistent with the synthesis conditions and has the highest composition balance score.",
+      "normalized_score": 0.5987482605511876,
+      "prior_probability": 0.9157333333333333,
+      "fit_quality": 0.639138309072618,
+      "trustworthy": true,
+      "posterior_probability": 0.20298910468091483,
+      "adjusted_posterior_probability": 0.20298910468091483,
+      "unnormalized_posterior": 0.5852802542280987
+    }
+  },
+  "ARR_46": {
+    "I_1": {
+      "phases": [
+        "CaP2(HO2)4_2",
+        "TiO2_61",
+        "CaTi4(PO4)6_148"
+      ],
+      "weight_fraction": [
+        12.606760448585675,
+        68.05842695970381,
+        19.33481259171052
+      ],
+      "rwp": 6.99,
+      "search_result_rwp": 9.51,
+      "score": 0.09162538614340525,
+      "search_result_score": 0.1182527992771349,
+      "dara_score": 0.09162538614340525,
+      "normalized_rwp": 0.8835,
+      "missing_peaks": 31,
+      "extra_peaks": 40,
+      "peaks_calculated": 112,
+      "peaks_observed": 63,
+      "flag": 87589.14000000001,
+      "normalized_flag": 0.6114055940077616,
+      "excess_bkg_high_intesity_peaks": 14.254785478547857,
+      "excess_bkg_low_angle_region": 14.896574882471452,
+      "excess_bkg_high_angle_region": 9.557933579335794,
+      "signal_above_bkg": 92.68065266817068,
+      "interpretation_importance": 32.41869837456204,
+      "balance_score": 0.71794,
+      "LLM_phases_likelihood": {
+        "CaP2(HO2)4 (space group 2)": 0.1,
+        "TiO2 (space group 61)": 0.8,
+        "CaTi4(PO4)6 (space group 148)": 0.7
+      },
+      "LLM_phases_explanation": {
+        "CaP2(HO2)4 (space group 2)": "CaP2H4O8 is unlikely to form under high-temperature solid-state synthesis conditions due to the presence of hydrogen, which would likely be lost as water vapor. The presence of this phase is thermodynamically implausible.",
+        "TiO2 (space group 61)": "Rutile TiO2 (SG 136) is the stable high-temperature polymorph, but SG 61 (Pbca) is a known variant. It is plausible as a residual precursor or unreacted phase.",
+        "CaTi4(PO4)6 (space group 148)": "CaTi2P3O12 is a plausible phase under these conditions, as it can form from the reaction of CaO, TiO2, and NH6PO4. The space group 148 is consistent with known structures."
+      },
+      "LLM_interpretation_likelihood": 0.4,
+      "LLM_interpretation_explanation": "The presence of CaP2H4O8 is highly unlikely, significantly reducing the plausibility of this interpretation. While TiO2 and CaTi4(PO4)6 are plausible, the overall composition balance is not ideal, and the presence of an implausible phase heavily penalizes the interpretation.",
+      "normalized_score": 0.39130740664293573,
+      "prior_probability": 0.585465,
+      "fit_quality": 0.7194358022143118,
+      "trustworthy": true,
+      "unnormalized_posterior": 0.42120448194340204,
+      "posterior_probability": 0.31220585848944554,
+      "adjusted_posterior_probability": 0.31220585848944554
+    },
+    "I_2": {
+      "phases": [
+        "CaP2(HO2)4_2",
+        "Ti12O25_61",
+        "CaTi4(PO4)6_148"
+      ],
+      "weight_fraction": [
+        70.20865340558181,
+        15.822840722102624,
+        13.968505872315564
+      ],
+      "rwp": 6.91,
+      "search_result_rwp": 9.58,
+      "score": 0.03125035264727237,
+      "search_result_score": 0.0996813545191721,
+      "dara_score": 0.03125035264727237,
+      "normalized_rwp": 0.8848333333333334,
+      "missing_peaks": 33,
+      "extra_peaks": 41,
+      "peaks_calculated": 139,
+      "peaks_observed": 63,
+      "flag": 74106.16,
+      "normalized_flag": 0.5172892526908497,
+      "excess_bkg_high_intesity_peaks": 13.816501650165012,
+      "excess_bkg_low_angle_region": 13.816501650165012,
+      "excess_bkg_high_angle_region": 8.228307254623047,
+      "signal_above_bkg": 93.82001044247396,
+      "interpretation_importance": 0.0,
+      "balance_score": 0.79164,
+      "LLM_phases_likelihood": {
+        "CaP2(HO2)4 (space group 2)": 0.1,
+        "Ti12O25 (space group 61)": 0.5,
+        "CaTi4(PO4)6 (space group 148)": 0.7
+      },
+      "LLM_phases_explanation": {
+        "CaP2(HO2)4 (space group 2)": "As in I_1, CaP2H4O8 is unlikely to form due to the loss of hydrogen at high temperatures, making this phase thermodynamically implausible.",
+        "Ti12O25 (space group 61)": "Ti12O25 is a metastable phase that can form under certain conditions, but its presence at 900\u00b0C is less likely than rutile TiO2. It may be kinetically trapped.",
+        "CaTi4(PO4)6 (space group 148)": "CaTi2P3O12 is plausible under these synthesis conditions, and the space group 148 is consistent with known structures."
+      },
+      "LLM_interpretation_likelihood": 0.35,
+      "LLM_interpretation_explanation": "The presence of CaP2H4O8 remains implausible, and Ti12O25 is less stable than rutile TiO2 under these conditions. The composition balance score is better than I_1, but the presence of implausible phases reduces the overall likelihood.",
+      "normalized_score": 0.34649152257570603,
+      "prior_probability": 0.6076233333333333,
+      "fit_quality": 0.705386063080791,
+      "trustworthy": true,
+      "unnormalized_posterior": 0.42860903093602715,
+      "posterior_probability": 0.3176942701138981,
+      "adjusted_posterior_probability": 0.3176942701138981
+    },
+    "I_3": {
+      "phases": [
+        "Ti12O25_61",
+        "CaTi4(PO4)6_148"
+      ],
+      "weight_fraction": [
+        65.61631627500334,
+        34.38368372499666
+      ],
+      "rwp": 7.22,
+      "search_result_rwp": 10.0,
+      "score": 0.2238627113110882,
+      "search_result_score": 0.09874319776594785,
+      "dara_score": 0.2238627113110882,
+      "normalized_rwp": 0.8796666666666667,
+      "missing_peaks": 29,
+      "extra_peaks": 25,
+      "peaks_calculated": 78,
+      "peaks_observed": 63,
+      "flag": 124972.28,
+      "normalized_flag": 0.8723541650015548,
+      "excess_bkg_high_intesity_peaks": 15.347854785478548,
+      "excess_bkg_low_angle_region": 18.59771658831431,
+      "excess_bkg_high_angle_region": 11.963099630996304,
+      "signal_above_bkg": 90.30045436192833,
+      "interpretation_importance": 100.0,
+      "balance_score": 0.7093,
+      "LLM_phases_likelihood": {
+        "Ti12O25 (space group 61)": 0.5,
+        "CaTi4(PO4)6 (space group 148)": 0.7
+      },
+      "LLM_phases_explanation": {
+        "Ti12O25 (space group 61)": "Ti12O25 is a metastable phase that can form under certain conditions, but its presence at 900\u00b0C is less likely than rutile TiO2. It may be kinetically trapped.",
+        "CaTi4(PO4)6 (space group 148)": "CaTi2P3O12 is plausible under these synthesis conditions, and the space group 148 is consistent with known structures."
+      },
+      "LLM_interpretation_likelihood": 0.6,
+      "LLM_interpretation_explanation": "This interpretation is more plausible than I_1 and I_2 due to the absence of the implausible CaP2H4O8 phase. Ti12O25 is less stable but possible, and CaTi4(PO4)6 is consistent with the synthesis conditions. The composition balance score is lower, but the phase set is more realistic.",
+      "normalized_score": 0.49740984223023993,
+      "prior_probability": 0.6637583333333335,
+      "fit_quality": 0.7522477251878578,
+      "trustworthy": true,
+      "unnormalized_posterior": 0.4993106963244839,
+      "posterior_probability": 0.37009987139665634,
+      "adjusted_posterior_probability": 0.37009987139665634
+    }
+  },
+  "TRI_105": {
+    "I_1": {
+      "phases": [
+        "V2O3_167",
+        "CaO_225",
+        "Ca5V3O13_176"
+      ],
+      "weight_fraction": [
+        69.96572728961793,
+        17.014190205782594,
+        13.020082504599479
+      ],
+      "rwp": 5.72,
+      "score": 0.9800508746174234,
+      "dara_score": 0.9800508746174234,
+      "normalized_rwp": 0.9046666666666667,
+      "missing_peaks": 2,
+      "extra_peaks": 0,
+      "peaks_calculated": 50,
+      "peaks_observed": 47,
+      "flag": 35199.27999999999,
+      "normalized_flag": 0.5600075475288285,
+      "interpretation_importance": 100.0,
+      "balance_score": 0.9930555555555556,
+      "LLM_phases_likelihood": {
+        "V2O3 (space group 167)": 0.8,
+        "CaO (space group 225)": 0.7,
+        "Ca5V3O13 (space group 176)": 0.5
+      },
+      "LLM_phases_explanation": {
+        "V2O3 (space group 167)": "V2O3 is stable under reducing conditions and is likely to form given the presence of carbon and argon atmosphere. The space group 167 is the correct structure for V2O3.",
+        "CaO (space group 225)": "CaO is a stable oxide and can form from the decomposition of CaCO3. It is likely to persist as an unreacted precursor or side product.",
+        "Ca5V3O13 (space group 176)": "Ca5V3O13 is a complex phase that may form under specific conditions, but its formation is less likely compared to simpler oxides. It is possible but not highly probable."
+      },
+      "LLM_interpretation_likelihood": 0.65,
+      "LLM_interpretation_explanation": "This interpretation includes plausible phases, but the presence of Ca5V3O13 is less likely. The composition balance is good, but the complexity of the phase set reduces overall confidence.",
+      "normalized_score": 0.9933164784116201,
+      "prior_probability": 0.8501157407407408,
+      "fit_quality": 0.9342166039149845,
+      "trustworthy": true,
+      "posterior_probability": 0.1518108881185512,
+      "adjusted_posterior_probability": 0.1518108881185512,
+      "unnormalized_posterior": 0.7941922402494863
+    },
+    "I_2": {
+      "phases": [
+        "V2O3_167",
+        "Ca5V3O13_176"
+      ],
+      "weight_fraction": [
+        86.7403486383599,
+        13.2596513616401
+      ],
+      "rwp": 12.76,
+      "score": 0.8139264516831347,
+      "dara_score": 0.8139264516831347,
+      "normalized_rwp": 0.7873333333333333,
+      "missing_peaks": 10,
+      "extra_peaks": 0,
+      "peaks_calculated": 37,
+      "peaks_observed": 47,
+      "flag": 52735.0,
+      "normalized_flag": 0.8389943776955886,
+      "interpretation_importance": 35.527843545742236,
+      "balance_score": 0.9358222222222222,
+      "LLM_phases_likelihood": {
+        "V2O3 (space group 167)": 0.8,
+        "Ca5V3O13 (space group 176)": 0.5
+      },
+      "LLM_phases_explanation": {
+        "V2O3 (space group 167)": "As above, V2O3 is stable and expected under the synthesis conditions.",
+        "Ca5V3O13 (space group 176)": "The formation of Ca5V3O13 is less likely, but possible under specific conditions. Its presence at 13.26% is plausible but not highly probable."
+      },
+      "LLM_interpretation_likelihood": 0.55,
+      "LLM_interpretation_explanation": "The absence of CaO reduces the plausibility of this interpretation, as CaO is a likely by-product. The composition balance is lower, further reducing confidence.",
+      "normalized_score": 0.9245934483329055,
+      "prior_probability": 0.775062962962963,
+      "fit_quality": 0.8330867049998574,
+      "trustworthy": true,
+      "posterior_probability": 0.12342537901957865,
+      "adjusted_posterior_probability": 0.12342537901957865,
+      "unnormalized_posterior": 0.6456946499822414
+    },
+    "I_3": {
+      "phases": [
+        "V2O3_167",
+        "CaO_225"
+      ],
+      "weight_fraction": [
+        80.5802243727339,
+        19.4197756272661
+      ],
+      "rwp": 7.67,
+      "score": 0.8668932093368273,
+      "dara_score": 0.8668932093368273,
+      "normalized_rwp": 0.8721666666666666,
+      "missing_peaks": 8,
+      "extra_peaks": 0,
+      "peaks_calculated": 32,
+      "peaks_observed": 47,
+      "flag": 72709.12999999999,
+      "normalized_flag": 1.1567754105838182,
+      "interpretation_importance": 65.04322887546434,
+      "balance_score": 0.9794555555555555,
+      "LLM_phases_likelihood": {
+        "V2O3 (space group 167)": 0.8,
+        "CaO (space group 225)": 0.7
+      },
+      "LLM_phases_explanation": {
+        "V2O3 (space group 167)": "V2O3 is stable and expected under the synthesis conditions.",
+        "CaO (space group 225)": "CaO is likely to form from CaCO3 decomposition and persist as a stable phase."
+      },
+      "LLM_interpretation_likelihood": 0.75,
+      "LLM_interpretation_explanation": "This interpretation is plausible with both V2O3 and CaO being expected phases. The absence of Ca5V3O13 aligns with the simpler phase formation expected under these conditions.",
+      "normalized_score": 0.9491755080860932,
+      "prior_probability": 0.883849074074074,
+      "fit_quality": 0.8978362804731422,
+      "trustworthy": true,
+      "posterior_probability": 0.15168846046656836,
+      "adjusted_posterior_probability": 0.15168846046656836,
+      "unnormalized_posterior": 0.7935517651662973
+    },
+    "I_4": {
+      "phases": [
+        "V2O3_15",
+        "CaO_225",
+        "Ca5V3O13_176"
+      ],
+      "weight_fraction": [
+        70.38034217460162,
+        16.54641426154593,
+        13.073243563852458
+      ],
+      "rwp": 5.79,
+      "score": 0.961374090061734,
+      "dara_score": 0.961374090061734,
+      "normalized_rwp": 0.9035,
+      "missing_peaks": 2,
+      "extra_peaks": 0,
+      "peaks_calculated": 53,
+      "peaks_observed": 47,
+      "flag": 34356.509999999995,
+      "normalized_flag": 0.5465993880201434,
+      "interpretation_importance": 96.82457437033668,
+      "balance_score": 0.9930555555555556,
+      "LLM_phases_likelihood": {
+        "V2O3 (space group 15)": 0.5,
+        "CaO (space group 225)": 0.7,
+        "Ca5V3O13 (space group 176)": 0.5
+      },
+      "LLM_phases_explanation": {
+        "V2O3 (space group 15)": "Space group 15 is less common for V2O3 and may indicate a metastable or kinetically trapped phase. Its likelihood is reduced compared to the stable polymorph.",
+        "CaO (space group 225)": "CaO is stable and expected to form.",
+        "Ca5V3O13 (space group 176)": "As above, Ca5V3O13 is less likely but possible."
+      },
+      "LLM_interpretation_likelihood": 0.6,
+      "LLM_interpretation_explanation": "The presence of a less stable V2O3 polymorph reduces the overall likelihood. The phase set is plausible but not optimal.",
+      "normalized_score": 0.9867737975157191,
+      "prior_probability": 0.8292824074074073,
+      "fit_quality": 0.9312579325052397,
+      "trustworthy": true,
+      "posterior_probability": 0.14762153568507128,
+      "adjusted_posterior_probability": 0.14762153568507128,
+      "unnormalized_posterior": 0.77227582018519
+    },
+    "I_5": {
+      "phases": [
+        "V2O3_15",
+        "Ca5V3O13_176"
+      ],
+      "weight_fraction": [
+        86.85105006898411,
+        13.148949931015885
+      ],
+      "rwp": 12.55,
+      "score": 0.7976644589870124,
+      "dara_score": 0.7976644589870124,
+      "normalized_rwp": 0.7908333333333334,
+      "missing_peaks": 10,
+      "extra_peaks": 0,
+      "peaks_calculated": 40,
+      "peaks_observed": 47,
+      "flag": 53570.74,
+      "normalized_flag": 0.8522906925000887,
+      "interpretation_importance": 35.390915619661314,
+      "balance_score": 0.9358222222222222,
+      "LLM_phases_likelihood": {
+        "V2O3 (space group 15)": 0.5,
+        "Ca5V3O13 (space group 176)": 0.5
+      },
+      "LLM_phases_explanation": {
+        "V2O3 (space group 15)": "As above, this polymorph is less stable and likely kinetically trapped.",
+        "Ca5V3O13 (space group 176)": "The formation of Ca5V3O13 is possible but not highly probable."
+      },
+      "LLM_interpretation_likelihood": 0.45,
+      "LLM_interpretation_explanation": "The absence of CaO and the presence of a less stable V2O3 polymorph reduce the plausibility of this interpretation.",
+      "normalized_score": 0.9165161338258779,
+      "prior_probability": 0.7333962962962963,
+      "fit_quality": 0.8327276001641816,
+      "trustworthy": true,
+      "posterior_probability": 0.11673980223107545,
+      "adjusted_posterior_probability": 0.11673980223107545,
+      "unnormalized_posterior": 0.6107193377841139
+    },
+    "I_6": {
+      "phases": [
+        "V2O3_15"
+      ],
+      "weight_fraction": [
+        100.0
+      ],
+      "rwp": 13.39,
+      "score": 0.6318001194033404,
+      "dara_score": 0.6318001194033404,
+      "normalized_rwp": 0.7768333333333334,
+      "missing_peaks": 16,
+      "extra_peaks": 0,
+      "peaks_calculated": 25,
+      "peaks_observed": 47,
+      "flag": 102767.93,
+      "normalized_flag": 1.634999819425691,
+      "interpretation_importance": 25.57507523309001,
+      "balance_score": 0.5925925925925926,
+      "LLM_phases_likelihood": {
+        "V2O3 (space group 15)": 0.5
+      },
+      "LLM_phases_explanation": {
+        "V2O3 (space group 15)": "This polymorph is less stable and likely kinetically trapped. Its presence as the sole phase is unlikely."
+      },
+      "LLM_interpretation_likelihood": 0.3,
+      "LLM_interpretation_explanation": "A single-phase interpretation with a less stable polymorph is not plausible given the synthesis conditions and expected by-products.",
+      "normalized_score": 0.8195652355796095,
+      "prior_probability": 0.470679012345679,
+      "fit_quality": 0.7910773007487588,
+      "trustworthy": false,
+      "posterior_probability": 0.0711739449402579,
+      "adjusted_posterior_probability": 0.007117394494025791,
+      "unnormalized_posterior": 0.3723434826055115
+    },
+    "I_7": {
+      "phases": [
+        "V2O3_167"
+      ],
+      "weight_fraction": [
+        100.0
+      ],
+      "rwp": 13.57,
+      "score": 0.6393368294329764,
+      "dara_score": 0.6393368294329764,
+      "normalized_rwp": 0.7738333333333334,
+      "missing_peaks": 16,
+      "extra_peaks": 0,
+      "peaks_calculated": 23,
+      "peaks_observed": 47,
+      "flag": 101875.31,
+      "normalized_flag": 1.620798564824029,
+      "interpretation_importance": 25.53282161214705,
+      "balance_score": 0.5925925925925926,
+      "LLM_phases_likelihood": {
+        "V2O3 (space group 167)": 0.8
+      },
+      "LLM_phases_explanation": {
+        "V2O3 (space group 167)": "This is the stable polymorph of V2O3 and expected to form."
+      },
+      "LLM_interpretation_likelihood": 0.5,
+      "LLM_interpretation_explanation": "While V2O3 is expected, the absence of other phases like CaO reduces the completeness of this interpretation.",
+      "normalized_score": 0.8245395269213777,
+      "prior_probability": 0.5540123456790124,
+      "fit_quality": 0.7907353978626815,
+      "trustworthy": false,
+      "posterior_probability": 0.08373902597328826,
+      "adjusted_posterior_probability": 0.008373902597328826,
+      "unnormalized_posterior": 0.4380771725813313
+    },
+    "I_8": {
+      "phases": [
+        "CaO_225"
+      ],
+      "weight_fraction": [
+        100.0
+      ],
+      "rwp": 28.36,
+      "score": 0.12821604978338372,
+      "dara_score": 0.12821604978338372,
+      "normalized_rwp": 0.5273333333333333,
+      "missing_peaks": 26,
+      "extra_peaks": 0,
+      "peaks_calculated": 8,
+      "peaks_observed": 47,
+      "flag": 202785.52000000002,
+      "normalized_flag": 3.2262427450095066,
+      "interpretation_importance": 0.0,
+      "balance_score": 0.18518518518518523,
+      "LLM_phases_likelihood": {
+        "CaO (space group 225)": 0.7
+      },
+      "LLM_phases_explanation": {
+        "CaO (space group 225)": "CaO is stable and expected to form, but its presence as the sole phase is unlikely."
+      },
+      "LLM_interpretation_likelihood": 0.2,
+      "LLM_interpretation_explanation": "A single-phase interpretation with only CaO is not plausible given the synthesis conditions and expected formation of V2O3.",
+      "normalized_score": 0.41973109551897864,
+      "prior_probability": 0.19135802469135804,
+      "fit_quality": 0.4914659207285484,
+      "trustworthy": false,
+      "posterior_probability": 0.01797700623973955,
+      "adjusted_posterior_probability": 0.0017977006239739551,
+      "unnormalized_posterior": 0.09404594779373458
+    },
+    "I_9": {
+      "phases": [
+        "V2O3_15",
+        "CaO_225"
+      ],
+      "weight_fraction": [
+        81.02273900910399,
+        18.97726099089601
+      ],
+      "rwp": 7.76,
+      "score": 0.8077186560856111,
+      "dara_score": 0.8077186560856111,
+      "normalized_rwp": 0.8706666666666667,
+      "missing_peaks": 8,
+      "extra_peaks": 0,
+      "peaks_calculated": 33,
+      "peaks_observed": 47,
+      "flag": 72132.37,
+      "normalized_flag": 1.1475993719514164,
+      "interpretation_importance": 59.68618792154007,
+      "balance_score": 0.9794555555555555,
+      "LLM_phases_likelihood": {
+        "V2O3 (space group 15)": 0.5,
+        "CaO (space group 225)": 0.7
+      },
+      "LLM_phases_explanation": {
+        "V2O3 (space group 15)": "This polymorph is less stable and likely kinetically trapped.",
+        "CaO (space group 225)": "CaO is stable and expected to form."
+      },
+      "LLM_interpretation_likelihood": 0.55,
+      "LLM_interpretation_explanation": "The presence of a less stable V2O3 polymorph reduces the overall likelihood, but the inclusion of CaO is plausible.",
+      "normalized_score": 0.9215398064051799,
+      "prior_probability": 0.8005157407407407,
+      "fit_quality": 0.8876243799128378,
+      "trustworthy": true,
+      "posterior_probability": 0.13582395732586927,
+      "adjusted_posterior_probability": 0.13582395732586927,
+      "unnormalized_posterior": 0.710557287985466
+    }
+  }
+}
