@@ -10,16 +10,20 @@ from functools import reduce
 from collections import OrderedDict
 from utils import cleanup_phases, type_of_furnace, celsius_to_kelvin
 
-model = "openai/gpt-4o"
-# model ="meta/Llama-4-Scout-FP8"
+
+# NOTE: Uses CBORG gateway; API_KEY must be set in env.
 openai.api_key = os.getenv("API_KEY")
 if not openai.api_key:
     raise ValueError("API key is missing!")
-openai.api_base = "https://api.cborg.lbl.gov"  # Set the CBORG base URL
+openai.api_base = "https://api.cborg.lbl.gov"  # CBORG base URL
+model = "openai/gpt-4o"  # deployment id used by CBORG
 
-
-
+#TODO Do we need this funciotn? is it used anywhere?
 def get_empirical_formula(formula_str):
+    """
+    Return a simplified element->amount dictionary by dividing counts by the GCD.
+    Intended for near-integer compositions.
+    """
     comp = Composition(formula_str)
     el_amt_dict = comp.get_el_amt_dict()
     atom_counts = [round(v) for v in el_amt_dict.values()]
@@ -29,6 +33,10 @@ def get_empirical_formula(formula_str):
 
 
 def describe_clean_composition(formula_str, digits=4, max_denominator=30):
+    """
+    Produce a human-readable description of the fractional composition and a small-denominator
+    integer approximation (for readability in prompts).
+    """
     comp = Composition(formula_str)
 
     # Get rounded fractional composition
@@ -51,7 +59,8 @@ def describe_clean_composition(formula_str, digits=4, max_denominator=30):
 def flatten_chemical_formula(formula):
     """
     Flatten a chemical formula by expanding parentheses and combining duplicate elements.
-    Removes 1s, preserves element order.
+    - Removes explicit 1s in the output.
+    - Preserves first-seen element order.
     """
     def expand_parentheses(f):
         pattern = r'\(([^()]+)\)(\d*)'
@@ -77,99 +86,9 @@ def flatten_chemical_formula(formula):
     return ''.join(f"{el}{cnt if cnt > 1 else ''}" for el, cnt in collapsed.items())
 
 def load_prompt_template(template_path):
+    """Load a prompt template from disk."""
     with open(template_path, "r") as f:
         return f.read()
-
-def calculate_llm_uncertainty(likelihoods1, likelihoods2, likelihoods3, default_value=0):
-    """
-    Calculate the uncertainty as the standard deviation of three likelihood measurements for each phase.
-
-    Parameters:
-        likelihoods1, likelihoods2, likelihoods3 (dict): Dictionaries containing the likelihoods for each phase from three separate trials.
-
-    Returns:
-        dict: A dictionary containing the calculated uncertainties for each phase.
-    """
-
-    all_phases = set(likelihoods1.keys()).union(likelihoods2.keys()).union(likelihoods3.keys())
-    
-    for phase in all_phases:
-        if phase not in likelihoods1:
-            likelihoods1[phase] = default_value
-        if phase not in likelihoods2:
-            likelihoods2[phase] = default_value
-        if phase not in likelihoods3:
-            likelihoods3[phase] = default_value
-
-    # Calculate uncertainties
-    uncertainties = {}
-    for phase in all_phases:
-        values = [likelihoods1[phase], likelihoods2[phase], likelihoods3[phase]]
-        uncertainties[phase] = np.std(values)
-    
-    return uncertainties
-
-def flatten_phases(phases):
-    """
-    Flattens a mixed list of strings, dictionaries, or other structures into a flat list of strings.
-
-    Parameters:
-        phases (list): A list containing strings, dictionaries, or other structures.
-
-    Returns:
-        list: A flat list of unique string phases.
-    """
-    flat_list = []
-    if isinstance(phases, list):
-        for item in phases:
-            if isinstance(item, dict):  
-                for value in item.values():
-                    if isinstance(value, list):
-                        flat_list.extend(value)
-                    else:
-                        flat_list.append(value)
-            elif isinstance(item, str):  
-                flat_list.append(item)
-    elif isinstance(phases, str): 
-        flat_list.append(phases)
-    return list(set(flat_list)) 
-
-
-def flatten_and_simplify_phases(phases):
-    """
-    Flattens a mixed list of strings, dictionaries, or other structures into a flat list of simplified strings.
-    Simplifies the phase names by removing ICSD numbers and additional identifiers.
-
-    Parameters:
-        phases (list): A list containing strings, dictionaries, or other structures.
-
-    Returns:
-        list: A flat list of unique simplified string phases.
-    """
-    flat_list = []
-    if isinstance(phases, list):
-        for item in phases:
-            if isinstance(item, dict): 
-                for value in item.values():
-                    if isinstance(value, list):
-                        flat_list.extend(value)
-                    else:
-                        flat_list.append(value)
-            elif isinstance(item, str):  
-                flat_list.append(item)
-    elif isinstance(phases, str): 
-        flat_list.append(phases)
-
-    # Simplify the phase names
-    simplified_list = []
-    for phase in flat_list:
-        if "_(" in phase: 
-            simplified_list.append(phase.split("_(")[0])
-        else:
-            simplified_list.append(phase)
-
-    return list(set(simplified_list)) 
-
 
 def get_phase_likelihood_via_prompt_all_interpretations(synthesis_data, all_phases, composition_balance_scores):
     """
