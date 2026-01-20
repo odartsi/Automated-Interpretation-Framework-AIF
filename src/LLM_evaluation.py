@@ -9,7 +9,10 @@ from math import gcd
 from functools import reduce
 from collections import OrderedDict
 from utils import cleanup_phases, type_of_furnace, celsius_to_kelvin
+from pathlib import Path
 
+PROMPT_DIR = Path(__file__).resolve().parent / "prompt"
+PROMPT_TEMPLATE_PATH = PROMPT_DIR / "llm_prompt_template.txt"
 
 # NOTE: Uses CBORG gateway; API_KEY must be set in env.
 openai.api_key = os.getenv("API_KEY")
@@ -18,6 +21,11 @@ if not openai.api_key:
 openai.api_base = "https://api.cborg.lbl.gov"  # CBORG base URL
 model = "openai/gpt-4o"  # deployment id used by CBORG
 
+def load_prompt_template(template_path):
+    """Load a prompt template from disk."""
+    with open(template_path, "r") as f:
+        return f.read()
+        
 #TODO Do we need this funciotn? is it used anywhere?
 def get_empirical_formula(formula_str):
     """
@@ -85,10 +93,6 @@ def flatten_chemical_formula(formula):
     collapsed = parse_and_collapse(no_parens)
     return ''.join(f"{el}{cnt if cnt > 1 else ''}" for el, cnt in collapsed.items())
 
-def load_prompt_template(template_path):
-    """Load a prompt template from disk."""
-    with open(template_path, "r") as f:
-        return f.read()
 
 def get_phase_likelihood_via_prompt_all_interpretations(synthesis_data, all_phases, composition_balance_scores):
     """
@@ -130,7 +134,7 @@ def get_phase_likelihood_via_prompt_all_interpretations(synthesis_data, all_phas
     for name, score in composition_balance_scores.items():
         prompt += f"- {name}: {round(score, 3)}\n"
     
-    prompt += load_prompt_template("llm_prompt_template.txt")
+    prompt += load_prompt_template(PROMPT_TEMPLATE_PATH)
     try:
         response = openai.ChatCompletion.create(
             model=model,
