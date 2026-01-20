@@ -1,35 +1,23 @@
 import openai
 import re
 import ast
-import pandas as pd
 import os
-from collections import Counter
 import numpy as np
-import matplotlib.pyplot as plt
-from utils import cleanup_phases, type_of_furnace, celsius_to_kelvin
-from phase_stability import get_stable_polymorph_spacegroup
 import textwrap
+from pymatgen.core import Composition
+from math import gcd
+from functools import reduce
+from collections import OrderedDict
+from utils import cleanup_phases, type_of_furnace, celsius_to_kelvin
 
-model = "openai/gpt-4o"#-mini
+model = "openai/gpt-4o"
 # model ="meta/Llama-4-Scout-FP8"
-# model = "lbl/llama"
-# model = "aws/llama-3.1-405b"
-# model= "azure/deepseek-r1"
-# model = "openai/gpt-4o-2024-08-06"
-# model=  "anthropic/claude-haiku"
 openai.api_key = os.getenv("API_KEY")
 if not openai.api_key:
     raise ValueError("API key is missing!")
 openai.api_base = "https://api.cborg.lbl.gov"  # Set the CBORG base URL
 
-import tiktoken
-from pymatgen.core import Composition
-from math import gcd
-from functools import reduce
-import re
-from collections import defaultdict, OrderedDict
 
-from pymatgen.core import Composition
 
 def get_empirical_formula(formula_str):
     comp = Composition(formula_str)
@@ -102,11 +90,7 @@ def calculate_llm_uncertainty(likelihoods1, likelihoods2, likelihoods3, default_
     Returns:
         dict: A dictionary containing the calculated uncertainties for each phase.
     """
-    # uncertainties = {}
-    # for phase in likelihoods1:
-    #     values = [likelihoods1[phase], likelihoods2[phase], likelihoods3[phase]]
-    #     uncertainties[phase] = np.std(values)
-    # return uncertainties
+
     all_phases = set(likelihoods1.keys()).union(likelihoods2.keys()).union(likelihoods3.keys())
     
     for phase in all_phases:
@@ -138,15 +122,15 @@ def flatten_phases(phases):
     flat_list = []
     if isinstance(phases, list):
         for item in phases:
-            if isinstance(item, dict):  # Extract values from dictionaries
+            if isinstance(item, dict):  
                 for value in item.values():
                     if isinstance(value, list):
                         flat_list.extend(value)
                     else:
                         flat_list.append(value)
-            elif isinstance(item, str):  # Add plain strings
+            elif isinstance(item, str):  
                 flat_list.append(item)
-    elif isinstance(phases, str):  # Single string (not in a list)
+    elif isinstance(phases, str): 
         flat_list.append(phases)
     return list(set(flat_list)) 
 
@@ -165,21 +149,21 @@ def flatten_and_simplify_phases(phases):
     flat_list = []
     if isinstance(phases, list):
         for item in phases:
-            if isinstance(item, dict):  # Extract values from dictionaries
+            if isinstance(item, dict): 
                 for value in item.values():
                     if isinstance(value, list):
                         flat_list.extend(value)
                     else:
                         flat_list.append(value)
-            elif isinstance(item, str):  # Add plain strings
+            elif isinstance(item, str):  
                 flat_list.append(item)
-    elif isinstance(phases, str):  # Single string (not in a list)
+    elif isinstance(phases, str): 
         flat_list.append(phases)
 
     # Simplify the phase names
     simplified_list = []
     for phase in flat_list:
-        if "_(" in phase:  # Remove the ICSD part
+        if "_(" in phase: 
             simplified_list.append(phase.split("_(")[0])
         else:
             simplified_list.append(phase)
@@ -295,15 +279,9 @@ def evaluate_interpretations_with_llm(filtered_df, interpretations,project_numbe
     Returns:
         dict: Dictionary of LLM likelihoods and explanations per interpretation.
     """
-    # Extract the dictionary from the list
-    # if isinstance(interpretations, list) and len(interpretations) == 1:
-    #     interpretations = interpretations[0]  # Access the single dictionary inside the list
-    # else:
-    #     raise ValueError("Interpretations should be a list containing a single dictionary.")
-
+   
     llm_evaluation_results = {}
-    # Aggregate unique phases from all interpretations
-    # all_phases = set()
+
     if filtered_df.empty:
             print(f"No matching rows found in synthesis data for project: {project_number}")
             llm_evaluation_results[project_number] = {
@@ -314,27 +292,11 @@ def evaluate_interpretations_with_llm(filtered_df, interpretations,project_numbe
 
     # Use the first matching row
     synthesis_row = filtered_df.iloc[0].copy()
-    # synthesis_row['Furnace.1'] = type_of_furnace(synthesis_row['Furnace.1'])
-    # import ast
-
-    # precursors_raw = synthesis_row['Precursors.1']
-    # precursors_list = ast.literal_eval(precursors_raw)
-    # synthesis_data = f"""
-    # Solid state synthesis; gram-quantity precursors are mixed and heated in a furnace.
-    # Target: {synthesis_row['Target.1']}
-    # Precursors: {", ".join(precursors_list)}
-    # Temperature: {celsius_to_kelvin(synthesis_row['Temperature (C).1'])}K ({synthesis_row['Temperature (C).1']}°C)
-    # Dwell Duration: {synthesis_row['Dwell Duration (h).1']} hours
-    # Furnace: {synthesis_row['Furnace.1']}
-    # """
-   
     synthesis_row['Furnace'] = type_of_furnace(synthesis_row['Furnace'])
-    
-
     precursors_raw = synthesis_row['Precursors']
     precursors_list = ast.literal_eval(precursors_raw)
     flattened_precursors = [flatten_chemical_formula(p) for p in precursors_list]
-     # Precursors: {", ".join(precursors_list)}
+  
     synthesis_data = f"""
     Solid state synthesis: gram-quantity precursors are mixed and heated in a furnace.
     Target: {synthesis_row['Target']}
@@ -343,15 +305,6 @@ def evaluate_interpretations_with_llm(filtered_df, interpretations,project_numbe
     Dwell Duration: {synthesis_row['Dwell Duration (h)']} hours
     Furnace: {synthesis_row['Furnace']}
     """
-    print(synthesis_data)
-    
-    # all_phases = {}
-
-    # for interpretation_name, interpretation in interpretations.items():
-    #     phases = cleanup_phases(interpretation["phases"])
-    #     print("phases before flatten ", phases )
-    #     flattened_phases = [phase.split("_(")[0] for phase in phases]
-    #     all_phases[interpretation_name] = flattened_phases
 
     all_phases = {}
     for interpretation_name, interpretation in interpretations.items():
@@ -360,7 +313,7 @@ def evaluate_interpretations_with_llm(filtered_df, interpretations,project_numbe
 
         entries = []
         for phase_str, weight in zip(raw_phases, weight_fractions):
-            main_part = phase_str.split("_(")[0]  # e.g., 'NiFe2O4_227'
+            main_part = phase_str.split("_(")[0]  
             if "_" in main_part:
                 formula, sg = main_part.split("_")
                 try:
@@ -381,41 +334,6 @@ def evaluate_interpretations_with_llm(filtered_df, interpretations,project_numbe
             entries.append(entry)
         print("The entries are: ", entries)
         all_phases[interpretation_name] = entries   
-    # for interpretation_name, interpretation in interpretations.items():
-    #     raw_phases = cleanup_phases(interpretation["phases"])
-    #     weight_fractions = interpretation["weight_fraction"]
-
-    #     entries = []
-    #     # for phase_str, weight in zip(raw_phases, weight_fractions):
-    #     #     main_part = phase_str.split("_(")[0]  # e.g., 'V4O7_2'
-    #     #     if "_" in main_part:
-    #     #         formula, sg = main_part.split("_")
-    #     #         entry = f"{formula} (space group {sg}, weight fraction {round(weight,2)}%)"
-    #     #     else:
-    #     #         entry = f"{main_part} (weight fraction {round(weight,2)}%)"
-    #     #     entries.append(entry)
-    #     for phase_str, weight in zip(raw_phases, weight_fractions):
-    #         main_part = phase_str.split("_(")[0]  # e.g., 'NiFe2O4_227'
-    #         if "_" in main_part:
-    #             formula, sg = main_part.split("_")
-    #             try:
-    #                 simplified = get_empirical_formula(formula)
-    #                 entry = (f"{formula} (space group {sg}, weight fraction {round(weight, 2)}%, "
-    #                         f"normalized composition {simplified})")
-    #             except Exception as e:
-    #                 entry = (f"{formula} (space group {sg}, weight fraction {round(weight, 2)}%, "
-    #                         f"normalization failed: {e})")
-    #         else:
-    #             try:
-    #                 simplified = get_empirical_formula(main_part)
-    #                 entry = (f"{main_part} (weight fraction {round(weight, 2)}%, "
-    #                         f"normalized composition {simplified})")
-    #             except Exception as e:
-    #                 entry = (f"{main_part} (weight fraction {round(weight, 2)}%, "
-    #                         f"normalization failed: {e})")
-    #         entries.append(entry)
-    #     print("The entries are: ", entries)
-    #     all_phases[interpretation_name] = entries
 
 
     composition_balance_scores = {}
@@ -461,9 +379,3 @@ def evaluate_interpretations_with_llm(filtered_df, interpretations,project_numbe
     
     return [interpretations]
     
-# input_csv = "../data/alab_synthesis_data/synthesis_and_predictions.csv"  # Replace with your input file
-# output_csv = "../data/alab_synthesis_data/llm_processed_synthesis_data_better_prompt_jan14_n.csv"  # Replace with your desired output file
-# def manual_llm_evaluation(input_csv, output_csv):
-#    process_synthesis_data_with_prompt(input_csv, output_csv)
-
-# manual_llm_evaluation(input_csv, output_csv)
