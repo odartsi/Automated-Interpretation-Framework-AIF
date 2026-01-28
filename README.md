@@ -62,7 +62,6 @@ AIF_copy/
 │   ├── statistical_factor.py      # XRD refinement and phase search
 │   ├── chemical_factor.py          # Composition balance calculations
 │   ├── LLM_evaluation.py            # LLM-based phase evaluation
-│   ├── phase_stability.py          # Phase stability checks (Materials Project)
 │   ├── probability_of_interpretation.py  # Main orchestration script
 │   ├── utils.py                    # Utility functions and plotting
 │   ├── prompts/
@@ -87,7 +86,6 @@ AIF_copy/
 
 ### External Services
 - **CBORG Gateway**: API access to GPT-4 (`https://api.cborg.lbl.gov`)
-- **Materials Project API**: Phase stability data (optional)
 - **ICSD Database**: Crystal structure database access
 
 ## Usage
