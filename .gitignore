@@ -1,0 +1,32 @@
+# Ignore __pycache__ directories
+__pycache__/
+
+# Ignore .pyc files
+*.pyc
+
+# Ignore macOS system files
+.DS_Store
+
+# Ignore data files
+data/sem_eds_data/
+# data/xrd_data/
+
+# Ignore ICSD and cifs files
+src/ICSD_2024/
+src/cifs/
+src/cifs_gsas/
+src/cifs_gsas_test/
+src/gsasii_test_temp/
+src/instrument_files/
+src/*.txt
+src/*.html
+notebooks/data/
+*.xrdml
+*.json
+*.xy
+*.txt
+*.html
+*.png
+*.svg
+data/xrd_data/xrd_analysis/PG/MnBiO3/PG_0628_1_Bi2O3_Mn2O3/PG_0628_1_Bi2O3_Mn2O3_I_3.png
+*.html
