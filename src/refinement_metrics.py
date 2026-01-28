@@ -1,4 +1,3 @@
-
 from pathlib import Path
 from dara.structure_db import ICSDDatabase
 from dara.refine import do_refinement_no_saving
@@ -406,8 +405,6 @@ def phase_importance(
                 for i in range(len(search_results)):
                     final_results, matcher, missing_peaks, isolated_missing_peaks, extra_peaks, isolated_extra_peaks, final_results_phases_list, final_results_phases_list_strip, score, score_search, normalized_rwp  = evaluate_interpretation(i, pattern_path, search_results, final_refinement_params, target)
                     if not final_results:
-                        print("in not final results")
-                        return final_results_rwp_list, all_search_rwp_list, interpretation_counter, interpretations
                         continue
                     cell_params = extract_cell_parameters(final_results)
                     existing_combinations_set = {frozenset(comb) for comb in existing_combinations}
@@ -456,7 +453,7 @@ def phase_importance(
                                 "bkg_baseline_score": bkg_baseline_score,
                             },
                             **({"cell_parameters": deepcopy(cell_params)} if cell_params is not None else {}),
-}
+                        }
                         new_elements_to_remove += list(final_results.lst_data.phases_results.keys())
                         iterations_without_new_interpretation =0
                         interpretation_counter +=1
@@ -464,17 +461,12 @@ def phase_importance(
                         iterations_without_new_interpretation += 1
                        
                 for result in search_results:
-                    all_phases_in_result = []  
                     for phases_ in result.phases:
                         if isinstance(phases_, (list, tuple)):
                             new_elements_to_remove += [
                                 phase.path.name for phase in phases_ if hasattr(phase, "path")
                             ]
-                            all_phases_in_result += [
-                                phase.path.name for phase in phases_ if hasattr(phase, "path")
-                            ]
                         elif hasattr(phases_, "path"):
-                            all_phases_in_result.append(phases_.path.name)
                             new_elements_to_remove.append(phases_.path.name)
 
                     phase_weights_dict = result.refinement_result.get_phase_weights()
@@ -590,7 +582,7 @@ def phase_importance(
                                 "bkg_baseline_score": bkg_baseline_score,
                             },
                             **({"cell_parameters": deepcopy(cell_params)} if cell_params is not None else {}),
-}
+                        }
                         interpretation_counter += 1
                         iterations_without_new_interpretation = 0
                         if interpretation_counter >=10:
