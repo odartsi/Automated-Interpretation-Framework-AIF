@@ -205,19 +205,20 @@ print(f"[{group}] Using interpretations file: {interpretations_file}")
 print(f"Running {len(combinations)} combination(s)...")
 
 
-results = []
-thresholds = {}
 start_time = time.time()
 
-# Load existing interpretations from file
+# Load existing interpretations from file (used for display-only path)
 if os.path.exists(interpretations_file):
     with open(interpretations_file, "r") as f:
         all_interpretations = json.load(f)
 else:
     all_interpretations = {}
 
-
-#OLD CODE REVERT IF NEEDED
+# ---------------------------------------------------------------------------
+# Two paths per combo:
+#   A) Display only: interpretations already in file -> load and plot, skip refinement.
+#   B) Full refinement: run refinement + LLM + balance + prior/posterior, then plot and save.
+# ---------------------------------------------------------------------------
 for combo in combinations:
     pattern_path = combo['pattern_path']
 
@@ -225,71 +226,45 @@ for combo in combinations:
     base_name = os.path.basename(pattern_path)
     base_name = os.path.splitext(base_name)[0]  # always remove .xy or .xrdml
 
-    # Now run your project_number logic on clean base_name
     try:
-        base_name = os.path.splitext(os.path.basename(pattern_path))[0]
         project_number = extract_project_number_from_filename(base_name)
-
     except IndexError:
         project_number = "Invalid format"
 
-    
-    
     filtered_df = df[df["Name"].str.contains(rf'^{project_number}$', na=False)]
-    print(project_number)
 
-    if "-" in project_number:
-        swapped_project_number = project_number.replace("-", "_")
-        
-        # Retry with swapped characters if no match is found
     if filtered_df.empty:
-        print("No rows found with exact project_number match. Retrying with swapped characters...")
-        if "_" in project_number:
-            swapped_project_number = project_number.replace("_", "-")
-        elif "-" in project_number:
-            swapped_project_number = project_number.replace("-", "_")
-        else:
-            swapped_project_number = project_number  # No special characters to swap
+        swapped = project_number.replace("_", "-") if "_" in project_number else project_number.replace("-", "_") if "-" in project_number else project_number
+        filtered_df = df[df["Name"].str.contains(rf'^{swapped}$', na=False)]
 
-        filtered_df = df[df["Name"].str.contains(rf'^{swapped_project_number}$', na=False)]
-
-    # target = filtered_df['Target.1'].iloc[0]
-    print(filtered_df)
     if filtered_df.empty:
         print("No rows match the filter — skipping...")
         continue
-    target = filtered_df['Target'].iloc[0]
-    # Check if interpretations already exist for this project number
-    if swapped_project_number in all_interpretations:
-        # print(f"Skipping processing for {project_number}, interpretations already available.")
-        interpretations = all_interpretations[swapped_project_number]
-        plot_contribution_decomposition_dual(interpretations, swapped_project_number, target)
-        plot_contribution_decomposition_dual_normalized_right_v2(interpretations, swapped_project_number, target)
-        plot_contribution_decomposition_dual_normalized_right_v3(interpretations, swapped_project_number, target)
-        plot_contribution_decomposition_dual_normalized_right_v4(interpretations, swapped_project_number, target)
-        plot_contribution_pie_scaled(interpretations, swapped_project_number, target)
+    target = filtered_df["Target"].iloc[0]
+
+    # ---- Path A: Display only (interpretations already in file) ----
+    if project_number in all_interpretations:
+        interpretations = all_interpretations[project_number]
+        plot_contribution_decomposition_dual(interpretations, project_number, target)
+        plot_contribution_decomposition_dual_normalized_right_v2(interpretations, project_number, target)
+        plot_contribution_decomposition_dual_normalized_right_v3(interpretations, project_number, target)
+        plot_contribution_decomposition_dual_normalized_right_v4(interpretations, project_number, target)
+        plot_contribution_pie_scaled(interpretations, project_number, target)
         plot_phase_and_interpretation_unnormalized_probabilities_newstyle(interpretations, project_number, filtered_df, target)
         # interpretations = flag_interpretation_trustworthiness(interpretations)
         # interpretations = compute_trust_score(interpretations)
         # # plot_phase_and_interpretation_probabilities_newstyle(interpretations, project_number, filtered_df, target)
         # plot_phase_and_interpretation_unnormalized_probabilities_newstyle(interpretations, project_number, filtered_df, target)
         continue
-    
-    print(f"Processing: {combo['pattern_path']} with chemical system: {combo['chemical_system']}")
-    # Split the chemical system into elements
-    elements = combo["chemical_system"].split("-")
-    result, project_number, target = calculate_spectrum_likelihood_given_interpretation_wrapper(
-        combo['pattern_path'], combo['chemical_system'], target, alpha=1)
 
-    print("just to make sure ", project_number, " : ", result)
-    print(filtered_df)
-    
+    # ---- Path B: Full refinement (run refinement, pipeline, plots, save) ----
+    print(f"Processing: {combo['pattern_path']} with chemical system: {combo['chemical_system']}")
+    result, project_number, target = calculate_spectrum_likelihood_given_interpretation_wrapper(
+        combo["pattern_path"], combo["chemical_system"], target, alpha=1)
+
     if result:
-        results = [result]
-       
-         # Evaluate interpretations
-        interpretations = calculate_chemical_factors(filtered_df,  results[0])
-        interpretations = evaluate_interpretations_with_llm(filtered_df, results[0], project_number)
+        interpretations = calculate_chemical_factors(filtered_df, result)
+        interpretations = evaluate_interpretations_with_llm(filtered_df, result, project_number)
         interpretations = calculate_chemical_factors(filtered_df,interpretations)
         # Normalize scores
         interpretations = normalize_scores_for_sample(interpretations)
