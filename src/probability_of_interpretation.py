@@ -11,28 +11,21 @@ from typing import Optional
 import re
 from utils import (
     plot_interpretation_probabilities_with_statistical,
-    calculate_posterior_probability_of_interpretation, 
-    plot_phase_probabilities, 
+    calculate_posterior_probability_of_interpretation,
     calculate_prior_probability,
-    calculate_phase_probabilities,
     plot_phase_and_interpretation_probabilities_newstyle,
-    plot_phase_and_interpretation_probabilities_adjusted,
     plot_phase_and_interpretation_unnormalized_probabilities_newstyle,
-    plot_contributions,
-    compute_contributions,
     calculate_fit_quality,
     normalize_scores_for_sample,
     flag_interpretation_trustworthiness,
     compute_trust_score,
-    compute_scaled_contributions,
-    plot_scaled_contributions,
     normalize_rwp_for_sample,
     plot_contribution_decomposition,
     plot_contribution_decomposition_dual,
     plot_contribution_decomposition_dual_normalized_right_v2,
     plot_contribution_pie_scaled,
     plot_contribution_decomposition_dual_normalized_right_v3,
-    plot_contribution_decomposition_dual_normalized_right_v4
+    plot_contribution_decomposition_dual_normalized_right_v4,
 )
 
 
