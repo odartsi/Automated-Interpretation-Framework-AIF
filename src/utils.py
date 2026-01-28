@@ -1672,6 +1672,21 @@ def normalize_scores_for_sample(interpretations, k=3, center=0.3):
 
     return interpretations
 
+
+def calculate_fit_quality(interpretations, w_rwp=1, w_score=1):
+    """
+    Compute a combined fit quality score per interpretation from normalized RWP and normalized score.
+
+    Adds/overwrites `fit_quality` for each interpretation:
+      fit_quality = (normalized_rwp*w_rwp + normalized_score*w_score) / (w_rwp + w_score)
+    """
+    for _, interpretation in interpretations.items():
+        interpretation["fit_quality"] = (
+            interpretation["normalized_rwp"] * w_rwp
+            + interpretation["normalized_score"] * w_score
+        ) / (w_rwp + w_score)
+    return interpretations
+
 def add_flag(background, observed):
     """
     Computes the excess background flag:
