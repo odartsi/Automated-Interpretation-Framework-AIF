@@ -7,7 +7,6 @@ from dara import search_phases
 from dara.search.peak_matcher import PeakMatcher
 from dara.peak_detection import detect_peaks
 import os
-import re
 import numpy as np
 from itertools import combinations
 from utils import (
@@ -18,6 +17,8 @@ from utils import (
     cleanup_phases,
     remove_cifs_prefix,
     remove_cifs_suffix,
+    extract_icsd_from_key,
+    strip_phase_identifier,
     importance_factor_calculation,
     add_flag,
     net_signal_score,
@@ -29,18 +30,8 @@ from utils import (
 import time
 TIME_LIMIT_ = 2000
 TIME_LIMIT = 1200
-MAX_ITER_WITHOUT_NEW_INTERPRETATION = 10 
+MAX_ITER_WITHOUT_NEW_INTERPRETATION = 10
 
-
-def extract_icsd_from_key(phase_key: str):
-    """
-    Extracts the ICSD id from keys like:
-      'ZrO2_14_(icsd_157403)-0'    -> '157403'
-      'Zn1.96O2_186_(icsd_13952)-None' -> '13952'
-    Returns None if no ICSD is found.
-    """
-    m = re.search(r'icsd[_-]?(\d+)', phase_key, re.I)
-    return m.group(1) if m else None
 
 def phase_assets_from_final(final_results, base_dir="cifs"):
     """
@@ -200,19 +191,23 @@ def evaluate_interpretation(i, pattern_path, search_results, final_refinement_pa
         strip_phase_identifier(p.strip()) for p in final_results.lst_data.phases_results.keys()
     ]
 
-    return final_results, matcher, missing_peaks, isolated_missing_peaks, extra_peaks, isolated_extra_peaks, final_results_phases_list, final_results_phases_list_strip, score, score_search, normalized_rwp   
-
-
-def strip_phase_identifier(phase_name):
-    """Remove everything after the first '(' in phase name (e.g. 'V2O3_167_(icsd_1869)-0' -> 'V2O3_167')."""
-    return re.split(r'_\(', phase_name)[0]
+    return final_results, matcher, missing_peaks, isolated_missing_peaks, extra_peaks, isolated_extra_peaks, final_results_phases_list, final_results_phases_list_strip, score, score_search, normalized_rwp
 
 
 def normalize_rwp(rwp):
     """Normalize RWP to [0,1] scale (RWP 0 -> 1, RWP 40 -> 0)."""
     return (rwp - 40) / (-40)
 
+
 def main(pattern_path, chemical_system, target):
+    """
+    Run phase search and refinement for a single XRD pattern and chemical system.
+
+    Fetches CIFs for the chemical system, runs phase search and Rietveld refinement,
+    and builds multiple interpretations by iteratively excluding phases (via phase_importance).
+    Results are stored in an interpretations dict keyed by "I_1", "I_2", etc., with
+    phases, RWP, scores, and metadata.
+    """
     all_phases_list = ['None']
     all_search_phases_list = []
     all_search_rwp_list = []

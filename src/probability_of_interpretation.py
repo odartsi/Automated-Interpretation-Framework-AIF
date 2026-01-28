@@ -132,6 +132,7 @@ DATASETS = {
 VALID_KEYS = list(DATASETS.keys())
 
 def _read_json(path):
+    """Load JSON from a file path; raises FileNotFoundError if the file is missing."""
     path = Path(path)
     if not path.exists():
         raise FileNotFoundError(f"Missing JSON: {path}")
@@ -139,12 +140,14 @@ def _read_json(path):
         return json.load(f)
 
 def _read_csv(path):
+    """Load CSV from a file path; raises FileNotFoundError if the file is missing."""
     path = Path(path)
     if not path.exists():
         raise FileNotFoundError(f"Missing CSV: {path}")
     return pd.read_csv(path)
 
 def _infer_group_from_search(term: str) -> str | None:
+    """Infer dataset group from a search term (e.g. 'TRI-15' -> 'TRI'). Returns None if no match."""
     t = term.strip().upper()
     # Strong heuristic: prefix like "TRI-15"
     for key in VALID_KEYS:
@@ -157,6 +160,7 @@ def _infer_group_from_search(term: str) -> str | None:
     return None
 
 def _choose_group_interactively(prompt_text="Choose dataset group"):
+    """Prompt the user to pick a dataset group; raises ValueError if the input is not in DATASETS."""
     print(f"{prompt_text} [{', '.join(VALID_KEYS)}]: ", end="")
     g = input().strip().upper()
     if g not in DATASETS:

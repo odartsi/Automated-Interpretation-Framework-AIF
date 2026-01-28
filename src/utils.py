@@ -446,6 +446,24 @@ def remove_cifs_suffix(file_list):
     """
     return [item.replace('.cif', '', 1)for item in file_list]
 
+
+def extract_icsd_from_key(phase_key: str) -> str | None:
+    """
+    Extract the ICSD id from phase keys like 'ZrO2_14_(icsd_157403)-0' or 'Zn1.96O2_186_(icsd_13952)-None'.
+    Returns the digits after 'icsd_' or 'icsd-', or None if no ICSD id is found.
+    """
+    m = re.search(r'icsd[_-]?(\d+)', phase_key, re.I)
+    return m.group(1) if m else None
+
+
+def strip_phase_identifier(phase_name: str) -> str:
+    """
+    Remove the ICSD suffix from a phase name: everything from '_(' onward is dropped.
+    Example: 'V2O3_167_(icsd_1869)-0' -> 'V2O3_167'.
+    """
+    return re.split(r'_\(', phase_name)[0]
+
+
 def transform_all_cifs(all_cifs):
     """
     Transforms the all_cifs list into a comparable format by removing the 'cifs/' prefix and cleaning up phases.
