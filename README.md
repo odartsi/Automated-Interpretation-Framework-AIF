@@ -77,17 +77,45 @@ AIF_copy/
 
 ### Core Libraries
 - **pymatgen**: Materials analysis and composition handling
-- **dara**: XRD refinement and phase search (custom library)
 - **openai**: LLM API access (via CBORG gateway)
 - **pandas**: Data manipulation
 - **numpy**: Numerical computations
 - **matplotlib/plotly**: Visualization
 
+### The `dara` package (required for refinement and phase search)
+
+The framework depends on **dara**, a library used for:
+
+- **XRD phase search** (`dara.search_phases`, `dara.structure_db.ICSDDatabase`)
+- **Rietveld refinement** (`dara.refine.do_refinement_no_saving`)
+- **Peak matching and detection** (`dara.search.peak_matcher.PeakMatcher`, `dara.peak_detection.detect_peaks`)
+- **Refinement results** (`dara.result.RefinementResult` in `utils.py`)
+
+Without `dara` installed and on your `PYTHONPATH`, the main entry point (`probability_of_interpretation.py`) and refinement metrics (`refinement_metrics.py`) will not run. Ensure you have access to the dara package and that it is installed in the same environment you use to run this code. (If dara is internal or versioned elsewhere, install it according to your organization’s instructions.)
+
 ### External Services
 - **CBORG Gateway**: API access to GPT-4 (`https://api.cborg.lbl.gov`)
-- **ICSD Database**: Crystal structure database access
+- **ICSD Database**: Crystal structure database access (via dara)
+
+## Installation and environment
+
+1. **Python environment**: Use a Python environment where you can install the dependencies (Python 3.8+ recommended).
+
+2. **Install dependencies**: Install pymatgen, openai, pandas, numpy, matplotlib, plotly (e.g. with `pip` or your project’s environment manager).
+
+3. **Install and expose `dara`**: The `dara` package must be available when running the code. Install it from your usual source (internal repo, PyPI, etc.) and ensure it is on `PYTHONPATH` or installed into the same environment.
+
+4. **Run from the project root**: Execute the main script from the repository root so that imports like `from utils import ...` and data paths resolve correctly:
+   ```bash
+   cd /path/to/AIF_copy
+   python src/probability_of_interpretation.py
+   ```
+
+5. **API key for LLM**: Set your API key for the CBORG gateway (see [Environment Setup](#environment-setup) below).
 
 ## Usage
+
+Before running, ensure you have completed [Installation and environment](#installation-and-environment) (including the `dara` package and API key).
 
 ### Basic Workflow
 
@@ -210,6 +238,7 @@ Test scripts are available in `src/tests/`:
 
 ## Limitations
 
+- Requires the **dara** package for XRD refinement and phase search; the code will not run without it.
 - Requires API access to LLM service (CBORG gateway)
 - Processing time scales with number of interpretations (typically 10-20 minutes per pattern)
 - Quality depends on completeness of synthesis metadata
