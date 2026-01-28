@@ -260,7 +260,7 @@ def main(pattern_path, chemical_system, target):
         if final_phase_set not in existing_combinations:
             existing_combinations.add(final_phase_set)
             save_xrd_plots(
-                search_results, final_results, f"I_{interpretation_counter}", pattern_path, isolated_missing_peaks, isolated_extra_peaks, target#, thresholds
+                search_results, final_results, f"I_{interpretation_counter}", pattern_path, isolated_missing_peaks, isolated_extra_peaks, target
             )
             plot_data = final_results.plot_data
             observed = plot_data.y_obs
@@ -648,7 +648,7 @@ def calculate_spectrum_likelihood_given_interpretation_wrapper(pattern_path, che
         search_results,
         final_results,
         elements_to_remove,
-        all_weight_fractions,  # Capture weight fractions
+        all_weight_fractions,
         interpretations
     ) = main(pattern_path, chemical_system, target)
 
