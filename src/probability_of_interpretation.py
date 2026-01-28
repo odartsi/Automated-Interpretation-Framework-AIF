@@ -272,7 +272,7 @@ for combo in combinations:
         interpretations = calculate_prior_probability(interpretations, w_llm=0.5, w_bscore =0.7)
         interpretations = calculate_fit_quality(interpretations,w_rwp=1, w_score=0.5)
         interpretations = flag_interpretation_trustworthiness(interpretations)
-        # interpretations = compute_trust_score(interpretations)
+        interpretations = compute_trust_score(interpretations)
         interpretations = calculate_posterior_probability_of_interpretation(interpretations)
 
         plot_interpretation_probabilities_with_statistical(interpretations,project_number, target)
