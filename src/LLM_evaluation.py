@@ -25,19 +25,6 @@ def load_prompt_template(template_path):
     """Load a prompt template from disk."""
     with open(template_path, "r") as f:
         return f.read()
-        
-#TODO Do we need this funciotn? is it used anywhere?
-def get_empirical_formula(formula_str):
-    """
-    Return a simplified element->amount dictionary by dividing counts by the GCD.
-    Intended for near-integer compositions.
-    """
-    comp = Composition(formula_str)
-    el_amt_dict = comp.get_el_amt_dict()
-    atom_counts = [round(v) for v in el_amt_dict.values()]
-    factor = reduce(gcd, atom_counts)
-    simplified = {el: round(count / factor, 6) for el, count in el_amt_dict.items()}
-    return simplified
 
 
 def describe_clean_composition(formula_str, digits=4, max_denominator=30):
