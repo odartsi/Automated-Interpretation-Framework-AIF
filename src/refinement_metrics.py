@@ -116,22 +116,6 @@ def extract_cell_parameters_if_any(result, flatten_if_single=True):
         print(f"[cell-params] skipped due to error: {e}")
         return None
 
-def extract_cell_parameters(result_obj):
-    """Return {phase_name: {'a','b','c','alpha','beta','gamma'}}."""
-    res = getattr(result_obj, "refinement_result", result_obj)   # works for both shapes
-    lst = res.lst_data
-
-    out = {}
-    for pname, phase in lst.phases_results.items():
-        a, _ = phase.a
-        b, _ = phase.b
-        c, _ = phase.c
-        # beta can be None in some paths; default angles to 90 if missing
-        beta = phase.beta[0] if getattr(phase, "beta", None) else 90.0
-        alpha = phase.alpha if phase.alpha is not None else 90.0
-        gamma = phase.gamma if phase.gamma is not None else 90.0
-        out[pname] = {"a": a, "b": b, "c": c, "alpha": alpha, "beta": beta, "gamma": gamma}
-    return out
 def evaluate_interpretation(i, pattern_path, search_results, final_refinement_params, target):
     """
     Evaluate a single interpretation result using refinement, peak matching, and scoring.
@@ -219,255 +203,16 @@ def evaluate_interpretation(i, pattern_path, search_results, final_refinement_pa
     return final_results, matcher, missing_peaks, isolated_missing_peaks, extra_peaks, isolated_extra_peaks, final_results_phases_list, final_results_phases_list_strip, score, score_search, normalized_rwp   
 
 
-# sys.path.insert(0, '/Users/odartsi/GSASII/GSAS-II/GSASII')
-# import GSASIIscriptable as G2sc
-
-
 def strip_phase_identifier(phase_name):
-    # This will remove everything after the first _(
+    """Remove everything after the first '(' in phase name (e.g. 'V2O3_167_(icsd_1869)-0' -> 'V2O3_167')."""
     return re.split(r'_\(', phase_name)[0]
 
 
-# class GSASIIResult:
-#     def __init__(self, rwp, peak_data, phase_names, phase_weights):
-#         self.rwp = rwp
-#         self.peak_data = peak_data
-#         self.phase_names = phase_names
-#         self.phase_weights = phase_weights
-# os.makedirs("gsasii_temp", exist_ok=True)
-
-
-
-# def gsasii_refinement(pattern_path, phase_cifs, instrument_prm, output_dir="gsasii_temp"):
-   
-#     print(f" ❌ Refining with {len(phase_cifs)} CIF(s):")
-#     for cif in phase_cifs:
-#         print(f"    - {cif}")
-#     # Ensure output directory exists
-#     output_dir = Path(output_dir)
-#     output_dir.mkdir(parents=True, exist_ok=True)
-#     project_path = output_dir / "refinement_project.gpx"
-
-#     # --- Step 1: Create new empty project
-#     gpx = G2sc.G2Project(newgpx=True)
-#     gpx.save(str(project_path))
-#     gpx = G2sc.G2Project(str(project_path))
-
-#     # --- Step 2: Load pattern
-#     if instrument_prm is None:
-#         histogram = gpx.add_powder_histogram(str(pattern_path))
-#     else:
-#         histogram = gpx.add_powder_histogram(str(pattern_path), str(instrument_prm))
-
-# #     # --- Step 3: Load phases
-#     phases = []
-#     for cif in phase_cifs:
-#         cif_path = str(cif.path) if hasattr(cif, "path") else str(cif)
-#         print(f"📂 Adding CIF: {cif_path}")
-#         try:
-#             phase = gpx.add_phase(cif_path, histograms=[histogram])
-#             phase.set_refinements({"Cell": True})
-#             phases.append(phase)
-#             print(f"✅ Successfully loaded {Path(cif_path).name}")
-#         except Exception as e:
-#             print(f"❌ Could not load {Path(cif_path).name}: {e}")
-#             continue
-
-#     # --- Step 4: Setup refinements
-#     for phase in phases:
-#         phase.set_refinements({'Cell': True})
-
-#         try:
-#             phase.set_refinements({'Atoms': {'X': True, 'Uiso': True}})
-#         except ValueError:
-#             print(f"⚠️ Warning: could not refine atom positions for phase {phase.data['General']['Name']} due to missing atoms. Continuing.")
-
-#     histogram.set_refinements({
-#         'Background': True,
-#         'Zero': True,
-#         'Width': True,
-#         'Scale': True,
-#     })
-
-#     gpx.save()
-
-#     # --- Step 5: Perform refinement
-#     gpx.do_refinements([{'maxCycles': 1, 'varylist': '*'}])
-#     gpx.save()
-
-#     # --- Step 6: Extract results
-#     # rwp = histogram.get_wR() * 100
-#     rwp_raw = histogram.get_wR()
-#     if rwp_raw is None:
-#         raise ValueError("Refinement failed. Rwp was not calculated.")
-#     rwp = rwp_raw * 100
-
-#     data_arrays = histogram.data['data']
-
-#     try:
-#         x = histogram.getdata('x')
-#         ycalc = histogram.getdata('ycalc')
-#         if ycalc is None or len(ycalc) != len(x):
-#             raise ValueError("Calculated data missing or shape mismatch")
-#         peak_data = np.vstack((x, ycalc)).T
-#     except Exception as e:
-#         print(f"⚠️ Warning: Histogram {histogram.name} missing calculated intensity. Using observed intensity instead. Error: {e}")
-#         x = histogram.getdata('x')
-#         yobs = histogram.getdata('yobs')
-#         if yobs is None or len(yobs) != len(x):
-#             raise ValueError(f"Observed intensity data missing or shape mismatch for histogram {histogram.name}")
-#         peak_data = np.vstack((x, yobs)).T
-
-#     phase_weights = {}
-#     for phase in phases:
-#         name = phase.data['General']['Name']
-#         # wtfrac = phase.get_wt_fraction() * 100  # Convert to %
-#         wtfrac = phase.data['General'].get('MassFrac', 0) * 100
-#         phase_weights[name] = wtfrac
-
-#     phase_names = list(phase_weights.keys())
-
-#     # --- Step 8: Print results
-#     print("\n========== GSAS-II Refinement Results ==========")
-#     print(f"Rwp = {rwp:.2f}%")
-#     print("Phases and weight fractions:")
-#     for name, weight in phase_weights.items():
-#         print(f"  {name}: {weight:.2f}%")
-#     print("=================================================\n")
-
-#     return GSASIIResult(rwp, peak_data, phase_names, phase_weights)
-
-def remove_elements_new(original_list, elements_to_remove):
-    """
-    Removes all elements in original_list that start with any string in elements_to_remove.
-    
-    Args:
-        original_list (list): The list of items to filter.
-        elements_to_remove (list): The list of strings to match the start of elements.
-        
-    Returns:
-        list: A new list with elements not starting with any string in elements_to_remove.
-    """
-    # return [item for item in original_list if not any(item.startswith(to_remove) for to_remove in elements_to_remove)]
-    return [
-        item for item in original_list
-        if not any(str(item).startswith(to_remove) for to_remove in elements_to_remove)
-    ]
 def normalize_rwp(rwp):
-    return (rwp - 40)/(-40)
+    """Normalize RWP to [0,1] scale (RWP 0 -> 1, RWP 40 -> 0)."""
+    return (rwp - 40) / (-40)
 
-def normalize_score(score, peak_calc,peak_obs):
-    min_value = - 0.1*peak_obs - 0.5*peak_calc 
-    max_value = peak_calc
-    return (score - min_value)/(max_value-min_value)
-
-
-def normalize_score2(score, peak_calc,peak_obs):
-    min_value = - 0.3*peak_obs - 0.5*peak_calc  #peak_obs for missing and peak_calc for wrong intensity and extra and matched
-    max_value = peak_calc
-    return (score - min_value)/(max_value-min_value)
-
-def normalize_score3(score, peak_calc,peak_obs):
-    min_value = - 0.3*peak_obs - 0.7*peak_calc 
-    max_value = peak_calc
-    return (score - min_value)/(max_value-min_value)
-
-
-def normalize_score4(score, peak_calc,peak_obs):
-    min_value = - 0.1*peak_obs - 0.7*peak_calc 
-    max_value = peak_calc
-    return (score - min_value)/(max_value-min_value)  
-
-def normalize_score5(score, peak_calc,peak_obs):
-    min_value = - 0.5*peak_obs - 0.7*peak_calc 
-    max_value = peak_calc
-    return (score - min_value)/(max_value-min_value) 
-
-# def main_gsas(pattern_path, chemical_system, thresholds):
-#     import time
-#     from pathlib import Path
-
-#     all_phases_list = ['None']
-#     all_search_phases_list = []
-#     all_search_rwp_list = []
-#     elements_to_remove = []
-#     interpretations = {}
-#     interpretation_counter = 1
-
-#     start_time = time.time()
-
-#     # 🗂️ Get all available CIFs
-#     # cod_database = ICSDDatabase()
-#     # all_cod_ids = cod_database.get_cifs_by_chemsys(chemical_system, dest_dir="cifs_gsas")
-#     all_cifs = sorted(list(Path("cifs_gsas_test").glob("*.cif")))[:2]
-
-#     print(f"🔍 Number of available CIFs: {len(all_cifs)}")
-
-#     # 📈 Directly run refinement with ALL CIFs (no search, no filtering)
-#     final_results = gsasii_refinement(
-#         pattern_path=pattern_path,
-#         phase_cifs=all_cifs,  # Use ALL CIFs
-#         instrument_prm="instrument_files/Calibrated.instprm",
-#         output_dir="gsasii_temp"
-#     )
-
-#     # 🎯 Matching calculated vs observed peaks
-#     peak_list = detect_peaks(
-#         pattern=pattern_path,
-#         wavelength="Cu",
-#         instrument_profile="Aeris-fds-Pixcel1d-Medipix3",
-#     )
-#     peak_obs = peak_list[["2theta", "intensity"]].values
-#     peak_calc = final_results.peak_data
-
-#     matcher = PeakMatcher(peak_calc, peak_obs)
-
-#     score4 = matcher.score(
-#         matched_coeff=1,
-#         wrong_intensity_coeff=-0.2,
-#         missing_coeff=-0.1,
-#         extra_coeff=-0.5,
-#         normalize=True,
-#     )
-
-#     normalized_score = normalize_score4(score4, len(matcher.peak_calc), len(matcher.peak_obs))
-#     normalized_rwp = normalize_rwp(final_results.rwp)
-
-
-#     missing_peaks = matcher.missing
-#     extra_peaks = matcher.extra
-
-#     final_results_phases_list = final_results.phase_names
-#     elapsed_time = time.time() - start_time
-
-#     # 🧠 Build interpretation
-#     interpretations[f"I_{interpretation_counter}"] = {
-#         "phases": final_results_phases_list,
-#         "weight_fraction": list(final_results.phase_weights.values()),
-#         "rwp": final_results.rwp,
-#         "score": score4,
-#         "normalized_score": normalized_score,
-#         "normalized_rwp": normalized_rwp,
-     
-#     }
-
-#     final_results_rwp_list = [final_results.rwp]
-
-#     return (
-#         all_search_phases_list,
-#         all_search_rwp_list,
-#         final_results_phases_list,
-#         final_results_rwp_list,
-#         all_phases_list,
-#         [],  # search_results (empty since we don't search)
-#         final_results,
-#         elements_to_remove,
-#         [],  # all_weight_fractions
-#         interpretations,
-#     )
-
-
-def main(pattern_path, chemical_system,target):
+def main(pattern_path, chemical_system, target):
     # Initialize variables
     all_phases_list = ['None']
     all_search_phases_list = []
@@ -512,8 +257,6 @@ def main(pattern_path, chemical_system,target):
         final_results, matcher, missing_peaks, isolated_missing_peaks, extra_peaks, isolated_extra_peaks, final_results_phases_list, final_results_phases_list_strip, score, score_search, normalized_rwp  = evaluate_interpretation(i, pattern_path, search_results, final_refinement_params, target)
        
         cell_params = extract_cell_parameters_if_any(final_results)  # may be None
-
-        # s_by_phase = extract_cell_parameters(final_results)
 
         # If you prefer a single dict when there's only one phase:
         # if len(cell_params_by_phase) == 1:
@@ -968,8 +711,6 @@ def phase_importance(
                         )
                         weight_fraction=list(final_results.get_phase_weights().values())
                         phase_keys, phase_cifs, phase_icsd = phase_assets_from_final(final_results, base_dir="cifs")
-                        # normalized_score= normalize_score4(score4,len(matcher.peak_calc),  len(matcher.peak_obs))
-                        # normalized_score= normalize_score(score,len(matcher.peak_calc),  len(matcher.peak_obs))
                         normalized_rwp = normalize_rwp(final_results.lst_data.rwp) 
                         # interpretations[f"I_{interpretation_counter}"]= {
                         #     "phases": list(final_results.lst_data.phases_results.keys()),
@@ -1076,7 +817,6 @@ def calculate_spectrum_likelihood_given_interpretation_wrapper(pattern_path, che
     Returns:
         dict: Results including P(S | I_n) and intermediate data for further processing.
     """
-    base_name = os.path.basename(pattern_path)
     # Step 1: Initialize and prepare data
     cleanup_cifs()
     (
@@ -1091,43 +831,7 @@ def calculate_spectrum_likelihood_given_interpretation_wrapper(pattern_path, che
         all_weight_fractions,  # Capture weight fractions
         interpretations
     ) = main(pattern_path, chemical_system, target)
- 
-    # batch_clean_cifs_for_gsasii("cifs", "cifs_gsas")
-    # (
-    #     all_search_phases_list,
-    #     all_search_rwp_list,
-    #     final_results_phases_list,
-    #     final_results_rwp_list,
-    #     all_phases_list,
-    #     search_results,
-    #     final_results,
-    #     elements_to_remove,
-    #     all_weight_fractions,  # Capture weight fractions
-    #     interpretations,
-    #     # thresholds
-    # ) = main_gsas(pattern_path, chemical_system, thresholds)
-    
-    # try:
-    #     if "-" in base_name and "_" in base_name:
-    #         # Split by '-' first, then split the second part by '_'
-    #         first_part = base_name.split('-')[0]
-    #         second_part = base_name.split('-')[1].split('_')[0]
-    #         project_number = first_part + "_" + second_part
-    #     elif "_" in base_name:
-    #         # Split by '_'
-    #         first_part = base_name.split('_')[0]
-    #         second_part = base_name.split('_')[1].split('-')[0]
-    #         project_number = first_part + "_" + second_part
-    #     elif "-" in base_name:
-    #         # Split by '-'
-    #         first_part = base_name.split('-')[0]
-    #         second_part = base_name.split('-')[1].split('.')[0]
-    #         project_number = first_part + "_" + second_part
-    #     else:
-    #         # Default to the first part if no delimiters are present
-    #         project_number = base_name.split('.')[0]
-    # except IndexError:
-    #     project_number = "Invalid format"
+
     base_name = os.path.basename(pattern_path)
     base_name = os.path.splitext(base_name)[0]
     try:
@@ -1155,7 +859,6 @@ def calculate_spectrum_likelihood_given_interpretation_wrapper(pattern_path, che
 
     
     # Step 2: Calculate importance factors
-    print(interpretations)
     interpretations = importance_factor_calculation(interpretations)
     return interpretations, project_number, target
  
