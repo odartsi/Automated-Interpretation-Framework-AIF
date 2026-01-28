@@ -29,17 +29,16 @@ Where:
 
 ### Evaluation Components
 
-1. **Statistical Factor** (`statistical_factor.py`):
+1. **Refinement metrics** (`refinement_metrics.py`):
    - Performs XRD phase search and Rietveld refinement
-   - Calculates RWP (weighted profile R-factor)
+   - Computes RWP (weighted profile R-factor) and peak-matching score
    - Matches calculated vs observed peaks
    - Analyzes background and signal quality
    - Generates multiple interpretations by iteratively excluding phases
 
-2. **Chemical Factor** (`chemical_factor.py`):
+2. **Composition balance** (`composition_balance.py`):
    - Compares target composition with interpretation composition
-   - Accounts for gas loss (e.g., CO₂ from carbonates)
-   - Calculates composition balance scores
+   - Calculates composition balance scores (how well phases match target stoichiometry)
    - Normalizes compositions for fair comparison
 
 3. **LLM Evaluation** (`LLM_evaluation.py`):
@@ -59,8 +58,8 @@ Where:
 ```
 AIF_copy/
 ├── src/
-│   ├── statistical_factor.py      # XRD refinement and phase search
-│   ├── chemical_factor.py          # Composition balance calculations
+│   ├── refinement_metrics.py      # RWP, score, refinement and fit metrics
+│   ├── composition_balance.py     # Composition balance scores
 │   ├── LLM_evaluation.py            # LLM-based phase evaluation
 │   ├── probability_of_interpretation.py  # Main orchestration script
 │   ├── utils.py                    # Utility functions and plotting
