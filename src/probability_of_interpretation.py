@@ -236,8 +236,19 @@ for combo in combinations:
     target = filtered_df["Target"].iloc[0]
 
     # ---- Path A: Display only (interpretations already in file) ----
-    if project_number in all_interpretations:
-        interpretations = all_interpretations[project_number]
+    # Look up using project_number or underscore-normalized form (file may have "TRI_197" vs pattern "TRI-197")
+    display_key = project_number
+    if display_key not in all_interpretations:
+        alt_key = project_number.replace("-", "_")
+        if alt_key in all_interpretations:
+            display_key = alt_key
+    if display_key not in all_interpretations:
+        alt_key = project_number.replace("_", "-")
+        if alt_key in all_interpretations:
+            display_key = alt_key
+
+    if display_key in all_interpretations:
+        interpretations = all_interpretations[display_key]
         plot_contribution_decomposition_dual(interpretations, project_number, target)
         plot_contribution_decomposition_dual_normalized_right_v2(interpretations, project_number, target)
         plot_contribution_decomposition_dual_normalized_right_v3(interpretations, project_number, target)
