@@ -330,7 +330,7 @@ def compare_dara_vs_aif(json_data, sample_names, synthesis_df, project_key="comb
                 # console.print("[bold]Fit snapshot(s) embedded in HTML[/]")
 
         # ---------------- ranking table ----------------
-        ranked = sorted(interps.items(), key=lambda x: x[1].get("unnormalized_posterior", 0), reverse=True)
+        ranked = sorted(interps.items(), key=lambda x: x[1].get("posterior_probability", 0), reverse=True)
         coloured_ph = assign_base_and_suffix_colors(ranked)
 
         best_rwp = min(i[1].get("rwp", float("inf")) for i in ranked)
@@ -368,7 +368,7 @@ def compare_dara_vs_aif(json_data, sample_names, synthesis_df, project_key="comb
             s = summarize(intp)
             tbl_rank.add_row(
                 f"[bold green]{iid}[/]" if iid in (aif_id, dara_id) else iid,
-                f"{intp.get('unnormalized_posterior', 0):.3f}",
+                f"{intp.get('posterior_probability', 0):.3f}",
                 coloured_ph.get(iid, s["phases"]),
                 green_if_best(s["rwp"], best_rwp, lower=True),
                 green_if_best(s["normalized_rwp"], best_vals["normalized_rwp"]),

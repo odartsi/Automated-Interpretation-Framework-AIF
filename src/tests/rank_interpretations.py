@@ -75,7 +75,7 @@ def rank_interpretations_by_aif(json_data, sample_names):
         # Collect column-wise best values
         best_values = {
             "posterior_probability": max(x[1].get("posterior_probability", 0) for x in sorted_interps),
-            "unnormalized_posterior": max(x[1].get("unnormalized_posterior", 0) for x in sorted_interps),
+            "posterior_probability": max(x[1].get("posterior_probability", 0) for x in sorted_interps),
             "fit_quality": max(x[1].get("fit_quality", 0) for x in sorted_interps),
             "prior_probability": max(x[1].get("prior_probability", 0) for x in sorted_interps),
             "rwp": min(x[1].get("rwp", float("inf")) for x in sorted_interps),
@@ -129,7 +129,7 @@ def rank_interpretations_by_aif(json_data, sample_names):
                 str(i),
                 interp_id,
                 highlight_best(data.get("posterior_probability", 0), best_values["posterior_probability"]),
-                highlight_best(data.get("unnormalized_posterior", 0), best_values["unnormalized_posterior"]),
+                highlight_best(data.get("posterior_probability", 0), best_values["posterior_probability"]),
                 ", ".join(data.get("phases", [])),
                 highlight_best(data.get("fit_quality", 0), best_values["fit_quality"], is_lower_better=False, fmt="{:.2f}"),
                 highlight_best(data.get("prior_probability", 0), best_values["prior_probability"], is_lower_better=False, fmt="{:.2f}"),

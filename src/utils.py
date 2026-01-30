@@ -675,33 +675,29 @@ def calculate_posterior_probability_of_interpretation(interpretations):
     if not isinstance(interpretations, dict):
         raise ValueError("Interpretations should be a dictionary or a list containing a dictionary.")
 
-     # Step 1: Compute unnormalized posterior = prior * fit_quality
+    # Step 1: Compute joint = prior * fit_quality
     joint_probabilities = {}
     for name, interp in interpretations.items():
         joint = interp["prior_probability"] * interp["fit_quality"]
-        interpretations[name]["unnormalized_posterior"] = joint
         joint_probabilities[name] = joint
 
     # Step 2: Normalize to get posterior_probability
     total_joint = sum(joint_probabilities.values())
     for name in interpretations:
         if total_joint > 0:
-            interpretations[name]["posterior_probability"] = (
-                interpretations[name]["unnormalized_posterior"] / total_joint
-            )
+            interpretations[name]["posterior_probability"] = joint_probabilities[name] / total_joint
         else:
             interpretations[name]["posterior_probability"] = 0.0
 
     # Optional: Downweight factor for untrustworthy results
-    TRUST_PENALTY_FACTOR = 0.1  # You can tune this
-
+    TRUST_PENALTY_FACTOR = 0.1
     for interpretation_name, interpretation in interpretations.items():
         is_trustworthy = interpretation.get("trustworthy", True)
         penalty = 1.0 if is_trustworthy else TRUST_PENALTY_FACTOR
         interpretation["adjusted_posterior_probability"] = (
             interpretation["posterior_probability"] * penalty
         )
-    return interpretations  # Return updated interpretations dictionary
+    return interpretations
 
 def calculate_phase_probabilities(interpretations):
     """
@@ -791,31 +787,8 @@ def calculate_fit_quality(interpretations, w_rwp=1, w_score=1):
         ) / (w_rwp + w_score)
     return interpretations
 
-def add_flag(background, observed):
-    """
-    Computes the excess background flag:
-    sum of max(0, background - observed) over the spectrum.
 
-    Parameters:
-        background (array-like): Background intensities.
-        observed (array-like): Observed intensities.
-
-    Returns:
-        float: Flag value (total excess background), or None if inputs are invalid.
-    """
-    background = np.asarray(background)
-    observed = np.asarray(observed)
-
-    # if background.shape != observed.shape:
-    #     return None
-    excess_bkg = np.sum(np.maximum(0, background - observed))
-    total_signal = np.sum(observed)
-
-    normalized_excess = excess_bkg*100 / total_signal
-
-    return excess_bkg, normalized_excess
-
-def flag_interpretation_trustworthiness(interpretations: dict) -> dict:
+def flag_interpretation_trustworthiness_(interpretations: dict) -> dict:
     """
     Adds a 'trustworthy' field to each interpretation in the dictionary based on custom flagging rules.
     
@@ -856,7 +829,117 @@ def flag_interpretation_trustworthiness(interpretations: dict) -> dict:
         interp["trustworthy"] = not (flag1 or flag2 or flag3 or flag4 or flag5 ) #or flag6)
 
     return interpretations
-def compute_trust_score(interpretations: dict) -> dict:
+
+def flag_interpretation_trustworthiness(
+    interpretations: dict,
+    trust_threshold: float = 0.65
+) -> dict:
+    """
+    Adds a boolean 'trustworthy' field to each interpretation based solely on trust_score.
+
+    Parameters:
+        interpretations (dict): Dictionary of interpretation entries (I_1, I_2, ...).
+        trust_threshold (float): Minimum trust_score required to be considered trustworthy.
+
+    Returns:
+        dict: Updated interpretations with 'trustworthy' key added.
+    """
+
+    for key, interp in interpretations.items():
+        try:
+            trust_score = float(interp.get("trust_score", 0.0))
+        except (TypeError, ValueError):
+            trust_score = 0.0
+
+        interp["trustworthy"] = trust_score >= trust_threshold
+
+    return interpretations
+def compute_trust_score(
+    interpretations: dict,
+    *,
+    llm_ref=0.41,
+    signal_ref=9000.0,
+    overshoot_ref=1200.0,
+    ratio_ref=15.0,
+    balance_ref=0.6,
+    rwp_ref=15.0,              # NEW: ideal rwp <= 15
+    include_peak_match=False,  # optional, off by default
+    peak_match_ref=0.6,
+    decimals=6
+) -> dict:
+    """
+    Adds interp['trust_score'] in [0,1] using soft penalties.
+
+    Criteria (penalty in [0,1], 0=good, 1=bad):
+      1) LLM likelihood: ideal >= llm_ref
+      2) Signal above background: ideal >= signal_ref
+      3) Background overshoot: ideal <= overshoot_ref
+      4) Signal/overshoot ratio: ideal >= ratio_ref
+      5) Balance score: ideal >= balance_ref
+      6) Rwp: ideal <= rwp_ref   (penalize only if rwp > rwp_ref)
+
+    Optionally add peak match (normalized_score) as an extra criterion if include_peak_match=True.
+
+    Trust score = 1 - mean(penalties).
+    """
+
+    for key, interp in interpretations.items():
+        try:
+            llm = float(interp.get("LLM_interpretation_likelihood", 1.0))
+            signal = float(interp.get("signal_above_bkg_score", 10000.0))
+            overshoot = float(interp.get("bkg_overshoot_score", 0.0))
+            balance = float(interp.get("balance_score", 1.0))
+            rwp = float(interp.get("rwp", 0.0))  # NEW
+            score = float(interp.get("normalized_score", 1.0))  # parsed for optional use
+        except (TypeError, ValueError):
+            interp["trust_score"] = 0.0
+            continue
+
+        # 1) LLM likelihood (ideal >= llm_ref)
+        penalty_llm = max(0.0, min(1.0, (llm_ref - llm) / llm_ref))
+
+        # 2) Signal above background (ideal >= signal_ref)
+        penalty_signal = max(0.0, min(1.0, (signal_ref - signal) / signal_ref))
+
+        # 3) Background overshoot (ideal <= overshoot_ref)
+        penalty_overshoot = (
+            max(0.0, min(1.0, (overshoot - overshoot_ref) / overshoot_ref))
+            if overshoot > 0 else 0.0
+        )
+
+        # 4) Signal / overshoot ratio (ideal >= ratio_ref)
+        if overshoot > 0:
+            ratio = signal / overshoot
+            penalty_ratio = max(0.0, min(1.0, (ratio_ref - ratio) / ratio_ref))
+        else:
+            penalty_ratio = 0.0  # no penalty if overshoot is 0
+
+        # 5) Balance score (ideal >= balance_ref)
+        penalty_balance = max(0.0, min(1.0, (balance_ref - balance) / balance_ref))
+
+        # 6) Rwp (ideal <= rwp_ref)  <-- NEW
+        # scale linearly: at rwp_ref => 0; at 2*rwp_ref => 1; above that clipped to 1
+        penalty_rwp = max(0.0, min(1.0, (rwp - rwp_ref) / rwp_ref))
+
+        penalties = [
+            penalty_llm,
+            penalty_signal,
+            penalty_overshoot,
+            penalty_ratio,
+            penalty_balance,
+            penalty_rwp,
+        ]
+
+        # Optional: Peak match score (ideal >= peak_match_ref)
+        if include_peak_match:
+            penalty_peak = max(0.0, min(1.0, (peak_match_ref - score) / peak_match_ref))
+            penalties.append(penalty_peak)
+
+        total_penalty = float(np.mean(penalties))
+        interp["trust_score"] = round(max(0.0, 1.0 - total_penalty), decimals)
+
+    return interpretations
+def compute_trust_score_(interpretations: dict) -> dict:
     """
     Adds a 'trust_score' field to each interpretation, ranging from 0 (not trustworthy) to 1 (fully trustworthy),
     based on six soft criteria:
@@ -952,21 +1035,6 @@ def calculate_excess_bkg(plot_data, peak_window=2, top_n_peaks=3, low_angle=(20,
         'low_angle_region': max_low_angle,
         'high_angle_region': max_high_angle
     }
-
-
-def net_signal_score(plot_data, angle_window=(10, 70)):
-    observed = np.asarray(plot_data.y_obs)
-    background = np.asarray(plot_data.y_bkg)
-    angles = np.asarray(plot_data.x)
-
-    region_mask = (angles >= angle_window[0]) & (angles <= angle_window[1])
-    obs, bkg = observed[region_mask], background[region_mask]
-
-    signal_above = np.sum(np.maximum(0, obs - bkg))
-    signal_below = np.sum(np.maximum(0, bkg - obs))
-    
-    signal_score = signal_above / (signal_above + signal_below + 1e-8)
-    return signal_score * 100
 
 def signal_above_bkg_score(plot_data, angle_window=(10, 70)):
     observed = np.asarray(plot_data.y_obs)
@@ -1134,7 +1202,7 @@ def plot_phase_and_interpretation_probabilities(interpretations, project_number,
     phase_probabilities = calculate_phase_probabilities(interpretations)
     
     interpretation_names = list(interpretations.keys())
-    posterior_values = [interpretations[interp]["unnormalized_posterior"] * 100 for interp in interpretation_names]
+    posterior_values = [interpretations[interp]["posterior_probability"] * 100 for interp in interpretation_names]
     rwp_values = [interpretations[interp]["rwp"] for interp in interpretation_names]
     
     sorted_indices = np.argsort(posterior_values)[::-1]
@@ -1355,7 +1423,7 @@ def plot_metrics_contribution(
     # Sort interpretations by posterior (ascending for plotting)
     sorted_items = sorted(
         interpretations.items(),
-        key=lambda x: x[1]["unnormalized_posterior"],
+        key=lambda x: x[1]["posterior_probability"],
         reverse=True
     )[::-1]
 
@@ -1363,11 +1431,11 @@ def plot_metrics_contribution(
 
     fig, ax = plt.subplots(figsize=(12, 6))
 
-    max_posterior = max(d["unnormalized_posterior"] for _, d in sorted_items) * 100
+    max_posterior = max(d["posterior_probability"] for _, d in sorted_items) * 100
 
     # Identify special interpretations for coloring labels
     lowest_rwp_key = max(sorted_items, key=lambda x: x[1]["normalized_rwp"])[0]
-    highest_post_key = max(sorted_items, key=lambda x: x[1]["unnormalized_posterior"])[0]
+    highest_post_key = max(sorted_items, key=lambda x: x[1]["posterior_probability"])[0]
 
     for idx, (interp_key, data) in enumerate(sorted_items):
         label = f"Interpretation_{interp_key.split('_')[1]}"
@@ -1376,7 +1444,7 @@ def plot_metrics_contribution(
         llm = data["LLM_interpretation_likelihood"]
         score = data["normalized_score"]
         rwp = data["normalized_rwp"]
-        posterior = data["unnormalized_posterior"]
+        posterior = data["posterior_probability"]
 
         # Posterior value (as %)
         posterior_val = posterior * 100.0

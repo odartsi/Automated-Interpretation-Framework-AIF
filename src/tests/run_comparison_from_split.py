@@ -245,7 +245,7 @@ def compare_dara_vs_aif(json_data, sample_names, synthesis_df, project_key="comb
             # === Show ranked interpretations ===
             console.print(f"\n[bold]All Interpretations Ranked by Unnormalized Posterior:[/bold]")
 
-            sorted_interps = sorted(interps.items(), key=lambda x: x[1].get("unnormalized_posterior", 0), reverse=True)
+            sorted_interps = sorted(interps.items(), key=lambda x: x[1].get("posterior_probability", 0), reverse=True)
 
             table_all = Table(show_lines=True)
             table_all.add_column("Interp ID", style="bold")
@@ -300,7 +300,7 @@ def compare_dara_vs_aif(json_data, sample_names, synthesis_df, project_key="comb
 
                 row = [
                     f"[bold green]{interp_id}[/]" if interp_id in [dara_id, aif_id] else interp_id,
-                    f"{interp.get('unnormalized_posterior', 0):.3f}",
+                    f"{interp.get('posterior_probability', 0):.3f}",
                     highlighted_phases.get(interp_id, ", ".join(phases)),
                     # ", ".join(phases),
                     # highlighted_phases.get(interp_id, ", ".join(phases)),

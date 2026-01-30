@@ -57,7 +57,7 @@ def unnormalized_posterior(interp, w_llm, w_bscore, w_rwp, w_score):
 baseline_argmax = {
     sid: max(
         interps.items(),
-        key=lambda kv: kv[1]['unnormalized_posterior']
+        key=lambda kv: kv[1]['posterior_probability']
     )[0]
     for sid, interps in data.items()
 }

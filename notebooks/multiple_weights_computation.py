@@ -43,7 +43,7 @@ with open(JSON_PATH, 'r') as f:
 
 # 2) Baseline winners from stored unnormalized_posterior
 baseline = {
-    sid: max(interps.items(), key=lambda kv: kv[1]['unnormalized_posterior'])[0]
+    sid: max(interps.items(), key=lambda kv: kv[1]['posterior_probability'])[0]
     for sid, interps in data.items()
 }
 
