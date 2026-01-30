@@ -20,7 +20,6 @@ from utils import (
     strip_phase_identifier,
     importance_factor_calculation,
     add_flag,
-    net_signal_score,
     signal_above_bkg_score,
     bkg_overshoot_score,
     abs_diff_score,
@@ -257,15 +256,8 @@ def main(pattern_path, chemical_system, target):
                 search_results, final_results, f"I_{interpretation_counter}", pattern_path, isolated_missing_peaks, isolated_extra_peaks, target
             )
             plot_data = final_results.plot_data
-            observed = plot_data.y_obs
-            background = plot_data.y_bkg
-        
-            excess_bkg, normalized_excess = add_flag(background, observed)
-            signal_above_bkg = net_signal_score(plot_data)
             signal_score = signal_above_bkg_score(plot_data)
             bkg_score = bkg_overshoot_score(plot_data)
-            diff_score = abs_diff_score(plot_data)
-            bkg_baseline_score = bkg_baseline_distance_score(plot_data)
             
 
             phase_weights_dict = final_results.get_phase_weights()
@@ -279,21 +271,15 @@ def main(pattern_path, chemical_system, target):
                     "weight_fraction": [x * 100 for x in weight_fraction],
                     "rwp": final_results.lst_data.rwp,
                     "search_result_rwp": search_results[i].refinement_result.lst_data.rwp,
-                    "score": score,
                     "search_result_score": score_search,
-                    "dara_score": score,
+                    "score": score,
                     "normalized_rwp": normalized_rwp,
                     "missing_peaks": len(isolated_missing_peaks),
                     "extra_peaks": len(isolated_extra_peaks),
                     "peaks_calculated": len(matcher.peak_calc),
                     "peaks_observed": len(matcher.peak_obs),
-                    "flag": excess_bkg,
-                    "normalized_flag": normalized_excess,
-                    "signal_above_bkg": signal_above_bkg,
                     "signal_above_bkg_score": signal_score,
                     "bkg_overshoot_score": bkg_score,
-                    "abs_diff_score": diff_score,
-                    "bkg_baseline_score": bkg_baseline_score,
                 },
                 **({"cell_parameters": deepcopy(cell_params)} if cell_params is not None else {}),
             }
@@ -412,15 +398,8 @@ def phase_importance(
                     if final_results_phase_set not in existing_combinations_set:
                         existing_combinations.add(final_results_phase_set)
                         plot_data = final_results.plot_data
-                        observed = plot_data.y_obs
-                        background = plot_data.y_bkg
-                        
-                        excess_bkg, normalized_excess = add_flag(background, observed)
-                        signal_above_bkg = net_signal_score(plot_data)
                         signal_score = signal_above_bkg_score(plot_data)
                         bkg_score = bkg_overshoot_score(plot_data)
-                        diff_score = abs_diff_score(plot_data)
-                        bkg_baseline_score = bkg_baseline_distance_score(plot_data)
 
                         
                         save_xrd_plots(
@@ -436,21 +415,15 @@ def phase_importance(
                                 "weight_fraction": [x * 100 for x in weight_fraction],
                                 "rwp": final_results.lst_data.rwp,
                                 "search_result_rwp": search_results[i].refinement_result.lst_data.rwp,
-                                "score": score,
                                 "search_result_score": score_search,
-                                "dara_score": score,
+                                "score": score,
                                 "normalized_rwp": normalized_rwp,
                                 "missing_peaks": len(isolated_missing_peaks),
                                 "extra_peaks": len(isolated_extra_peaks),
                                 "peaks_calculated": len(matcher.peak_calc),
                                 "peaks_observed": len(matcher.peak_obs),
-                                "flag": excess_bkg,
-                                "normalized_flag": normalized_excess,
-                                "signal_above_bkg": signal_above_bkg,
                                 "signal_above_bkg_score": signal_score,
                                 "bkg_overshoot_score": bkg_score,
-                                "abs_diff_score": diff_score,
-                                "bkg_baseline_score": bkg_baseline_score,
                             },
                             **({"cell_parameters": deepcopy(cell_params)} if cell_params is not None else {}),
                         }
@@ -541,14 +514,8 @@ def phase_importance(
                     if is_unique:
                         existing_combinations.add(frozenset(final_results_phases_list_strip))
                         plot_data = final_results.plot_data
-                        observed = plot_data.y_obs
-                        background = plot_data.y_bkg
-                        excess_bkg, normalized_excess = add_flag(background, observed)
-                        signal_above_bkg = net_signal_score(plot_data)
                         signal_score = signal_above_bkg_score(plot_data)
                         bkg_score = bkg_overshoot_score(plot_data)
-                        diff_score = abs_diff_score(plot_data)
-                        bkg_baseline_score = bkg_baseline_distance_score(plot_data)
             
                 
                         save_xrd_plots(
@@ -565,21 +532,15 @@ def phase_importance(
                                 "weight_fraction": [x * 100 for x in weight_fraction],
                                 "rwp": final_results.lst_data.rwp,
                                 "search_result_rwp": best_result.refinement_result.lst_data.rwp,
-                                "score": score,
                                 "search_result_score": score_search,
-                                "dara_score": score,
+                                "score": score,
                                 "normalized_rwp": normalized_rwp,
                                 "missing_peaks": len(isolated_missing_peaks),
                                 "extra_peaks": len(isolated_extra_peaks),
                                 "peaks_calculated": len(matcher.peak_calc),
                                 "peaks_observed": len(matcher.peak_obs),
-                                "flag": excess_bkg,
-                                "normalized_flag": normalized_excess,
-                                "signal_above_bkg": signal_above_bkg,
                                 "signal_above_bkg_score": signal_score,
                                 "bkg_overshoot_score": bkg_score,
-                                "abs_diff_score": diff_score,
-                                "bkg_baseline_score": bkg_baseline_score,
                             },
                             **({"cell_parameters": deepcopy(cell_params)} if cell_params is not None else {}),
                         }
