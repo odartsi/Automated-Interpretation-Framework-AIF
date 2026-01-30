@@ -10,22 +10,15 @@ from pathlib import Path
 from typing import Optional
 import re
 from utils import (
-    plot_interpretation_probabilities_with_statistical,
     calculate_posterior_probability_of_interpretation,
     calculate_prior_probability,
-    plot_phase_and_interpretation_probabilities_newstyle,
-    plot_phase_and_interpretation_unnormalized_probabilities_newstyle,
     calculate_fit_quality,
     normalize_scores_for_sample,
-    flag_interpretation_trustworthiness,
     compute_trust_score,
     normalize_rwp_for_sample,
-    plot_contribution_decomposition,
-    plot_contribution_decomposition_dual,
-    plot_contribution_decomposition_dual_normalized_right_v2,
-    plot_contribution_pie_scaled,
-    plot_contribution_decomposition_dual_normalized_right_v3,
-    plot_contribution_decomposition_dual_normalized_right_v4,
+    plot_metrics_contribution,
+    plot_phase_and_interpretation_probabilities,
+    flag_interpretation_trustworthiness
 )
 
 
@@ -249,16 +242,21 @@ for combo in combinations:
 
     if display_key in all_interpretations:
         interpretations = all_interpretations[display_key]
-        plot_contribution_decomposition_dual(interpretations, project_number, target)
-        plot_contribution_decomposition_dual_normalized_right_v2(interpretations, project_number, target)
-        plot_contribution_decomposition_dual_normalized_right_v3(interpretations, project_number, target)
-        plot_contribution_decomposition_dual_normalized_right_v4(interpretations, project_number, target)
-        plot_contribution_pie_scaled(interpretations, project_number, target)
-        plot_phase_and_interpretation_unnormalized_probabilities_newstyle(interpretations, project_number, filtered_df, target)
-        # interpretations = flag_interpretation_trustworthiness(interpretations)
-        # interpretations = compute_trust_score(interpretations)
-        # # plot_phase_and_interpretation_probabilities_newstyle(interpretations, project_number, filtered_df, target)
-        # plot_phase_and_interpretation_unnormalized_probabilities_newstyle(interpretations, project_number, filtered_df, target)
+        plot_phase_and_interpretation_probabilities(interpretations, display_key, filtered_df, target)
+        plot_metrics_contribution(interpretations, display_key, target)
+        print("-" * 50)
+        print(f"For {project_number}")
+        for key, value in interpretations.items():
+            print(f"Interpretation: {key}")
+            print(f"  Phases: {', '.join(value['phases'])}")
+            print(f"  LLM Interpretation Likelihood: {value['LLM_interpretation_likelihood']*100}")
+            print(f"  Composition Balance: {value['balance_score']*100}")
+            print(f"  Fit quality: {value['fit_quality']}")
+            print(f"  Normalized_rwp: {value['normalized_rwp']*100}")
+            print(f"  Normalized_score: {value['normalized_score']*100}")
+            print(f"  Prior Probability: {value['prior_probability']*100}")
+            print(f"  Posterior Probability: {value['posterior_probability']*100}")
+            print("-" * 50)
         continue
 
     # ---- Path B: Full refinement (run refinement, pipeline, plots, save) ----
@@ -270,19 +268,16 @@ for combo in combinations:
         interpretations = calculate_chemical_factors(filtered_df, result)
         interpretations = evaluate_interpretations_with_llm(filtered_df, result, project_number)
         interpretations = calculate_chemical_factors(filtered_df,interpretations)
-        # Normalize scores
         interpretations = normalize_scores_for_sample(interpretations)
         interpretations = normalize_rwp_for_sample(interpretations)
         interpretations = calculate_prior_probability(interpretations, w_llm=0.5, w_bscore =0.7)
         interpretations = calculate_fit_quality(interpretations,w_rwp=1, w_score=0.5)
-        interpretations = flag_interpretation_trustworthiness(interpretations)
         interpretations = compute_trust_score(interpretations)
+        interpretations = flag_interpretation_trustworthiness(interpretations)
         interpretations = calculate_posterior_probability_of_interpretation(interpretations)
 
-        plot_interpretation_probabilities_with_statistical(interpretations,project_number, target)
-        plot_phase_and_interpretation_probabilities_newstyle(interpretations, project_number, filtered_df, target)
-        plot_phase_and_interpretation_unnormalized_probabilities_newstyle(interpretations, project_number, filtered_df, target)
-        plot_contribution_decomposition(interpretations, project_number, target)
+        plot_phase_and_interpretation_probabilities(interpretations, project_number, filtered_df, target)
+        plot_metrics_contribution(interpretations, project_number, target)
 
         print("-" * 50)
         print(f"For {project_number}")
