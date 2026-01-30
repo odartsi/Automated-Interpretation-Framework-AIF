@@ -1062,37 +1062,10 @@ def bkg_overshoot_score(plot_data, angle_window=(10, 70)):
     score = np.sum(np.maximum(bkg - obs, 0)) / (delta_theta + 1e-8)
     return score
 
-def abs_diff_score(plot_data, angle_window=(10, 70)):
-    observed = np.asarray(plot_data.y_obs)
-    background = np.asarray(plot_data.y_bkg)
-    angles = np.asarray(plot_data.x)
-
-    region_mask = (angles >= angle_window[0]) & (angles <= angle_window[1])
-    obs, bkg, theta = observed[region_mask], background[region_mask], angles[region_mask]
-
-    delta_theta = theta[-1] - theta[0]
-    score = np.sum(np.abs(obs - bkg)) / (delta_theta + 1e-8)
-    return score
-
 
 def estimate_baseline(y, window_size=50):
     """A non-parametric baseline: the minimum in each sliding window."""
     return minimum_filter1d(y, size=window_size, mode='reflect')
-def bkg_baseline_distance_score(plot_data,
-                                angle_window=(10,70),
-                                window_size=50):
-    obs   = np.asarray(plot_data.y_obs)
-    bkg   = np.asarray(plot_data.y_bkg)
-    θ     = np.asarray(plot_data.x)
-    mask  = (θ>=angle_window[0]) & (θ<=angle_window[1])
-    obs, bkg = obs[mask], bkg[mask]
-
-    # 1) compute data-driven baseline
-    baseline = estimate_baseline(obs, window_size=window_size)
-
-    # 2) mean absolute deviation between fitted background and baseline
-    return np.mean(np.abs(bkg - baseline))
-
 
 def extreme_diff(plot_data, angle_window=(10,70),
                  p_low=5, p_high=95):
