@@ -1,14 +1,10 @@
 from refinement_metrics import calculate_spectrum_likelihood_given_interpretation_wrapper
 from LLM_evaluation import evaluate_interpretations_with_llm
 from composition_balance import calculate_chemical_factors
-import time 
-import pandas as pd
+import time
 import json
 import os
 import logging
-from pathlib import Path
-from typing import Optional
-import re
 from utils import (
     calculate_posterior_probability_of_interpretation,
     calculate_prior_probability,
@@ -18,9 +14,11 @@ from utils import (
     normalize_rwp_for_sample,
     plot_metrics_contribution,
     plot_phase_and_interpretation_probabilities,
-    flag_interpretation_trustworthiness
+    flag_interpretation_trustworthiness,
+    load_json,
+    load_csv,
+    extract_project_number_from_filename,
 )
-
 
 
 # --- configure logging once (console + file) ---
@@ -30,107 +28,19 @@ logging.basicConfig(
     handlers=[logging.StreamHandler(), logging.FileHandler("run_errors.log", mode="w")]
 )
 
-def safe_pick_target(filtered_df: pd.DataFrame) -> Optional[str]:
-    """Return a usable target column if present, else None."""
-    for col in ["Target", "Target.1", "target", "target_1"]:
-        if col in filtered_df.columns and not filtered_df[col].isna().all():
-            return filtered_df[col].iloc[0]
-    return None
-    
-SAMPLE_PREFIX_RE = re.compile(r'^(PG_\d+(?:[-_]\d+))_')  
-# captures 'PG_0106_1' or 'PG_0106-1' right before the next underscore
-
-def extract_project_number_from_filename(base_name: str) -> str:
-    """
-    base_name: filename without extension
-      e.g. 'PG_0106_1_Ag2O_Bi2O3_200C_60min_uuid'
-           'PG_2547-1_Ag2O_...'
-           'PG_0750_1_uuid'
-    returns underscore-style project_number, e.g. 'PG_0106_1'
-    """
-    m = SAMPLE_PREFIX_RE.match(base_name)
-    if m:
-        # normalize to underscore style for CSV join
-        return m.group(1).replace('-', '_')
-    # fallback: if nothing matches, keep your old behavior
-    parts = base_name.split('_')
-    if len(parts) >= 2:
-        return parts[0] + '_' + parts[1]
-    return base_name
-
 # -----------------------------
-# Dataset registry 
+# Dataset registry
 # -----------------------------
 DATASETS = {
     "TRI": {
         "csv": "../data/alab_synthesis_data/synthesis_TRI.csv",
         "combos": "../data/xrd_data/combinations.json",
         "interpretations":"../data/xrd_data/interpretations/interpretations_for_brier.json" # tri-80"../data/xrd_data/interpretations/interpretations_test.json"#tri-197: "../data/xrd_data/interpretations/interpretations_for_brier.json",#
-    },
-    "MINES": {
-        "csv": "../data/alab_synthesis_data/synthesis_MINES.csv",
-        "combos": "../data/alab_synthesis_data/composition_MINES.json",
-        "interpretations": "../data/xrd_data/interpretations/interpretations_16_more_forevaluation.json",
-    },
-    "ARR": {
-        "csv": "../data/alab_synthesis_data/synthesis_ARR.csv",
-        "combos": "../data/alab_synthesis_data/composition_ARR.json",
-        "interpretations": "../data/xrd_data/interpretations/interpretations_for_brier.json",
-    },
-    "GENOME": {
-        "csv": "../data/alab_synthesis_data/synthesis_PG_genome.csv",
-        "combos": "../data/alab_synthesis_data/composition_PG_genome.json",
-        "interpretations": "../data/xrd_data/interpretations/interpretations_for_brier.json",
-    },
-    "OPXRD": {
-        "csv": "../data/xrd_data/opXRD/synthesis_opxrd_full_oly.csv",
-        "combos": "../data/xrd_data/opXRD/combinations_opxrd_oly.json",
-        "interpretations": "../data/xrd_data/interpretations/interpretations_16_more_forevaluation.json",
-    },
-    # "GENOME_LAUREN": {
-    #     "csv": "../data/xrd_data/opXRD/Genome_Lauren/genome_lauren_metadata.csv",
-    #     "combos": "../data/xrd_data/opXRD/Genome_Lauren/combinations_genome_lauren.json",
-    #     "interpretations": "../data/xrd_data/interpretations/interpretations_genome_lauren.json",
-    # },
-    "GENOME_LAUREN": {
-        "csv": "../data/xrd_data/opXRD/Genome_Lauren/genome_lauren_metadata_false_only.csv",
-        "combos": "../data/xrd_data/opXRD/Genome_Lauren/combinations_genome_lauren_false_only_2.json",
-        "interpretations": "../data/xrd_data/interpretations/interpretations_genome_lauren_false.json",
-    },
-     "GENOME_LAUREN_NEW": {
-        "csv": "/Users/odartsi/Documents/GitHub/Automated_Interpretation_Framework/data/xrd_data/opXRD/Genome_Lauren/lauren_ge900_true.csv",
-        "combos": "/Users/odartsi/Documents/GitHub/Automated_Interpretation_Framework/data/xrd_data/opXRD/Genome_Lauren/lauren_ge900_true.json",
-        "interpretations": "../data/xrd_data/interpretations/interpretations_genome_lauren_ge900_true.json",
-    },
-    
-    "RRUFF": {
-        "csv": "../data/xrd_data/RRUFF/metadata_rruff_replaced.csv",
-        "combos": "../data/xrd_data/RRUFF/combinations_rruff_selection.json",
-        "interpretations": "../data/xrd_data/interpretations/interpretations_rruff_new.json",
-    },
-    "CNRS":{
-        "csv": "/Users/odartsi/Documents/GitHub/Automated_Interpretation_Framework/data/xrd_data/opXRD/opxrd/CNRS/summary.csv",
-        "combos": "/Users/odartsi/Documents/GitHub/Automated_Interpretation_Framework/data/xrd_data/opXRD/opxrd/CNRS/pattern_index.json",
-        "interpretations": "../data/xrd_data/interpretations/interpretations_opXRD_CNRS.json",
     }
+  
 }
 
 VALID_KEYS = list(DATASETS.keys())
-
-def _read_json(path):
-    """Load JSON from a file path; raises FileNotFoundError if the file is missing."""
-    path = Path(path)
-    if not path.exists():
-        raise FileNotFoundError(f"Missing JSON: {path}")
-    with path.open("r") as f:
-        return json.load(f)
-
-def _read_csv(path):
-    """Load CSV from a file path; raises FileNotFoundError if the file is missing."""
-    path = Path(path)
-    if not path.exists():
-        raise FileNotFoundError(f"Missing CSV: {path}")
-    return pd.read_csv(path)
 
 def _infer_group_from_search(term: str) -> str | None:
     """Infer dataset group from a search term (e.g. 'TRI-15' -> 'TRI'). Returns None if no match."""
@@ -163,8 +73,8 @@ if choice not in {"a", "s"}:
 if choice == "a":
     group = _choose_group_interactively("Which dataset group to run")
     cfg = DATASETS[group]
-    df = _read_csv(cfg["csv"])
-    all_combinations = _read_json(cfg["combos"])
+    df = load_csv(cfg["csv"])
+    all_combinations = load_json(cfg["combos"])
     combinations = all_combinations
     interpretations_file = cfg["interpretations"]
 
@@ -176,8 +86,8 @@ else:
         group = _choose_group_interactively("Could not infer dataset group. Please specify")
 
     cfg = DATASETS[group]
-    df = _read_csv(cfg["csv"])
-    all_combinations = _read_json(cfg["combos"])
+    df = load_csv(cfg["csv"])
+    all_combinations = load_json(cfg["combos"])
     interpretations_file = cfg["interpretations"]
 
     combinations = [c for c in all_combinations if search_term in c.get("pattern_path", "")]

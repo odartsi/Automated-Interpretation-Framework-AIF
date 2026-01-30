@@ -1,16 +1,63 @@
 import os
+import json
 from collections import defaultdict
 import matplotlib.pyplot as plt
 import numpy as np
-import ast 
+import ast
+import pandas as pd
 from pymatgen.core import Composition
 import re
 import shutil
 from pathlib import Path
+from typing import Optional
 import plotly.graph_objects as go
 from dara.result import RefinementResult
 import matplotlib.patches as mpatches
 from scipy.ndimage import minimum_filter1d
+
+
+def load_json(path):
+    """Load JSON from a file path; raises FileNotFoundError if the file is missing."""
+    path = Path(path)
+    if not path.exists():
+        raise FileNotFoundError(f"Missing JSON: {path}")
+    with path.open("r") as f:
+        return json.load(f)
+
+
+def load_csv(path):
+    """Load CSV from a file path; raises FileNotFoundError if the file is missing."""
+    path = Path(path)
+    if not path.exists():
+        raise FileNotFoundError(f"Missing CSV: {path}")
+    return pd.read_csv(path)
+
+
+def safe_pick_target(filtered_df: pd.DataFrame) -> Optional[str]:
+    """Return a usable target column if present, else None."""
+    for col in ["Target", "Target.1", "target", "target_1"]:
+        if col in filtered_df.columns and not filtered_df[col].isna().all():
+            return filtered_df[col].iloc[0]
+    return None
+
+
+SAMPLE_PREFIX_RE = re.compile(r"^(PG_\d+(?:[-_]\d+))_")
+
+
+def extract_project_number_from_filename(base_name: str) -> str:
+    """
+    Extract project_number from a filename (without extension).
+    e.g. 'PG_0106_1_Ag2O_Bi2O3_200C_60min_uuid' -> 'PG_0106_1'
+    Returns underscore-style project_number for CSV join.
+    """
+    m = SAMPLE_PREFIX_RE.match(base_name)
+    if m:
+        return m.group(1).replace("-", "_")
+    parts = base_name.split("_")
+    if len(parts) >= 2:
+        return parts[0] + "_" + parts[1]
+    return base_name
+
 
 def get_output_dir( target,project_number,):
     project = project_number.split("_")[0]
