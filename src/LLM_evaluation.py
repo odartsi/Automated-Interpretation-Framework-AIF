@@ -14,12 +14,30 @@ from pathlib import Path
 PROMPT_DIR = Path(__file__).resolve().parent / "prompt"
 PROMPT_TEMPLATE_PATH = PROMPT_DIR / "llm_prompt_template.txt"
 
-# NOTE: Uses CBORG gateway; API_KEY must be set in env.
-openai.api_key = os.getenv("API_KEY")
-if not openai.api_key:
-    raise ValueError("API key is missing!")
-openai.api_base = "https://api.cborg.lbl.gov"  # CBORG base URL
-model = "openai/gpt-4o"  # deployment id used by CBORG
+# # NOTE: Uses CBORG gateway; API_KEY must be set in env.
+# openai.api_key = os.getenv("API_KEY")
+# if not openai.api_key:
+#     raise ValueError("API key is missing!")
+# openai.api_base = "https://api.cborg.lbl.gov"  # CBORG base URL
+# model = "openai/gpt-4o"  # deployment id used by CBORG
+
+DEFAULT_API_BASE = "https://api.cborg.lbl.gov"
+DEFAULT_MODEL = "openai/gpt-4o"
+
+def configure_openai_from_env():
+    """
+    Configure OpenAI client from environment variables.
+    Required for actual API calls:
+      - API_KEY
+    Optional:
+      - API_BASE (defaults to CBORG)
+      - MODEL (defaults to CBORG deployment id)
+    """
+    openai.api_key = os.getenv("API_KEY")
+    openai.api_base = os.getenv("API_BASE", DEFAULT_API_BASE)
+
+    # Return model name to use
+    return os.getenv("MODEL", DEFAULT_MODEL)
 
 def load_prompt_template(template_path):
     """Load a prompt template from disk."""
@@ -122,9 +140,14 @@ def get_phase_likelihood_via_prompt_all_interpretations(synthesis_data, all_phas
         prompt += f"- {name}: {round(score, 3)}\n"
     
     prompt += load_prompt_template(PROMPT_TEMPLATE_PATH)
+    model_to_use = configure_openai_from_env()
+    if not openai.api_key:
+        raise ValueError(
+            "API_KEY is missing. Set it in your environment or in the notebook before running LLM evaluation."
+        )
     try:
         response = openai.ChatCompletion.create(
-            model=model,
+            model=model_to_use,
             messages=[
                 {"role": "system", "content": "You are an expert in material synthesis and phase prediction. Use thermodynamics, kinetics, and polymorph knowledge to evaluate stability and likelihood of observed phases."},
                 {"role": "user", "content": prompt},
