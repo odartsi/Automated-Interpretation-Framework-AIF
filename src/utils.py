@@ -773,47 +773,7 @@ def calculate_fit_quality(interpretations, w_rwp=1, w_score=1):
         ) / (w_rwp + w_score)
     return interpretations
 
-def flag_interpretation_trustworthiness_(interpretations: dict) -> dict:
-    """
-    Adds a 'trustworthy' field to each interpretation in the dictionary based on custom flagging rules.
-    
-    Parameters:
-        interpretations (dict): A dictionary of interpretation entries (I_1, I_2, ...) where each entry is a dictionary of properties.
-    
-    Returns:
-        dict: The updated dictionary with a new key 'trustworthy' added to each interpretation.
-    """
-    
-    for key, interp in interpretations.items():
-        balance_score = interp.get("balance_score", 1.0)
-        llm = interp.get("LLM_interpretation_likelihood", 1.0)
-        signal_above_bkg_score =interp.get("signal_above_bkg_score", 0.0)
-        bkg_overshoot_score =interp.get("bkg_overshoot_score", 0.0)
-        peak_match_score = interp.get("normalized_score",1.0)
 
-        # Apply your custom flags
-        flag1 = llm <= 0.4
-        if signal_above_bkg_score !=0.0:
-            flag2 = signal_above_bkg_score < 9000
-        else: 
-            flag2 = False
-        if bkg_overshoot_score !=0.0:
-            flag3 = bkg_overshoot_score > 1200
-        else: 
-            flag3 = False
-
-        if bkg_overshoot_score !=0.0 and signal_above_bkg_score !=0.0:
-            flag4 = signal_above_bkg_score/bkg_overshoot_score < 15
-        else: 
-            flag4 = False
-
-        flag5 = balance_score < 0.6
-        # flag6 = peak_match_score < 0.6
-
-        # If any flag is True, it's not trustworthy
-        interp["trustworthy"] = not (flag1 or flag2 or flag3 or flag4 or flag5 ) #or flag6)
-
-    return interpretations
 
 def flag_interpretation_trustworthiness(
     interpretations: dict,
@@ -839,6 +799,7 @@ def flag_interpretation_trustworthiness(
         interp["trustworthy"] = trust_score >= trust_threshold
 
     return interpretations
+
 def compute_trust_score(
     interpretations: dict,
     *,
@@ -847,8 +808,8 @@ def compute_trust_score(
     overshoot_ref=1200.0,
     ratio_ref=15.0,
     balance_ref=0.6,
-    rwp_ref=15.0,              # NEW: ideal rwp <= 15
-    include_peak_match=False,  # optional, off by default
+    rwp_ref=15.0,             
+    include_peak_match=False,  
     peak_match_ref=0.6,
     decimals=6
 ) -> dict:
@@ -924,62 +885,7 @@ def compute_trust_score(
         interp["trust_score"] = round(max(0.0, 1.0 - total_penalty), decimals)
 
     return interpretations
-def compute_trust_score_(interpretations: dict) -> dict:
-    """
-    Adds a 'trust_score' field to each interpretation, ranging from 0 (not trustworthy) to 1 (fully trustworthy),
-    based on six soft criteria:
-        - LLM likelihood (>= 0.4)
-        - Signal above background score (>= 9000)
-        - Background overshoot score (<= 1200)
-        - Signal-to-overshoot ratio (>= 15)
-        - Balance score (>= 0.6)
-        - Peak match score (normalized_score >= 0.6)
 
-    Trust score is 1 - average of penalties (each in [0, 1]).
-    """
-
-    for key, interp in interpretations.items():
-        try:
-            llm = float(interp.get("LLM_interpretation_likelihood", 1.0))
-            signal = float(interp.get("signal_above_bkg_score", 10000.0))
-            overshoot = float(interp.get("bkg_overshoot_score", 0.0))
-            balance = float(interp.get("balance_score", 1.0))
-            # score = float(interp.get("normalized_score", 1.0))
-        except (TypeError, ValueError):
-            interp["trust_score"] = 0.0
-            continue
-
-        # Flag 1: LLM likelihood (ideal > 0.4)
-        penalty_llm = max(0.0, min(1.0, (0.41 - llm) / 0.41))
-
-        # Flag 2: Signal above background (ideal >= 9000)
-        penalty_signal = max(0.0, min(1.0, (9000 - signal) / 9000))
-
-        # Flag 3: Background overshoot (ideal <= 1200)
-        penalty_overshoot = max(0.0, min(1.0, (overshoot - 1200) / 1200)) if overshoot > 0 else 0.0
-
-        # Flag 4: Signal / overshoot ratio (ideal >= 15)
-        if overshoot > 0:
-            ratio = signal / overshoot
-            penalty_ratio = max(0.0, min(1.0, (15 - ratio) / 15))
-        else:
-            penalty_ratio = 0.0  # no penalty if overshoot is 0
-
-        # Flag 5: Balance score (ideal >= 0.6)
-        penalty_balance = max(0.0, min(1.0, (0.6 - balance) / 0.6))
-
-        # Flag 6: Peak match score (ideal >= 0.6)
-        # penalty_score = max(0.0, min(1.0, (0.6 - score) / 0.6))
-
-        # Aggregate penalty and compute trust score
-        total_penalty = (
-            penalty_llm + penalty_signal + penalty_overshoot +
-            penalty_ratio + penalty_balance #+ penalty_score
-        ) / 6.0
-
-        interp["trust_score"] = round(max(0.0, 1.0 - total_penalty), 3)
-
-    return interpretations
 
 def calculate_excess_bkg(plot_data, peak_window=2, top_n_peaks=3, low_angle=(20,35), high_angle=60): #10, 40
     observed = np.asarray(plot_data.y_obs)
@@ -987,10 +893,6 @@ def calculate_excess_bkg(plot_data, peak_window=2, top_n_peaks=3, low_angle=(20,
     angles = np.asarray(plot_data.x)
 
     def max_localized_excess(region_mask):
-        # localized_excess = np.maximum(0, background[region_mask] - observed[region_mask])
-        # total_signal = np.sum(observed[region_mask])
-        # max_excess = np.max(localized_excess)
-        # return (max_excess * 100 / total_signal) if total_signal != 0 else np.nan
         max_local_excess = np.max(np.maximum(0, background[region_mask] - observed[region_mask]))
         local_intensity = observed[region_mask][np.argmax(np.maximum(0, background[region_mask] - observed[region_mask]))]
 
@@ -1097,7 +999,7 @@ def plot_phase_and_interpretation_probabilities(interpretations, project_number,
 
     # --- Helper Functions ---
     def clean_phase_name(phase):
-        return phase.split("_(icsd")[0]
+        return re.split(r'_\((?:icsd|cod).*?\)', phase)[0]
 
     def cleanup_phases(phase_list):
         return phase_list
