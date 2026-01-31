@@ -7,10 +7,6 @@ __pycache__/
 # Ignore macOS system files
 .DS_Store
 
-# Ignore data files
-data/sem_eds_data/
-# data/xrd_data/
-
 # Ignore ICSD and cifs files
 src/ICSD_2024/
 src/cifs/
@@ -31,5 +27,4 @@ notebooks/example_output/
 *.html
 *.png
 *.svg
-data/xrd_data/xrd_analysis/PG/MnBiO3/PG_0628_1_Bi2O3_Mn2O3/PG_0628_1_Bi2O3_Mn2O3_I_3.png
 *.html
