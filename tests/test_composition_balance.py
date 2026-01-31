@@ -14,7 +14,7 @@ from composition_balance import (
 
 def test_calculate_composition_balance_score_refined_perfect_match():
     target = Composition("CaO")
-    output = {"Ca": 1.0, "O": 1.0}
+    output = Composition("CaO")
     score = calculate_composition_balance_score_refined(target, output)
     assert score == pytest.approx(1.0, rel=1e-5)
 
