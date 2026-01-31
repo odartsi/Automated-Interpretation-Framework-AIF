@@ -41,15 +41,13 @@ def safe_pick_target(filtered_df: pd.DataFrame) -> Optional[str]:
     return None
 
 
-SAMPLE_PREFIX_RE = re.compile(r"^(PG_\d+(?:[-_]\d+))_")
-
-
 def extract_project_number_from_filename(base_name: str) -> str:
     """
     Extract project_number from a filename (without extension).
     e.g. 'PG_0106_1_Ag2O_Bi2O3_200C_60min_uuid' -> 'PG_0106_1'
     Returns underscore-style project_number for CSV join.
     """
+    SAMPLE_PREFIX_RE = re.compile(r"^(PG_\d+(?:[-_]\d+))_")
     m = SAMPLE_PREFIX_RE.match(base_name)
     if m:
         return m.group(1).replace("-", "_")
@@ -648,6 +646,7 @@ def importance_factor_calculation(interpretations):
         data["interpretation_importance"] = imp_value
 
     return interpretations
+
 def calculate_prior_probability(interpretations, w_llm=1, w_bscore=1):
     # Update each interpretation with a new field "prior_probability"
     for interpretation_name, interpretation in interpretations.items():
@@ -732,8 +731,6 @@ def calculate_phase_probabilities(interpretations):
  
     return phase_probabilities
    
-
-
 def normalize_rwp_for_sample(interpretations, max_rwp=60):
     """Apply softclip linear normalization to RWP values in the interpretation."""
     if not isinstance(interpretations, dict):
@@ -748,8 +745,6 @@ def normalize_rwp_for_sample(interpretations, max_rwp=60):
             interp["normalized_rwp"] = None
 
     return interpretations
-
-
 
 def scaled_sigmoid(s, k=7, center=0.2):
     """Sigmoid scaled so that score=1 maps exactly to normalized=1."""
@@ -772,7 +767,6 @@ def normalize_scores_for_sample(interpretations, k=3, center=0.3):
 
     return interpretations
 
-
 def calculate_fit_quality(interpretations, w_rwp=1, w_score=1):
     """
     Compute a combined fit quality score per interpretation from normalized RWP and normalized score.
@@ -786,7 +780,6 @@ def calculate_fit_quality(interpretations, w_rwp=1, w_score=1):
             + interpretation["normalized_score"] * w_score
         ) / (w_rwp + w_score)
     return interpretations
-
 
 def flag_interpretation_trustworthiness_(interpretations: dict) -> dict:
     """
@@ -1101,305 +1094,14 @@ def bkg_underfit_score(plot_data,
     diffs = obs - bkg
     return np.percentile(diffs, perc)
 
-# def plot_phase_and_interpretation_probabilities(interpretations, project_number, df, target):
-#     """
-#     Plot phase probabilities and interpretation probabilities.
-#     - Style: Bigger bars, tighter spacing, Right-Aligned labels (matching phases).
-#     - Palette: Specific user-defined NPG colors + Deep Teal/Green highlights.
-#     - Logic: Original precursor detection.
-#     """
-    
-#     # --- Helper Functions ---
-#     def clean_phase_name(phase):
-#         return phase.split("_(icsd")[0]
-
-#     def cleanup_phases(phase_list):
-#         return phase_list
-
-#     def clean_chemical_formula(name):
-#         return re.sub(r"\s*\(.*?\)", "", name).strip()
-
-#     def format_phase_display(name):
-#         # Converts 'Phase_123' to 'Phase (sg #123)'
-#         match = re.search(r"(.+)_(\d+)$", name)
-#         if match:
-#             return f"{match.group(1)} (sg #{match.group(2)})"
-#         return name
-
-    
-#     phase_color_palette = ["#91D1C2","#00468B", "#F3E5AB",  "#D191A0",  
-#         "#b2b223",  "#98a8b8","#A6CEE3", "#B2DF8A", "#FB9A99", "#FDBF6F", "#CAB2D6", "#FFFF99", "#1F78B4", "#33A02C"
-# ]
-    
-#     interpretation_colors = {
-#     "I_1": "#3C5488",
-#     "I_2": "#7E8DA4", 
-#     "I_3": "#BFD3E6",
-#     "I_4": "#D9D9D9",
-#     "I_5": "#f3d57f", 
-#     "I_6": "#F39B7F",
-#     "I_7": "#0B3C5D",
-#     "I_8": "#1D6996",
-#     "I_9": "#38A6A5",
-#     "I_10": "#6F6F6F",
-#     "I_11": "#B23A48",
-#     "I_12": "#8F2D56",
-    
-# }
-
-#     default_interpretation_color = "#4C566A"
-
-
-#     # Highlight Colors
-#     color_AIF_best  = "#005F73"  
-#     color_Rwp_lowest = "#00A087"  
-  
-
-#     # --- Precursor Logic (Original) ---
-#     precursors_raw = df['Precursors'].values[0]
-#     if isinstance(precursors_raw, str) and precursors_raw.startswith("["):
-#         precursors_list = ast.literal_eval(precursors_raw)
-#     else:
-#         precursors_list = precursors_raw
-        
-#     precursors = set(clean_chemical_formula(p) for p in precursors_list)
-
-#     def is_precursor(phase_name):
-#         base_phase = phase_name.split("_")[0]
-#         # Original logic: exact split match
-#         return any(base_phase == precursor.split("_")[0] for precursor in precursors)
-    
-#     # Clean phases
-#     for interp in interpretations:
-#         interpretations[interp]["phases"] = cleanup_phases([clean_phase_name(p) for p in interpretations[interp]["phases"]])
-
-#     unique_phases = sorted(set(clean_phase_name(phase) for interp in interpretations.values() for phase in interp["phases"]))
-#     unique_phases = cleanup_phases(unique_phases)
-#     phase_colors = dict(zip(unique_phases, phase_color_palette[:len(unique_phases)]))
-    
-
-#     # Compute probabilities
-#     phase_probabilities = calculate_phase_probabilities(interpretations)
-    
-#     interpretation_names = list(interpretations.keys())
-#     posterior_values = [interpretations[interp]["posterior_probability"] * 100 for interp in interpretation_names]
-#     rwp_values = [interpretations[interp]["rwp"] for interp in interpretation_names]
-    
-#     sorted_indices = np.argsort(posterior_values)[::-1]
-#     sorted_interpretations = [interpretation_names[i] for i in sorted_indices]
-#     sorted_posterior_values = [posterior_values[i] for i in sorted_indices]
-#     sorted_rwp_values = [rwp_values[i] for i in sorted_indices]
-
-#     I_best = sorted_interpretations[np.argmax(sorted_posterior_values)]
-#     I_dara = sorted_interpretations[np.argmin(sorted_rwp_values)]
-    
-#     # Assign lowest Rwp color for legend consistency
-#     interpretation_colors[I_dara] = color_Rwp_lowest
-
-#     # -------------------------------------------------------------------------
-#     # PLOT 1: Interpretation Probabilities
-#     # -------------------------------------------------------------------------
-    
-#     sorted_weight_fractions = [interpretations[interp]["weight_fraction"] for interp in sorted_interpretations]
-#     sorted_phases = [interpretations[interp]["phases"] for interp in sorted_interpretations]
-
-#     # STYLE: Tighter vertical spacing (0.6 factor) + wider figure (11)
-#     fig, ax = plt.subplots(figsize=(11, max(4, len(sorted_interpretations) * 0.6)))
-#     plt.subplots_adjust(bottom=0.151)
-#     plt.subplots_adjust(left=0.25, right=0.95)
-
-#     bottom_bar = np.zeros(len(sorted_interpretations))
-#     trust_flags = {interp: interpretations[interp].get("trustworthy", True) for interp in sorted_interpretations}
-#     total_bar_widths = defaultdict(float)
-
-#     for phase_idx, phase in enumerate(unique_phases):
-#         fraction_values = [
-#             (weights[phases.index(phase)] if phase in phases else 0) * post_prob / 100
-#             for phases, weights, post_prob in zip(sorted_phases, sorted_weight_fractions, sorted_posterior_values)
-#         ]
-
-#         bars = ax.barh(
-#             [f"Interpretation_{name.split('_')[1]}" for name in sorted_interpretations[::-1]],
-#             fraction_values[::-1],
-#             left=bottom_bar[::-1],
-#             color=phase_colors[phase],
-#             edgecolor="none",
-#             height=0.8 
-#         )
-#         bottom_bar += fraction_values
-        
-#         for bar, interp_name in zip(bars, sorted_interpretations[::-1]):
-#              total_bar_widths[interp_name] += bar.get_width()
-
-#     # --- Labels ---
-#     ax.set_yticks([]) 
-#     ax.axvline(0, color="black", linewidth=1, zorder=3)
-#     ax.spines['left'].set_visible(False)
-#     ax.spines['top'].set_visible(False)
-#     ax.spines['right'].set_visible(False)
-    
-#     trans = ax.get_yaxis_transform() 
-
-#     for y_idx, interp_name in enumerate(sorted_interpretations[::-1]):
-#         is_trustworthy = trust_flags[interp_name]
-#         symbol = "✔" if is_trustworthy else "✘"
-#         symbol_color = "green" if is_trustworthy else "red"
-        
-#         display_name = f"Interpretation {interp_name.split('_')[1]}"
-#         text_color = color_Rwp_lowest if interp_name == I_dara else (color_AIF_best if interp_name == I_best else "black")
-#         weight = "bold"
-
-#         # STYLE: Right Aligned Labels (Closer to axis, matching Phase plot)
-#         # 1. Name
-#         ax.text(-0.02, y_idx, display_name, color=text_color, 
-#                 fontsize=14, fontweight=weight, ha='right', va='center', transform=trans)
-
-#         # 2. Symbol (Dynamic offset based on name length to sit "in front")
-#         # Heuristic: ~0.012 units per character is a rough estimate for fontsize 14
-#         symbol_offset = -0.02 - (len(display_name) * 0.013) - 0.02
-#         ax.text(symbol_offset, y_idx, symbol, color=symbol_color, 
-#                 fontsize=16, fontweight='bold', ha='right', va='center', transform=trans)
-
-#         # 3. Subtitles
-#         if interp_name == I_dara:
-#             ax.text(-0.02, y_idx - 0.35, "(Lowest Rwp)", color="black", 
-#                     fontsize=12, ha='right', va='top', transform=trans)
-#         if interp_name == I_best:
-#              ax.text(-0.02, y_idx - 0.35, "(AIF)", color="black", 
-#                     fontsize=12, ha='right', va='top', transform=trans)
-
-#     # Percentages
-#     for interp_name, value in zip(sorted_interpretations[::-1], sorted_posterior_values[::-1]):
-#          y_pos = sorted_interpretations[::-1].index(interp_name)
-#          ax.text(total_bar_widths[interp_name] + 1.5, y_pos, f"{value:.1f}%", va="center", ha="left", fontsize=12, color="black")
-
-#     ax.set_xlabel("Interpretation Probability (%)", fontsize=14)
-#     ax.set_xlim(left=0, right=max(sorted_posterior_values) + 15)
-#     ax.tick_params(axis="x", labelsize=12)
-    
-#     # Legend
-#     legend_handles = []
-#     for phase in unique_phases:
-#         display = format_phase_display(phase)
-#         if is_precursor(phase):
-#             display += "\n(unreacted precursor)"
-        
-#         handle = plt.Line2D([0], [0], color=phase_colors.get(phase, "black"), lw=6, label=display)
-#         legend_handles.append(handle)
-
-#     ax.legend(handles=legend_handles, loc="lower right", fontsize=10, frameon=True, edgecolor="black")
-
-#     output_dir = get_output_dir(target, project_number)
-#     output_path = os.path.join(output_dir, "interpretation_probabilities.png")
-#     plt.savefig(output_path, format="png", dpi=300)
-#     plt.close()
-
-#     # -------------------------------------------------------------------------
-#     # PLOT 2: Phase Probabilities
-#     # -------------------------------------------------------------------------
-
-#     sorted_phases_by_prob = sorted(phase_probabilities.items(), key=lambda x: x[1], reverse=True)
-#     cleaned_phases_list, probabilities = zip(*[(clean_phase_name(p), v) for p, v in sorted_phases_by_prob]) if sorted_phases_by_prob else ([], [])
-
-#     # STYLE: Tighter vertical spacing matching Plot 1
-#     fig, ax = plt.subplots(figsize=(11, max(4, len(cleaned_phases_list) * 0.6)))
-#     plt.subplots_adjust(bottom=0.18)
-#     plt.subplots_adjust(left=0.25, right=0.95)
-
-#     bottom_bar = np.zeros(len(cleaned_phases_list))
-#     total_bar_widths_phase = defaultdict(float)
-
-#     for interp in sorted_interpretations:
-#         fraction_values = [
-#             (interpretations[interp]["posterior_probability"] * 100 if phase in [clean_phase_name(p) for p in interpretations[interp]["phases"]] else 0)
-#             for phase in cleaned_phases_list
-#         ]
-        
-#         color = color_AIF_best if interp == I_best else interpretation_colors.get(interp, default_interpretation_color)
-#         hatch = "xx" if interp == I_best else ""
-
-#         bars = ax.barh(cleaned_phases_list[::-1], fraction_values[::-1], left=bottom_bar[::-1], 
-#                        color=color, hatch=hatch, height=0.8) # STYLE: Bigger bars
-        
-#         for bar, phase in zip(bars, cleaned_phases_list[::-1]):
-#             total_bar_widths_phase[phase] += bar.get_width()
-
-#         bottom_bar += fraction_values
-
-#     # --- Labels ---
-#     ax.set_yticks([]) 
-#     ax.axvline(0, color="black", linewidth=1, zorder=3)
-#     ax.spines['left'].set_visible(False)
-#     ax.spines['top'].set_visible(False)
-#     ax.spines['right'].set_visible(False)
-    
-#     trans = ax.get_yaxis_transform()
-
-#     for y_idx, phase in enumerate(cleaned_phases_list[::-1]):
-#         display_name = format_phase_display(phase)
-        
-#         # Name
-#         ax.text(-0.02, y_idx, display_name, color="black", 
-#                 fontsize=14, fontweight='bold', ha='right', va='center', transform=trans)
-        
-#         # Subtitle
-#         if is_precursor(phase):
-#             ax.text(-0.02, y_idx - 0.35, "(unreacted precursor)", color="black", 
-#                     fontsize=11,  ha='right', va='top', transform=trans)
-
-#     # Value Labels
-#     for phase in cleaned_phases_list:
-#         y_pos = cleaned_phases_list[::-1].index(phase)
-#         total_w = total_bar_widths_phase[phase]
-#         ax.text(total_w + 1.5, y_pos, f"{total_w:.1f}%", va="center", ha="left", fontsize=12)
-
-#     ax.set_xlabel("Phase Probability (%)", fontsize=14)
-#     ax.set_xlim(left=0, right=max(probabilities) + 15)
-#     ax.tick_params(axis="x", labelsize=12)
-
-#     # Legend
-#     legend_handles = []
-#     for interp in interpretation_names:
-#         color = color_AIF_best if interp == I_best else interpretation_colors.get(interp, default_interpretation_color)
-        
-#         # Use Lowest Rwp color for that specific interpretation
-#         if interp == I_dara:
-#             color = color_Rwp_lowest
-            
-#         interp_num = interp.split("_")[1]
-#         interp_label = f"Interp {interp_num}"
-
-#         label_txt = (
-#             f"{interp_label}\n(AIF)"
-#             if interp == I_best
-#             else (f"{interp_label}\n(Lowest Rwp)" if interp == I_dara else interp_label)
-#         )
-#         if interp == I_best:
-#             patch = mpatches.Patch(facecolor=color, edgecolor="black", hatch="xx", label=label_txt, linewidth=0)
-#         else:
-#             patch = mpatches.Patch(facecolor=color, edgecolor="white", label=label_txt, linewidth=1.5)
-#         legend_handles.append(patch)
-
-#     ax.legend(handles=legend_handles, loc="lower right", fontsize=10, frameon=True, edgecolor="black")
-    
-#     output_path = os.path.join(output_dir, "phases_probabilities.png")
-#     plt.savefig(output_path, format="png", dpi=300)
-#     plt.close()
 def plot_phase_and_interpretation_probabilities(interpretations, project_number, df, target):
     """
     Plot phase probabilities and interpretation probabilities.
     - Style: Bigger bars, tighter spacing, Right-Aligned labels (matching phases).
     - Palette: Specific user-defined NPG colors + Deep Teal/Green highlights.
-    - Logic: Original precursor detection.
-    - Update: If AIF best == Lowest Rwp, use AIF color and show "(AIF == Lowest Rwp)" without overlap.
+    - Logic: Precursor detection uses BOTH formula + space group when provided in df.
+    - Update: If AIF best == Lowest Rwp, use AIF color and show "(AIF = Lowest Rwp)" without overlap.
     """
-    import os
-    import re
-    import ast
-    import numpy as np
-    import matplotlib.pyplot as plt
-    import matplotlib.patches as mpatches
-    from collections import defaultdict
 
     # --- Helper Functions ---
     def clean_phase_name(phase):
@@ -1417,6 +1119,29 @@ def plot_phase_and_interpretation_probabilities(interpretations, project_number,
         if match:
             return f"{match.group(1)} (sg #{match.group(2)})"
         return name
+
+    def parse_phase_formula_and_sg(phase_name):
+        """
+        Returns (formula, sg_int_or_None).
+        Expected phase format: 'V2O5_59' or 'V2O5' (no sg).
+        """
+        m = re.search(r"(.+)_([0-9]+)$", phase_name)
+        if m:
+            return m.group(1), int(m.group(2))
+        return phase_name, None
+
+    def parse_list_cell(cell):
+        """
+        Parses df cells that might be:
+          - python list already
+          - stringified python list, e.g. "['CaCO3','V2O5']" or "[167, 59]"
+        """
+        if isinstance(cell, str) and cell.strip().startswith("["):
+            try:
+                return ast.literal_eval(cell)
+            except Exception:
+                return cell
+        return cell
 
     phase_color_palette = [
         "#91D1C2", "#00468B", "#F3E5AB", "#D191A0",
@@ -1446,21 +1171,44 @@ def plot_phase_and_interpretation_probabilities(interpretations, project_number,
     color_AIF_best = "#005F73"
     color_Rwp_lowest = "#00A087"
 
-    # --- Precursor Logic (Original) ---
-    precursors_raw = df["Precursors"].values[0]
-    if isinstance(precursors_raw, str) and precursors_raw.startswith("["):
-        precursors_list = ast.literal_eval(precursors_raw)
-    else:
-        precursors_list = precursors_raw
+    # -------------------------------------------------------------------------
+    # UPDATED PRECURSOR LOGIC: require formula + space group match (if available)
+    # -------------------------------------------------------------------------
+    precursors_raw = parse_list_cell(df["Precursors"].values[0])
 
-    precursors = set(clean_chemical_formula(p) for p in precursors_list)
+    prec_sg_available = ("Precursors_space_groups" in df.columns) and (df["Precursors_space_groups"].notna().any())
+    prec_sg_raw = parse_list_cell(df["Precursors_space_groups"].values[0]) if prec_sg_available else None
+
+    # Normalize precursor formula list
+    if precursors_raw is None:
+        precursors_list = []
+    else:
+        precursors_list = precursors_raw if isinstance(precursors_raw, (list, tuple)) else [precursors_raw]
+    precursors_list = [clean_chemical_formula(p) for p in precursors_list]
+
+    # Normalize precursor space-group list (must align with precursors_list)
+    if prec_sg_available and isinstance(prec_sg_raw, (list, tuple)) and len(prec_sg_raw) == len(precursors_list):
+        prec_sg_list = [int(sg) if sg is not None else None for sg in prec_sg_raw]
+        precursors_with_sg = set(zip(precursors_list, prec_sg_list))  # e.g. {("V2O5",59),("CaCO3",167)}
+    else:
+        precursors_with_sg = None  # fallback to formula-only matching
 
     def is_precursor(phase_name):
-        base_phase = phase_name.split("_")[0]
-        # Original logic: exact split match
-        return any(base_phase == precursor.split("_")[0] for precursor in precursors)
+        phase_formula, phase_sg = parse_phase_formula_and_sg(phase_name)
+        phase_formula = clean_chemical_formula(phase_formula)
 
+        # If df gave precursor sg info, require BOTH formula and sg match
+        if precursors_with_sg is not None:
+            if phase_sg is None:
+                return False
+            return (phase_formula, int(phase_sg)) in precursors_with_sg
+
+        # Fallback: original formula-only behavior (if sg list missing/misaligned)
+        return any(phase_formula.split("_")[0] == p.split("_")[0] for p in precursors_list)
+
+    # -------------------------------------------------------------------------
     # Clean phases
+    # -------------------------------------------------------------------------
     for interp in interpretations:
         interpretations[interp]["phases"] = cleanup_phases(
             [clean_phase_name(p) for p in interpretations[interp]["phases"]]
@@ -1489,8 +1237,6 @@ def plot_phase_and_interpretation_probabilities(interpretations, project_number,
 
     same_best_and_dara = (I_best == I_dara)
 
-    # Only assign Lowest-Rwp color if it's a DIFFERENT interpretation than AIF best.
-    # If same, keep AIF color.
     if not same_best_and_dara:
         interpretation_colors[I_dara] = color_Rwp_lowest
 
@@ -1527,7 +1273,6 @@ def plot_phase_and_interpretation_probabilities(interpretations, project_number,
         for bar, interp_name in zip(bars, sorted_interpretations[::-1]):
             total_bar_widths[interp_name] += bar.get_width()
 
-    # --- Labels ---
     ax.set_yticks([])
     ax.axvline(0, color="black", linewidth=1, zorder=3)
     ax.spines["left"].set_visible(False)
@@ -1544,7 +1289,6 @@ def plot_phase_and_interpretation_probabilities(interpretations, project_number,
         display_name = f"Interpretation {interp_name.split('_')[1]}"
         weight = "bold"
 
-        # Text color: AIF wins if combined; otherwise Lowest-Rwp gets its own color.
         if interp_name == I_best:
             text_color = color_AIF_best
         elif (not same_best_and_dara) and (interp_name == I_dara):
@@ -1552,20 +1296,17 @@ def plot_phase_and_interpretation_probabilities(interpretations, project_number,
         else:
             text_color = "black"
 
-        # 1) Name
         ax.text(
             -0.02, y_idx, display_name, color=text_color,
             fontsize=14, fontweight=weight, ha="right", va="center", transform=trans
         )
 
-        # 2) Trust symbol (offset based on name length)
         symbol_offset = -0.02 - (len(display_name) * 0.013) - 0.02
         ax.text(
             symbol_offset, y_idx, symbol, color=symbol_color,
             fontsize=16, fontweight="bold", ha="right", va="center", transform=trans
         )
 
-        # 3) Subtitles (no overlap; combined case becomes one line)
         subtitle_lines = []
         if same_best_and_dara and interp_name == I_best:
             subtitle_lines = ["(AIF = Lowest Rwp)"]
@@ -1581,7 +1322,6 @@ def plot_phase_and_interpretation_probabilities(interpretations, project_number,
                 fontsize=12, ha="right", va="top", transform=trans
             )
 
-    # Percentages
     for interp_name, value in zip(sorted_interpretations[::-1], sorted_posterior_values[::-1]):
         y_pos = sorted_interpretations[::-1].index(interp_name)
         ax.text(
@@ -1634,7 +1374,6 @@ def plot_phase_and_interpretation_probabilities(interpretations, project_number,
             for phase in cleaned_phases_list
         ]
 
-        # Bar color: AIF wins if combined; otherwise Lowest-Rwp has its own color
         if interp == I_best:
             color = color_AIF_best
         elif (not same_best_and_dara) and (interp == I_dara):
@@ -1658,7 +1397,6 @@ def plot_phase_and_interpretation_probabilities(interpretations, project_number,
 
         bottom_bar += fraction_values
 
-    # --- Labels ---
     ax.set_yticks([])
     ax.axvline(0, color="black", linewidth=1, zorder=3)
     ax.spines["left"].set_visible(False)
@@ -1681,7 +1419,6 @@ def plot_phase_and_interpretation_probabilities(interpretations, project_number,
                 fontsize=11, ha="right", va="top", transform=trans
             )
 
-    # Value Labels
     for phase in cleaned_phases_list:
         y_pos = cleaned_phases_list[::-1].index(phase)
         total_w = total_bar_widths_phase[phase]
@@ -1723,7 +1460,6 @@ def plot_phase_and_interpretation_probabilities(interpretations, project_number,
     output_path = os.path.join(output_dir, "phases_probabilities.png")
     plt.savefig(output_path, format="png", dpi=300)
     plt.close()
-
 def plot_metrics_contribution(
     interpretations, project_number, target
 ):
