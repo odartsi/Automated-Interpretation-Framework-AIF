@@ -1,5 +1,6 @@
 from pathlib import Path
 from dara.structure_db import ICSDDatabase
+from dara.structure_db import CODDatabase
 from dara.refine import do_refinement_no_saving
 from copy import deepcopy
 from dara import search_phases
@@ -212,7 +213,8 @@ def main(pattern_path, chemical_system, target):
 
     start_time = time.time()
     cleanup_cifs()
-    cod_database = ICSDDatabase()
+    # cod_database = ICSDDatabase()
+    cod_database = CODDatabase()
     cod_database.get_cifs_by_chemsys(chemical_system, dest_dir="cifs")
     all_cifs = list(Path("cifs").glob("*.cif"))
 
