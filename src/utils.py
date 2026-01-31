@@ -1128,7 +1128,8 @@ def plot_phase_and_interpretation_probabilities(interpretations, project_number,
 
     
     phase_color_palette = ["#91D1C2","#00468B", "#F3E5AB",  "#D191A0",  
-        "#b2b223",  "#98a8b8", ]
+        "#b2b223",  "#98a8b8","#A6CEE3", "#B2DF8A", "#FB9A99", "#FDBF6F", "#CAB2D6", "#FFFF99", "#1F78B4", "#33A02C"
+]
     
     interpretation_colors = {
     "I_1": "#3C5488",
@@ -1136,7 +1137,13 @@ def plot_phase_and_interpretation_probabilities(interpretations, project_number,
     "I_3": "#BFD3E6",
     "I_4": "#D9D9D9",
     "I_5": "#f3d57f", 
-    "I_6": "#F39B7F"
+    "I_6": "#F39B7F",
+    "I_7": "#0B3C5D",
+    "I_8": "#1D6996",
+    "I_9": "#38A6A5",
+    "I_10": "#6F6F6F",
+    "I_11": "#B23A48",
+    "I_12": "#8F2D56",
     
 }
 
