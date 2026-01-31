@@ -80,7 +80,8 @@ The framework depends on **dara**, a library used for:
 - **Peak matching and detection** (`dara.search.peak_matcher.PeakMatcher`, `dara.peak_detection.detect_peaks`)
 - **Refinement results** (`dara.result.RefinementResult` in `utils.py`)
 
-Without `dara` installed and on your `PYTHONPATH`, the main entry point (`probability_of_interpretation.py`) and refinement metrics (`refinement_metrics.py`) will not run. Ensure you have access to the dara package and that it is installed in the same environment you use to run this code. (If dara is internal or versioned elsewhere, install it according to your organization’s instructions.)
+Without [`dara`](https://github.com/idocx/dara) installed and available on your `PYTHONPATH`, the main entry point (`probability_of_interpretation.py`) and refinement metrics (`refinement_metrics.py`) will not run.  
+Ensure you have access to the `dara` package and that it is installed in the same environment used to run this code.
 
 ### External Services
 - **CBORG Gateway**: API access to GPT-4 (`https://api.cborg.lbl.gov`)
