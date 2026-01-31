@@ -1,5 +1,0 @@
-chemist,neither_total,neither_with_valid_trust,neither_low_trust_n,neither_low_trust_pct,neither_high_trust_n,neither_high_trust_pct,excluded_no_features
-A,6,6,2,33.333333333333336,4,66.66666666666667,0
-B,10,10,2,20.0,8,80.0,0
-C,5,5,2,40.0,3,60.0,0
-D,8,8,2,25.0,6,75.0,0
