@@ -111,7 +111,14 @@ Without `dara` installed and on your `PYTHONPATH`, the main entry point (`probab
    python src/probability_of_interpretation.py
    ```
 
-5. **API key for LLM**: Set your API key for the CBORG gateway (see [Environment Setup](#environment-setup) below).
+5. **Optional – run unit tests**: Install pytest and run tests from the project root (with `src` on `PYTHONPATH`):
+   ```bash
+   pip install -r requirements-dev.txt
+   PYTHONPATH=src python -m pytest tests/ -v
+   ```
+   Unit tests live in the top-level `tests/` directory and cover pure functions in `utils`, `composition_balance`, `refinement_metrics`, `LLM_evaluation`, and `probability_of_interpretation` (e.g. `load_json`, `extract_project_number_from_filename`, `scaled_sigmoid`, `calculate_posterior_probability_of_interpretation`, `normalize_rwp`, `_infer_group_from_search`).
+
+6. **API key for LLM**: Set your API key for the CBORG gateway (see [Environment Setup](#environment-setup) below).
 
 ## Usage
 
