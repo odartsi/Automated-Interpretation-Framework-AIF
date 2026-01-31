@@ -1,6 +1,10 @@
-# Automated Interpretation Framework (AIF)
+# Automated Interpretation Framework (AIF) <img width="187" height="187" alt="AIF logo_" src="https://github.com/user-attachments/assets/4fb5a925-62c2-47f7-ac78-6bbb6b6593fc" />
+
 
 An intelligent system for automatically interpreting X-ray diffraction (XRD) patterns in materials science. The framework evaluates multiple phase interpretations by combining statistical analysis, chemical composition matching, and large language model (LLM) evaluation to identify the most plausible interpretation of experimental XRD data.
+
+<img width="2500" height="903" alt="AIF approach_with_chemical_horizontal_FINAL_newpalette" src="https://github.com/user-attachments/assets/625c78f2-6601-453a-b135-46c37a0ab813" />
+
 
 ## Overview
 
@@ -261,4 +265,4 @@ If you use this framework in your research, please cite appropriately.
 
 ## Contact
 
-[Add contact information]
+[olympiadartsi@gmail.com]
