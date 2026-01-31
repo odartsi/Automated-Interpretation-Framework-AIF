@@ -47,19 +47,21 @@ The framework evaluates interpretations using a Bayesian approach.
 ```
 AIF_copy/
 ├── src/
-│   ├── refinement_metrics.py      # RWP, score, refinement and fit metrics
-│   ├── composition_balance.py     # Composition balance scores
-│   ├── LLM_evaluation.py            # LLM-based phase evaluation
+│   ├── refinement_metrics.py          # RWP, score, refinement and fit metrics
+│   ├── composition_balance.py         # Composition balance scores
+│   ├── LLM_evaluation.py              # LLM-based phase evaluation
 │   ├── probability_of_interpretation.py  # Main orchestration script
-│   ├── utils.py                    # Utility functions and plotting
+│   ├── utils.py                       # Utility functions and plotting
 │   ├── prompts/
-│   │   └── llm_prompt_template.txt # LLM prompt template
-│   └── tests/                      # Test scripts and comparisons
+│   │   └── llm_prompt_template.txt    # LLM prompt template
+│   └── tests/                         # Test scripts and comparisons
 ├── data/
-│   ├── alab_synthesis_data/        # Synthesis metadata (CSV files)
-│   └── xrd_data/                   # XRD patterns and interpretations
-├── notebooks/                      # Jupyter notebooks for analysis
-└── README.md
+│   ├── alab_synthesis_data/            # Synthesis metadata (CSV files)
+│   └── xrd_data/                       # XRD patterns and interpretations
+├── notebooks/
+│   ├── AIF_example_workflow.ipynb     # Display-only example workflow
+│   └── AIF_run_workflow.ipynb          # Full pipeline re-run notebook
+├── README.md
 ```
 
 ## Dependencies
