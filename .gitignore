@@ -21,6 +21,7 @@ src/instrument_files/
 src/*.txt
 src/*.html
 notebooks/data/
+notebooks/example_output/
 *.xrdml
 *.json
 *.xy

@@ -33,10 +33,10 @@ logging.basicConfig(
 # -----------------------------
 DATASETS = {
     "TRI": {
-        "csv": "../data/alab_synthesis_data/synthesis_TRI.csv",
-        "combos": "../data/xrd_data/combinations.json",
-        "interpretations":"../data/xrd_data/interpretations/interpretations_for_brier.json" # tri-80"../data/xrd_data/interpretations/interpretations_test.json"#tri-197: "../data/xrd_data/interpretations/interpretations_for_brier.json",#
-    }
+        "csv": "../data/xrd_data/synthesis_data.csv",
+        "combos": "../data/xrd_data/difractogram_paths.json",
+        "interpretations":"../data/xrd_data/interpretations/interpretations.json"
+        }
   
 }
 
