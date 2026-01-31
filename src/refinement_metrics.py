@@ -6,7 +6,9 @@ from copy import deepcopy
 from dara import search_phases
 from dara.search.peak_matcher import PeakMatcher
 from dara.peak_detection import detect_peaks
+from pymatgen.io.cif import CifParser
 import os
+import re
 import numpy as np
 from itertools import combinations
 from utils import (
@@ -28,6 +30,61 @@ TIME_LIMIT_ = 2000
 TIME_LIMIT = 1200
 MAX_ITER_WITHOUT_NEW_INTERPRETATION = 10
 
+def filter_valid_structure_cifs(cif_paths):
+    good = []
+    bad = []
+    for p in cif_paths:
+        try:
+            parser = CifParser(str(p), occupancy_tolerance=10)  # tolerant
+            structs = parser.parse_structures(primitive=False)
+            if structs and len(structs) > 0:
+                good.append(p)
+            else:
+                bad.append((p, "no structures"))
+        except Exception as e:
+            bad.append((p, str(e)))
+
+    if bad:
+        for p, reason in bad[:10]:
+            print("  ", p.name, "->", reason[:160])
+
+    return good
+
+def sanitize_cod_cifs(cifs_dir="cifs"):
+    """
+    Fix COD CIFs that break pymatgen parsing, mainly:
+      - _atom_site_attached_hydrogens containing '?' or '.'
+    Strategy:
+      1) Remove the tag from the loop header if present
+      2) If values are present, replace '?' and '.' with '0' in that column-ish context
+    Conservative: if we detect the tag, we drop it entirely (safe for inorganic use).
+    """
+    cifs_dir = Path(cifs_dir)
+    for cif_path in cifs_dir.glob("*.cif"):
+        try:
+            txt = cif_path.read_text(errors="ignore")
+        except Exception:
+            continue
+
+        if "_atom_site_attached_hydrogens" not in txt:
+            continue
+
+        lines = txt.splitlines()
+
+        # Remove the header line that declares this item
+        new_lines = []
+        for line in lines:
+            if line.strip().startswith("_atom_site_attached_hydrogens"):
+                continue
+            new_lines.append(line)
+
+        new_txt = "\n".join(new_lines)
+
+        # Extra safety: replace standalone '?' or '.' tokens that remain (rare)
+        # This is global, but only applied to files that had the tag.
+        new_txt = re.sub(r"(?<=\s)[\?\.](?=\s|$)", "0", new_txt)
+
+        cif_path.write_text(new_txt)
 
 def phase_assets_from_final(final_results, base_dir="cifs"):
     """
@@ -215,8 +272,15 @@ def main(pattern_path, chemical_system, target):
     cleanup_cifs()
     # cod_database = ICSDDatabase()
     cod_database = CODDatabase()
-    cod_database.get_cifs_by_chemsys(chemical_system, dest_dir="cifs")
+    cod_database.get_cifs_by_chemsys(chemical_system, dest_dir="cifs") 
     all_cifs = list(Path("cifs").glob("*.cif"))
+
+    # 1) sanitize known COD issues 
+    sanitize_cod_cifs("cifs")
+
+    # 2) filter out CIFs with no parseable structure 
+    all_cifs = filter_valid_structure_cifs(all_cifs)
+
 
     search_tree = search_phases(
         pattern_path=pattern_path,
