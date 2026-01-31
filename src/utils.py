@@ -800,7 +800,7 @@ def flag_interpretation_trustworthiness(
 
     return interpretations
 
-def compute_trust_score(
+def compute_trust_score_(
     interpretations: dict,
     *,
     llm_ref=0.41,
@@ -886,6 +886,89 @@ def compute_trust_score(
 
     return interpretations
 
+
+def compute_trust_score(
+    interpretations: dict,
+    *,
+    llm_ref=0.41,
+    signal_ref=9000.0,
+    overshoot_ref=1200.0,
+    ratio_ref=15.0,
+    balance_ref=0.6,
+    peak_match_ref=0.6,
+    rwp_ref=15.0,
+    decimals=6,
+) -> dict:
+    """
+    Adds a 'trust_score' field to each interpretation, ranging from 0 (not trustworthy) to 1 (fully trustworthy),
+    based on 7 soft criteria (each penalty in [0,1], 0=good, 1=bad):
+
+        1) Low Signal:                 signal < signal_ref
+        2) High Background overshoot:  overshoot > overshoot_ref
+        3) Low signal/overshoot ratio: ratio < ratio_ref
+        4) Low LLM likelihood:         llm <= llm_ref
+        5) Low balance score:          balance < balance_ref
+        6) Low peak matching score:    normalized_score < peak_match_ref
+        7) High Rwp:                   rwp > rwp_ref
+
+    Trust score = 1 - average(penalties).
+    Keeps old behavior: missing fields default to "good" values; overshoot <= 0 gives 0 penalty for overshoot and ratio.
+    """
+
+    for key, interp in interpretations.items():
+        try:
+            llm = float(interp.get("LLM_interpretation_likelihood", 1.0))
+            signal = float(interp.get("signal_above_bkg_score", 10000.0))
+            overshoot = float(interp.get("bkg_overshoot_score", 0.0))
+            balance = float(interp.get("balance_score", 1.0))
+            score = float(interp.get("normalized_score", 1.0))  # peak match
+            rwp = float(interp.get("rwp", 0.0))
+        except (TypeError, ValueError):
+            interp["trust_score"] = 0.0
+            continue
+
+        # 1) LLM likelihood (ideal >= llm_ref)
+        penalty_llm = max(0.0, min(1.0, (llm_ref - llm) / llm_ref))
+
+        # 2) Signal above background (ideal >= signal_ref)
+        penalty_signal = max(0.0, min(1.0, (signal_ref - signal) / signal_ref))
+
+        # 3) Background overshoot (ideal <= overshoot_ref)
+        penalty_overshoot = (
+            max(0.0, min(1.0, (overshoot - overshoot_ref) / overshoot_ref))
+            if overshoot > 0 else 0.0
+        )
+
+        # 4) Signal / overshoot ratio (ideal >= ratio_ref)
+        if overshoot > 0:
+            ratio = signal / overshoot
+            penalty_ratio = max(0.0, min(1.0, (ratio_ref - ratio) / ratio_ref))
+        else:
+            penalty_ratio = 0.0  # keep old behavior
+
+        # 5) Balance score (ideal >= balance_ref)
+        penalty_balance = max(0.0, min(1.0, (balance_ref - balance) / balance_ref))
+
+        # 6) Peak match score (ideal >= peak_match_ref)  <-- now ALWAYS included
+        penalty_peak = max(0.0, min(1.0, (peak_match_ref - score) / peak_match_ref))
+
+        # 7) Rwp (ideal <= rwp_ref; penalize only if rwp > rwp_ref)
+        # linear: rwp_ref -> 0, 2*rwp_ref -> 1 (clipped)
+        penalty_rwp = max(0.0, min(1.0, (rwp - rwp_ref) / rwp_ref))
+
+        total_penalty = (
+            penalty_llm
+            + penalty_signal
+            + penalty_overshoot
+            + penalty_ratio
+            + penalty_balance
+            + penalty_peak
+            + penalty_rwp
+        ) / 7.0
+
+        interp["trust_score"] = round(max(0.0, 1.0 - total_penalty), decimals)
+
+    return interpretations
 
 def calculate_excess_bkg(plot_data, peak_window=2, top_n_peaks=3, low_angle=(20,35), high_angle=60): #10, 40
     observed = np.asarray(plot_data.y_obs)

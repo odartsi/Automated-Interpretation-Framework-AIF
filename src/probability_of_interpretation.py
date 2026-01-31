@@ -152,8 +152,11 @@ for combo in combinations:
 
     if display_key in all_interpretations:
         interpretations = all_interpretations[display_key]
+        interpretations = compute_trust_score(interpretations)
+        interpretations = flag_interpretation_trustworthiness(interpretations)
         plot_phase_and_interpretation_probabilities(interpretations, display_key, filtered_df, target)
         plot_metrics_contribution(interpretations, display_key, target)
+
         print("-" * 50)
         print(f"For {project_number}")
         for key, value in interpretations.items():
@@ -161,11 +164,12 @@ for combo in combinations:
             print(f"  Phases: {', '.join(value['phases'])}")
             print(f"  LLM Interpretation Likelihood: {value['LLM_interpretation_likelihood']*100}")
             print(f"  Composition Balance: {value['balance_score']*100}")
-            print(f"  Fit quality: {value['fit_quality']}")
             print(f"  Normalized_rwp: {value['normalized_rwp']*100}")
             print(f"  Normalized_score: {value['normalized_score']*100}")
             print(f"  Prior Probability: {value['prior_probability']*100}")
             print(f"  Posterior Probability: {value['posterior_probability']*100}")
+            print(f"  Trust Score: {value['trust_score']}")
+            print(f"  Trustworthiness: {value['trustworthy']}")
             print("-" * 50)
         continue
 
@@ -196,11 +200,12 @@ for combo in combinations:
             print(f"  Phases: {', '.join(value['phases'])}")
             print(f"  LLM Interpretation Likelihood: {value['LLM_interpretation_likelihood']*100}")
             print(f"  Composition Balance: {value['balance_score']*100}")
-            print(f"  Fit quality: {value['fit_quality']}")
             print(f"  Normalized_rwp: {value['normalized_rwp']*100}")
             print(f"  Normalized_score: {value['normalized_score']*100}")
             print(f"  Prior Probability: {value['prior_probability']*100}")
             print(f"  Posterior Probability: {value['posterior_probability']*100}")
+            print(f"  Trust Score: {value['trust_score']}")
+            print(f"  Trustworthiness: {value['trustworthy']}")
             print("-" * 50)
 
         # Save interpretations to the dictionary and file
