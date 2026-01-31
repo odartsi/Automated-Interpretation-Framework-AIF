@@ -189,7 +189,6 @@ def test_calculate_posterior_probability_of_interpretation():
     }
     out = calculate_posterior_probability_of_interpretation(interps)
     assert "posterior_probability" in out["I_1"]
-    assert "adjusted_posterior_probability" in out["I_1"]
     total = out["I_1"]["posterior_probability"] + out["I_2"]["posterior_probability"]
     assert abs(total - 1.0) < 1e-5
 
@@ -200,7 +199,7 @@ def test_calculate_posterior_probability_trust_penalty():
         "I_2": {"prior_probability": 0.5, "fit_quality": 0.5, "trustworthy": False},
     }
     out = calculate_posterior_probability_of_interpretation(interps)
-    assert out["I_1"]["adjusted_posterior_probability"] > out["I_2"]["adjusted_posterior_probability"]
+    assert out["I_1"]["posterior_probability"] > out["I_2"]["posterior_probability"]
 
 
 def test_calculate_posterior_probability_raises_on_non_dict():

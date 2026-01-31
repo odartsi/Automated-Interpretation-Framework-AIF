@@ -688,14 +688,6 @@ def calculate_posterior_probability_of_interpretation(interpretations):
         else:
             interpretations[name]["posterior_probability"] = 0.0
 
-    # Optional: Downweight factor for untrustworthy results
-    TRUST_PENALTY_FACTOR = 0.1
-    for interpretation_name, interpretation in interpretations.items():
-        is_trustworthy = interpretation.get("trustworthy", True)
-        penalty = 1.0 if is_trustworthy else TRUST_PENALTY_FACTOR
-        interpretation["adjusted_posterior_probability"] = (
-            interpretation["posterior_probability"] * penalty
-        )
     return interpretations
 
 def calculate_phase_probabilities(interpretations):
