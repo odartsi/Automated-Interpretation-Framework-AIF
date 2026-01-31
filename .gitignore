@@ -18,6 +18,8 @@ src/cifs_gsas/
 src/cifs_gsas_test/
 src/gsasii_test_temp/
 src/instrument_files/
+src/dara_downloaded_cifs/*
+src/*.cif
 src/*.txt
 src/*.html
 notebooks/data/
