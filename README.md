@@ -1,5 +1,6 @@
-# Automated Interpretation Framework (AIF) <img width="187" height="187" alt="AIF logo_" src="https://github.com/user-attachments/assets/4fb5a925-62c2-47f7-ac78-6bbb6b6593fc" />
+<img width="187" height="187" alt="AIF logo_" src="https://github.com/user-attachments/assets/4fb5a925-62c2-47f7-ac78-6bbb6b6593fc" />
 
+# Automated Interpretation Framework (AIF) 
 
 An intelligent system for automatically interpreting X-ray diffraction (XRD) patterns in materials science. The framework evaluates multiple phase interpretations by combining statistical analysis, chemical composition matching, and large language model (LLM) evaluation to identify the most plausible interpretation of experimental XRD data.
 
@@ -10,26 +11,10 @@ An intelligent system for automatically interpreting X-ray diffraction (XRD) pat
 
 The Automated Interpretation Framework addresses a critical challenge in materials science: determining which phase interpretation is most likely correct when multiple valid interpretations exist for a single XRD pattern. The framework uses a Bayesian approach, combining multiple evidence sources to calculate posterior probabilities for each interpretation.
 
-### Key Features
-
-- **Multi-factor Evaluation**: Combines statistical fit quality, chemical composition balance, and thermodynamic plausibility
-- **LLM-powered Analysis**: Uses GPT-4 to evaluate phase stability and synthesis plausibility based on experimental conditions
-- **Iterative Phase Search**: Systematically explores phase combinations by excluding candidate phases to discover alternative interpretations
-- **Comprehensive Scoring**: Calculates multiple metrics including RWP, peak matching scores, background analysis, and composition balance
-- **Visualization**: Generates detailed plots showing interpretation probabilities, phase contributions, and fit quality
 
 ## How It Works
 
-The framework evaluates interpretations using a Bayesian approach:
-
-```
-P(I_n | S) ∝ P(S | I_n) × P(I_n)
-```
-
-Where:
-- **P(I_n | S)**: Posterior probability of interpretation I_n given spectrum S
-- **P(S | I_n)**: Statistical likelihood (fit quality) - how well the interpretation fits the XRD pattern
-- **P(I_n)**: Prior probability based on chemical and thermodynamic plausibility
+The framework evaluates interpretations using a Bayesian approach.
 
 ### Evaluation Components
 
@@ -46,7 +31,7 @@ Where:
    - Normalizes compositions for fair comparison
 
 3. **LLM Evaluation** (`LLM_evaluation.py`):
-   - Uses GPT-4 to evaluate phase stability under synthesis conditions
+   - Uses GPT-4o to evaluate phase stability under synthesis conditions
    - Considers temperature, atmosphere, precursors, and dwell time
    - Evaluates polymorph stability and thermodynamic plausibility
    - Provides explanations for likelihood scores
@@ -62,19 +47,21 @@ Where:
 ```
 AIF_copy/
 ├── src/
-│   ├── refinement_metrics.py      # RWP, score, refinement and fit metrics
-│   ├── composition_balance.py     # Composition balance scores
-│   ├── LLM_evaluation.py            # LLM-based phase evaluation
+│   ├── refinement_metrics.py          # RWP, score, refinement and fit metrics
+│   ├── composition_balance.py         # Composition balance scores
+│   ├── LLM_evaluation.py              # LLM-based phase evaluation
 │   ├── probability_of_interpretation.py  # Main orchestration script
-│   ├── utils.py                    # Utility functions and plotting
+│   ├── utils.py                       # Utility functions and plotting
 │   ├── prompts/
-│   │   └── llm_prompt_template.txt # LLM prompt template
-│   └── tests/                      # Test scripts and comparisons
+│   │   └── llm_prompt_template.txt    # LLM prompt template
+│   └── tests/                         # Test scripts and comparisons
 ├── data/
-│   ├── alab_synthesis_data/        # Synthesis metadata (CSV files)
-│   └── xrd_data/                   # XRD patterns and interpretations
-├── notebooks/                      # Jupyter notebooks for analysis
-└── README.md
+│   ├── alab_synthesis_data/            # Synthesis metadata (CSV files)
+│   └── xrd_data/                       # XRD patterns and interpretations
+├── notebooks/
+│   ├── AIF_example_workflow.ipynb     # Display-only example workflow
+│   └── AIF_run_workflow.ipynb          # Full pipeline re-run notebook
+├── README.md
 ```
 
 ## Dependencies
@@ -95,7 +82,8 @@ The framework depends on **dara**, a library used for:
 - **Peak matching and detection** (`dara.search.peak_matcher.PeakMatcher`, `dara.peak_detection.detect_peaks`)
 - **Refinement results** (`dara.result.RefinementResult` in `utils.py`)
 
-Without `dara` installed and on your `PYTHONPATH`, the main entry point (`probability_of_interpretation.py`) and refinement metrics (`refinement_metrics.py`) will not run. Ensure you have access to the dara package and that it is installed in the same environment you use to run this code. (If dara is internal or versioned elsewhere, install it according to your organization’s instructions.)
+Without [`dara`](https://github.com/idocx/dara) installed and available on your `PYTHONPATH`, the main entry point (`probability_of_interpretation.py`) and refinement metrics (`refinement_metrics.py`) will not run.  
+Ensure you have access to the `dara` package and that it is installed in the same environment used to run this code.
 
 ### External Services
 - **CBORG Gateway**: API access to GPT-4 (`https://api.cborg.lbl.gov`)
@@ -111,7 +99,7 @@ Without `dara` installed and on your `PYTHONPATH`, the main entry point (`probab
 
 4. **Run from the project root**: Execute the main script from the repository root so that imports like `from utils import ...` and data paths resolve correctly:
    ```bash
-   cd /path/to/AIF_copy
+   cd /path/to/AIF
    python src/probability_of_interpretation.py
    ```
 
@@ -120,7 +108,7 @@ Without `dara` installed and on your `PYTHONPATH`, the main entry point (`probab
    pip install -r requirements-dev.txt
    PYTHONPATH=src python -m pytest tests/ -v
    ```
-   Unit tests live in the top-level `tests/` directory and cover pure functions in `utils`, `composition_balance`, `refinement_metrics`, `LLM_evaluation`, and `probability_of_interpretation` (e.g. `load_json`, `extract_project_number_from_filename`, `scaled_sigmoid`, `calculate_posterior_probability_of_interpretation`, `normalize_rwp`, `_infer_group_from_search`).
+   Unit tests live in the top-level `tests/` directory and cover pure functions in `utils`, `composition_balance`, `refinement_metrics`, `LLM_evaluation`, and `probability_of_interpretation`
 
 6. **API key for LLM**: Set your API key for the CBORG gateway (see [Environment Setup](#environment-setup) below).
 
@@ -158,14 +146,13 @@ Before running, ensure you have completed [Installation and environment](#instal
 The framework supports multiple datasets configured in `probability_of_interpretation.py`:
 
 ```python
-DATASETS = {
+    DATASETS = {
     "TRI": {
-        "csv": "../data/alab_synthesis_data/synthesis_TRI.csv",
-        "combos": "../data/xrd_data/combinations.json",
-        "interpretations": "../data/xrd_data/interpretations/interpretations_for_brier.json"
-    },
-    # ... other datasets
-}
+        "csv": "../data/xrd_data/synthesis_data.csv",
+        "combos": "../data/xrd_data/difractogram_paths.json",
+        "interpretations":"../data/xrd_data/interpretations/interpretations.json"
+        }
+   }
 ```
 
 ### Environment Setup
@@ -193,9 +180,21 @@ export API_KEY="your-api-key-here"
 - **Explanations**: Detailed reasoning for scores
 
 ### Final Output
-- **Prior Probability**: Combined chemical and LLM scores
-- **Posterior Probability**: Final probability after statistical weighting
+- **Posterior Intereprtation Probability**
+- **Phases Probability**
 - **Trust Score**: Flag for potentially unreliable interpretations
+
+## Notebooks
+
+This repository contains two main Jupyter notebooks:
+
+- **`AIF_example_workflow.ipynb`**  
+  An example / display notebook intended for inspecting results and visualizations.  
+  This notebook does **not** re-run the full workflow or make LLM/API calls.
+
+- **`AIF_run_workflow.ipynb`**  
+  The full workflow notebook used to re-run the analysis pipeline from scratch.  
+  This notebook requires proper environment configuration (e.g. setting `API_KEY`) and may take significant time to run.
 
 ## Example Output
 
@@ -240,20 +239,12 @@ interpretations = calculate_fit_quality(
 )
 ```
 
-## Testing
 
-Test scripts are available in `src/tests/`:
-- `compare_AIF_Dara_selections.py`: Compare AIF selections with expert selections
-- `check_if_AIF_selected_the_best.py`: Verify best interpretation selection
-- `rank_interpretations.py`: Rank interpretations by various metrics
-
-## Limitations
+## Requirements
 
 - Requires the **dara** package for XRD refinement and phase search; the code will not run without it.
 - Requires API access to LLM service (CBORG gateway)
-- Processing time scales with number of interpretations (typically 10-20 minutes per pattern)
-- Quality depends on completeness of synthesis metadata
-- LLM evaluation may vary slightly between runs (uses seed=42 for reproducibility)
+
 
 ## Citation
 
