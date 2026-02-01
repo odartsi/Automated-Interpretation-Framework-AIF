@@ -270,8 +270,8 @@ def main(pattern_path, chemical_system, target):
 
     start_time = time.time()
     cleanup_cifs()
-    # cod_database = ICSDDatabase()
-    cod_database = CODDatabase()
+    cod_database = ICSDDatabase()
+    # cod_database = CODDatabase()
     cod_database.get_cifs_by_chemsys(chemical_system, dest_dir="cifs") 
     all_cifs = list(Path("cifs").glob("*.cif"))
 

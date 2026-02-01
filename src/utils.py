@@ -886,34 +886,83 @@ def compute_trust_score_(
 
     return interpretations
 
+from typing import Dict, Any
+import numpy as np
 
 def compute_trust_score(
-    interpretations: dict,
+    interpretations: Dict[str, Dict[str, Any]],
     *,
-    llm_ref=0.41,
-    signal_ref=9000.0,
-    overshoot_ref=1200.0,
-    ratio_ref=15.0,
-    balance_ref=0.6,
-    peak_match_ref=0.6,
-    rwp_ref=15.0,
-    decimals=6,
-) -> dict:
-    """
-    Adds a 'trust_score' field to each interpretation, ranging from 0 (not trustworthy) to 1 (fully trustworthy),
-    based on 7 soft criteria (each penalty in [0,1], 0=good, 1=bad):
+    # Paper thresholds (your table) — set llm_ref=0.4 if you want to match it exactly
+    llm_ref: float = 0.4,
+    signal_ref: float = 9000.0,
+    overshoot_ref: float = 1200.0,
+    ratio_ref: float = 15.0,
+    balance_ref: float = 0.6,
+    peak_match_ref: float = 0.6,
+    rwp_ref: float = 15.0,
 
-        1) Low Signal:                 signal < signal_ref
-        2) High Background overshoot:  overshoot > overshoot_ref
-        3) Low signal/overshoot ratio: ratio < ratio_ref
-        4) Low LLM likelihood:         llm <= llm_ref
-        5) Low balance score:          balance < balance_ref
-        6) Low peak matching score:    normalized_score < peak_match_ref
-        7) High Rwp:                   rwp > rwp_ref
+    # "More strict" (weighted + soft) settings
+    temperature: float = 1.25,  # >1 softer, <1 stricter
+    llm_scale: float = 0.10,
+    signal_scale: float = 2000.0,
+    overshoot_scale: float = 300.0,
+    ratio_scale: float = 3.0,
+    balance_scale: float = 0.10,
+    peak_scale: float = 0.10,
+    rwp_scale: float = 5.0,
 
-    Trust score = 1 - average(penalties).
-    Keeps old behavior: missing fields default to "good" values; overshoot <= 0 gives 0 penalty for overshoot and ratio.
+    # weights (increase these for stricter penalization)
+    w_llm: float = 1.0,
+    w_signal: float = 1.0,
+    w_overshoot: float = 1.0,
+    w_ratio: float = 1.0,
+    w_balance: float = 1.0,
+    w_peak: float = 1.0,
+    w_rwp: float = 1.0,
+
+    decimals: int = 6,
+    verbose: bool = False,      # prints per-interpretation breakdown
+) -> Dict[str, Dict[str, Any]]:
     """
+    Replaces linear clipped penalties with a stricter weighted+soft version:
+
+      1) Convert each diagnostic into a soft "goodness" probability in [0,1]
+         using a sigmoid around its reference threshold.
+      2) Apply temperature scaling in logit space.
+      3) Convert to a penalty: pen = 1 - prob_temp
+      4) Aggregate with a weighted mean: trust = 1 - weighted_mean(penalties)
+
+    Keeps return style:
+      - interp["trust_score"]
+      - interp["pen_*"] and interp["comp_*"] for llm/signal/overshoot/ratio/balance/peak/rwp
+
+    Notes:
+      - As before, overshoot <= 0 -> ratio treated as "good" (no penalty).
+      - Missing metrics use your old "good defaults" unless parsing fails.
+    """
+
+    def _clip01(x: float) -> float:
+        return max(0.0, min(1.0, float(x)))
+
+    def _sigmoid(z: float) -> float:
+        # stable enough for typical ranges here
+        return float(1.0 / (1.0 + np.exp(-z)))
+
+    def _soft_high(x: float, thr: float, scale: float) -> float:
+        # high is good: x >= thr
+        return _sigmoid((x - thr) / max(scale, 1e-12))
+
+    def _soft_low(x: float, thr: float, scale: float) -> float:
+        # low is good: x <= thr
+        return _sigmoid((thr - x) / max(scale, 1e-12))
+
+    def _temp_scale_prob(p: float, temp: float) -> float:
+        # temperature scaling in logit space
+        eps = 1e-6
+        p = float(np.clip(p, eps, 1 - eps))
+        logit = np.log(p / (1 - p))
+        t = max(float(temp), 1e-6)
+        return float(1.0 / (1.0 + np.exp(-logit / t)))
 
     for key, interp in interpretations.items():
         try:
@@ -921,52 +970,104 @@ def compute_trust_score(
             signal = float(interp.get("signal_above_bkg_score", 10000.0))
             overshoot = float(interp.get("bkg_overshoot_score", 0.0))
             balance = float(interp.get("balance_score", 1.0))
-            score = float(interp.get("normalized_score", 1.0))  # peak match
+            peak = float(interp.get("normalized_score", 1.0))
             rwp = float(interp.get("rwp", 0.0))
         except (TypeError, ValueError):
             interp["trust_score"] = 0.0
+            for k in ["llm", "signal", "overshoot", "ratio", "balance", "peak", "rwp"]:
+                interp[f"pen_{k}"] = 1.0
+                interp[f"comp_{k}"] = 0.0
             continue
 
-        # 1) LLM likelihood (ideal >= llm_ref)
-        penalty_llm = max(0.0, min(1.0, (llm_ref - llm) / llm_ref))
-
-        # 2) Signal above background (ideal >= signal_ref)
-        penalty_signal = max(0.0, min(1.0, (signal_ref - signal) / signal_ref))
-
-        # 3) Background overshoot (ideal <= overshoot_ref)
-        penalty_overshoot = (
-            max(0.0, min(1.0, (overshoot - overshoot_ref) / overshoot_ref))
-            if overshoot > 0 else 0.0
-        )
-
-        # 4) Signal / overshoot ratio (ideal >= ratio_ref)
+        # ratio computed only if overshoot > 0 (keep your prior logic)
         if overshoot > 0:
             ratio = signal / overshoot
-            penalty_ratio = max(0.0, min(1.0, (ratio_ref - ratio) / ratio_ref))
         else:
-            penalty_ratio = 0.0  # keep old behavior
+            ratio = float("inf")
 
-        # 5) Balance score (ideal >= balance_ref)
-        penalty_balance = max(0.0, min(1.0, (balance_ref - balance) / balance_ref))
+        # Soft "goodness" probs
+        p_llm = _soft_high(llm, llm_ref, llm_scale)
+        p_signal = _soft_high(signal, signal_ref, signal_scale)
+        p_overshoot = _soft_low(overshoot, overshoot_ref, overshoot_scale)
+        p_ratio = _soft_high(ratio, ratio_ref, ratio_scale) if np.isfinite(ratio) else 1.0
+        p_balance = _soft_high(balance, balance_ref, balance_scale)
+        p_peak = _soft_high(peak, peak_match_ref, peak_scale)
+        p_rwp = _soft_low(rwp, rwp_ref, rwp_scale)
 
-        # 6) Peak match score (ideal >= peak_match_ref)  <-- now ALWAYS included
-        penalty_peak = max(0.0, min(1.0, (peak_match_ref - score) / peak_match_ref))
+        # Temperature-scaled probs
+        pt_llm = _temp_scale_prob(p_llm, temperature)
+        pt_signal = _temp_scale_prob(p_signal, temperature)
+        pt_overshoot = _temp_scale_prob(p_overshoot, temperature)
+        pt_ratio = _temp_scale_prob(p_ratio, temperature)
+        pt_balance = _temp_scale_prob(p_balance, temperature)
+        pt_peak = _temp_scale_prob(p_peak, temperature)
+        pt_rwp = _temp_scale_prob(p_rwp, temperature)
 
-        # 7) Rwp (ideal <= rwp_ref; penalize only if rwp > rwp_ref)
-        # linear: rwp_ref -> 0, 2*rwp_ref -> 1 (clipped)
-        penalty_rwp = max(0.0, min(1.0, (rwp - rwp_ref) / rwp_ref))
+        # Penalties are 1 - prob
+        pen_llm = _clip01(1.0 - pt_llm)
+        pen_signal = _clip01(1.0 - pt_signal)
+        pen_overshoot = _clip01(1.0 - pt_overshoot)
+        pen_ratio = _clip01(1.0 - pt_ratio)
+        pen_balance = _clip01(1.0 - pt_balance)
+        pen_peak = _clip01(1.0 - pt_peak)
+        pen_rwp = _clip01(1.0 - pt_rwp)
 
-        total_penalty = (
-            penalty_llm
-            + penalty_signal
-            + penalty_overshoot
-            + penalty_ratio
-            + penalty_balance
-            + penalty_peak
-            + penalty_rwp
-        ) / 7.0
+        penalties = {
+            "llm": pen_llm,
+            "signal": pen_signal,
+            "overshoot": pen_overshoot,
+            "ratio": pen_ratio,
+            "balance": pen_balance,
+            "peak": pen_peak,
+            "rwp": pen_rwp,
+        }
 
-        interp["trust_score"] = round(max(0.0, 1.0 - total_penalty), decimals)
+        weights = {
+            "llm": w_llm,
+            "signal": w_signal,
+            "overshoot": w_overshoot,
+            "ratio": w_ratio,
+            "balance": w_balance,
+            "peak": w_peak,
+            "rwp": w_rwp,
+        }
+
+        w_sum = float(sum(weights.values()))
+        if w_sum <= 0:
+            # fallback to unweighted mean if someone passes all weights=0
+            total_penalty = float(np.mean(list(penalties.values())))
+        else:
+            total_penalty = float(
+                sum(weights[n] * penalties[n] for n in penalties.keys()) / w_sum
+            )
+
+        trust = max(0.0, 1.0 - total_penalty)
+        interp["trust_score"] = round(trust, decimals)
+
+        # Store penalties + components (same style you had)
+        for name, pen in penalties.items():
+            interp[f"pen_{name}"] = round(pen, decimals)
+            interp[f"comp_{name}"] = round(1.0 - pen, decimals)
+
+        if verbose:
+            print("\n" + "=" * 90)
+            print(f"Interpretation: {key}  | trust_score = {interp['trust_score']:.6f}")
+            print(f"{'metric':12s} | {'value':>12s} | {'soft_p':>7s} | {'temp_p':>7s} | {'pen':>7s} | {'w':>5s}")
+            print("-" * 90)
+            rows = [
+                ("llm", llm, p_llm, pt_llm, pen_llm, w_llm),
+                ("signal", signal, p_signal, pt_signal, pen_signal, w_signal),
+                ("overshoot", overshoot, p_overshoot, pt_overshoot, pen_overshoot, w_overshoot),
+                ("ratio", ratio, p_ratio, pt_ratio, pen_ratio, w_ratio),
+                ("balance", balance, p_balance, pt_balance, pen_balance, w_balance),
+                ("peak", peak, p_peak, pt_peak, pen_peak, w_peak),
+                ("rwp", rwp, p_rwp, pt_rwp, pen_rwp, w_rwp),
+            ]
+            for n, v, p, pt, pen, w in rows:
+                v_str = f"{v:12.4f}" if np.isfinite(v) else f"{str(v):>12s}"
+                print(f"{n:12s} | {v_str} | {p:7.3f} | {pt:7.3f} | {pen:7.3f} | {w:5.2f}")
+            print("-" * 90)
+            print(f"Total weighted penalty = {total_penalty:.4f}  (temperature={temperature})")
 
     return interpretations
 
