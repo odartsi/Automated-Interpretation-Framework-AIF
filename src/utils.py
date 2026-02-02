@@ -14,7 +14,8 @@ import plotly.graph_objects as go
 from dara.result import RefinementResult
 import matplotlib.patches as mpatches
 from scipy.ndimage import minimum_filter1d
-
+from typing import Dict, Any
+import numpy as np
 
 def load_json(path):
     """Load JSON from a file path; raises FileNotFoundError if the file is missing."""
@@ -800,94 +801,6 @@ def flag_interpretation_trustworthiness(
 
     return interpretations
 
-def compute_trust_score_(
-    interpretations: dict,
-    *,
-    llm_ref=0.41,
-    signal_ref=9000.0,
-    overshoot_ref=1200.0,
-    ratio_ref=15.0,
-    balance_ref=0.6,
-    rwp_ref=15.0,             
-    include_peak_match=False,  
-    peak_match_ref=0.6,
-    decimals=6
-) -> dict:
-    """
-    Adds interp['trust_score'] in [0,1] using soft penalties.
-
-    Criteria (penalty in [0,1], 0=good, 1=bad):
-      1) LLM likelihood: ideal >= llm_ref
-      2) Signal above background: ideal >= signal_ref
-      3) Background overshoot: ideal <= overshoot_ref
-      4) Signal/overshoot ratio: ideal >= ratio_ref
-      5) Balance score: ideal >= balance_ref
-      6) Rwp: ideal <= rwp_ref   (penalize only if rwp > rwp_ref)
-
-    Optionally add peak match (normalized_score) as an extra criterion if include_peak_match=True.
-
-    Trust score = 1 - mean(penalties).
-    """
-
-    for key, interp in interpretations.items():
-        try:
-            llm = float(interp.get("LLM_interpretation_likelihood", 1.0))
-            signal = float(interp.get("signal_above_bkg_score", 10000.0))
-            overshoot = float(interp.get("bkg_overshoot_score", 0.0))
-            balance = float(interp.get("balance_score", 1.0))
-            rwp = float(interp.get("rwp", 0.0))  # NEW
-            score = float(interp.get("normalized_score", 1.0))  # parsed for optional use
-        except (TypeError, ValueError):
-            interp["trust_score"] = 0.0
-            continue
-
-        # 1) LLM likelihood (ideal >= llm_ref)
-        penalty_llm = max(0.0, min(1.0, (llm_ref - llm) / llm_ref))
-
-        # 2) Signal above background (ideal >= signal_ref)
-        penalty_signal = max(0.0, min(1.0, (signal_ref - signal) / signal_ref))
-
-        # 3) Background overshoot (ideal <= overshoot_ref)
-        penalty_overshoot = (
-            max(0.0, min(1.0, (overshoot - overshoot_ref) / overshoot_ref))
-            if overshoot > 0 else 0.0
-        )
-
-        # 4) Signal / overshoot ratio (ideal >= ratio_ref)
-        if overshoot > 0:
-            ratio = signal / overshoot
-            penalty_ratio = max(0.0, min(1.0, (ratio_ref - ratio) / ratio_ref))
-        else:
-            penalty_ratio = 0.0  # no penalty if overshoot is 0
-
-        # 5) Balance score (ideal >= balance_ref)
-        penalty_balance = max(0.0, min(1.0, (balance_ref - balance) / balance_ref))
-
-        # 6) Rwp (ideal <= rwp_ref)  <-- NEW
-        # scale linearly: at rwp_ref => 0; at 2*rwp_ref => 1; above that clipped to 1
-        penalty_rwp = max(0.0, min(1.0, (rwp - rwp_ref) / rwp_ref))
-
-        penalties = [
-            penalty_llm,
-            penalty_signal,
-            penalty_overshoot,
-            penalty_ratio,
-            penalty_balance,
-            penalty_rwp,
-        ]
-
-        # Optional: Peak match score (ideal >= peak_match_ref)
-        if include_peak_match:
-            penalty_peak = max(0.0, min(1.0, (peak_match_ref - score) / peak_match_ref))
-            penalties.append(penalty_peak)
-
-        total_penalty = float(np.mean(penalties))
-        interp["trust_score"] = round(max(0.0, 1.0 - total_penalty), decimals)
-
-    return interpretations
-
-from typing import Dict, Any
-import numpy as np
 
 def compute_trust_score(
     interpretations: Dict[str, Dict[str, Any]],
