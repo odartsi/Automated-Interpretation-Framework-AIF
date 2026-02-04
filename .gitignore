@@ -20,9 +20,6 @@ src/*.txt
 src/*.html
 notebooks/data/
 notebooks/example_output/
-*.xrdml
-*.json
-*.xy
 *.txt
 *.html
 *.png
