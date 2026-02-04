@@ -1,0 +1,388 @@
+
+Instructions:
+
+**Phase Likelihood Scoring:**
+- Score each **individual phase** from 0 to 1 (likelihood it has formed under the synthesis conditions).
+- Penalize polymorphs that are not stable at the synthesis temperature (e.g., low-T polymorphs at high T), but do **not assign 0** unless they are physically implausible or thermodynamically forbidden.
+- If a polymorph is less stable but still possible due to mechanisms such as kinetic trapping or low synthesis duration, assign reduced likelihood (e.g., 0.5).
+- If a phase is a known precursor or may remain unreacted, assign moderate likelihood (e.g., 0.4–0.6). If it is particularly inert under these conditions, assign higher (0.7–0.8).
+- If a phase is physically implausible (e.g., CO as a solid, a gas-phase species, or a high-energy transient), assign near-zero likelihood (0.0–0.1). This should always be penalized more than plausible phases.
+
+**Interpretation Likelihood (overall):**
+- This is **not an average** of individual phase likelihoods.
+- Score the overall interpretation based on the **compatibility, plausibility, and completeness** of the phase set as a whole.
+- If a phase is implausible, penalize the overall interpretation likelihood significantly.
+- If likely phases are **missing**, reduce the interpretation likelihood even if the present phases are individually plausible. For example, if only one phase is present but synthesis conditions suggest a multiphase product, reduce the score accordingly.
+- Respect the reported weight fractions when considering importance or impact on interpretation. Phases with higher weight fractions must contribute proportionally more to the interpretation likelihood — especially if their individual phase likelihood is low, they should heavily penalize the interpretation.
+- Take into account on how likely is an interpretation the composition balance.
+
+**Phase and Interpretation Likelihoods – Critical Rule:**
+- When scoring or evaluating phase likelihoods, judge based on the approximately equal to identity, not the formula label.
+- Phases with the same "approximately equal to" must be assigned the same phase likelihood, regardless of their formula or how they appear across interpretations.
+- Do not penalize complex or unusual formulas if their "approximately equal to" matches a known plausible phase.
+- When evaluating interpretation plausibility, consider the combined presence and total weight of all phases with the same approximately equal to identity.
+
+**Completeness Check – Requirement:**
+- Penalize interpretations that **omit plausible or expected phases** based on the synthesis conditions, but do **not assign 0** unless they are physically implausible or thermodynamically forbidden.
+- Penalize single-phase interpretations if other by-products, unreacted precursors, or side products would also be expected under the conditions.
+- If the list is incomplete (e.g., missing likely by-products or unreacted precursors), apply a modest penalty depending on severity.
+
+**Explanation Requirements:**
+- For **each phase**, provide:
+    1. A list of reasons / factors for a reduced likelihood score, along with the strength of each factor.
+    2. For example, if the **polymorph** is less favorable, explain **how much** this affects its likelihood (not just that it’s less stable). Use labels where appropriate to classify polymorphs as:
+    - **Ground-state**
+    - **Metastable**
+    - **Kinetically trapped**
+    - **Unknown/ambiguous**
+    3. Use temperature, redox potential, and kinetics to justify likelihood numerically where possible. For example, provide rationales for whether a particular oxidation state in the product might form given starting precursors and reaction conditions. Consider whether anion groups such as carbonates are likely to decompose or be retained.
+
+
+**Stability Reminder (important):**
+- Do NOT allow the same interpretation to vary significantly in likelihood across runs.
+- Use deterministic logic, synthesis rules, and known reaction windows to ground your scoring.
+
+
+**When synthesis fields are nan (unspecified)**
+- Treat missing fields as unknown; do not invent temperatures, atmospheres, durations, or precursors.
+- Base phase and interpretation judgments on general plausibility (common solid phases, mutual chemical compatibility, reported weight fractions, and labeled identities), not on specific condition thresholds.
+- Avoid hard penalties that depend on the missing field(s). If a judgment would require that field (e.g., “high-T only”), express uncertainty instead of penalizing strongly.
+- You may infer a broad regime from coexisting phases (e.g., reduced vs. oxidized), but state that this is an assumption and keep the reasoning qualitative.
+- Always acknowledge the unknowns in the explanation (e.g., “Temperature and atmosphere unspecified; evaluated on general plausibility and phase compatibility.”).
+- Still respect reported weight fractions: large fractions of questionable phases should reduce the overall interpretation plausibility more than trace amounts.
+- Never treat gas-phase species or non-crystalline entities as valid solid phases, even if other fields are unknown.
+
+Finally, remember that these phase interpretations are from x-ray diffraction measurements and therefore correspond to solid-phase crystalline materials. Glassy materials or gas phase species will not be included in the interpretation.
+
+
+**Do not** confuse gas-phase species (e.g., CO, O₂) with solid phases — disqualify them appropriately.
+Format your response as a dictionary where each interpretation key maps to a nested dictionary with:
+- "Likelihoods": {{phase: value}}
+- "Explanations": {{phase: explanation}}
+- "Interpretation_Likelihood": float
+- "Interpretation_Explanation": str
+
+The following examples are provided for demonstration purposes:
+
+- Example 1:
+Solid state synthesis: gram-quantity precursors are mixed and heated in a furnace.
+Target: ZrTiO4  
+Precursors: ZrO2, TiO2  
+Temperature: 1273.15 K (1000°C)  
+Dwell Duration: 4.0 hours  
+Furnace: Box furnace with ambient air
+
+Interpretations:
+- I_1: ZrTiO4 (space group 18, weight fraction 80.00%, fractional_composition = {'Zr': 0.1667, 'Ti': 0.1667, 'O': 0.6667}, approximately equal to ZrTiO4), ZrO2 (space group 14, weight fraction 5.00%, fractional_composition = {'Zr': 0.3333, 'O': 0.6667}, approximately equal to ZrO2), TiO2 (space group 141, weight fraction 6.00%, fractional_composition = {'Ti': 0.3333, 'O': 0.6667}, approximately equal to TiO2), Al2TiO5 (space group 63, weight fraction 9.00%, fractional_composition = {'Al': 0.25, 'Ti': 0.125, 'O': 0.625}, approximately equal to Al2TiO5)
+- I_2: ZrTiO4 (space group 60, weight fraction 80.00%, fractional_composition = {'Zr': 0.1667, 'Ti': 0.1667, 'O': 0.6667}, approximately equal to ZrTiO4), ZrO2 (space group 14, weight fraction 20.00%, fractional_composition = {'Zr': 0.3333, 'O': 0.6667}, approximately equal to ZrO2)
+- I_3: ZrTi2O6 (space group 14, weight fraction 85.00%, fractional_composition = {'Zr': 0.1111, 'Ti': 0.2222, 'O': 0.6667}, approximately equal to ZrTi2O6), TiO2 (space group 136, weight fraction 15.00%, fractional_composition = {'Ti': 0.3333, 'O': 0.6667}, approximately equal to TiO2)
+
+Composition balance scores:
+- I_1: 0.940
+- I_2: 0.900
+- I_3: 0.783
+
+
+Expected likelihoods and explanations:
+{
+"I_1": {
+    "Likelihoods": {
+    "ZrTiO4 (space group 18)": 0.4,
+    "ZrO2 (space group 14)": 0.85,
+    "TiO2 (space group 141)": 0.2,
+    "Al2TiO5 (space group 63)": 0.6
+    },
+    "Explanations": {
+    "ZrTiO4 (space group 18)": "Space group 18 (P2₁) is not the correct structure for ZrTiO₄ under high-temperature solid-state synthesis. The accepted structure is orthorhombic Pbcn (SG 60). Use of SG 18 suggests a misidentified or distorted variant.",
+    "ZrO2 (space group 14)": "Monoclinic ZrO₂ (P2₁/c, SG 14) is the correct and stable phase at 1000 °C. Likely present as unreacted precursor or due to Zr-rich stoichiometry.",
+    "TiO2 (space group 141)": "Anatase (I4₁/amd, SG 141) transforms to rutile >600–800 °C. At 1000 °C, rutile (SG 136) should dominate. Anatase is not expected unless kinetically trapped.",
+    "Al2TiO5 (space group 63)": "Tialite (Cmcm, SG 63) forms from TiO₂ and Al₂O₃ at high temperatures. Likely present due to Al contamination from crucibles or milling."
+    },
+    "Interpretation_Likelihood": 0.50,
+    "Interpretation_Explanation": "Incorrect space group for ZrTiO₄ and implausible persistence of anatase TiO₂ reduce the credibility of this interpretation, though ZrO₂ and Al₂TiO₅ are chemically consistent with moderate weight fractions."
+},
+
+"I_2": {
+    "Likelihoods": {
+    "ZrTiO4 (space group 60)": 0.95,
+    "ZrO2 (space group 14)": 0.85
+    },
+    "Explanations": {
+    "ZrTiO4 (space group 60)": "Pbcn (SG 60) is the correct and well-established structure for disordered high-T ZrTiO₄. Its formation is expected at 1000 °C.",
+    "ZrO2 (space group 14)": "Residual monoclinic ZrO₂ is plausible as a remnant precursor, especially with a slight excess or incomplete reaction. 20% weight is reasonable."
+    },
+    "Interpretation_Likelihood": 0.93,
+    "Interpretation_Explanation": "This is the most plausible interpretation: ZrTiO₄ is in its correct ground-state structure, and unreacted ZrO₂ is expected. The interpretation aligns well with the synthesis conditions and stoichiometry."
+},
+
+"I_3": {
+    "Likelihoods": {
+    "ZrTi2O6 (space group 14)": 0.3,
+    "TiO2 (space group 136)": 0.9
+    },
+    "Explanations": {
+    "ZrTi2O6 (space group 14)": "ZrTi₂O₆ is a Ti-rich phase, unlikely to form under 1:1 Zr:Ti stoichiometry. SG 14 is also uncommon for this compound; Pbcn or other orthorhombic settings are more appropriate.",
+    "TiO2 (space group 136)": "Rutile (SG 136) is the correct high-temperature TiO₂ polymorph and expected to persist if Ti is in excess or unreacted."
+    },
+    "Interpretation_Likelihood": 0.45,
+    "Interpretation_Explanation": "The inclusion of a Ti-rich phase (ZrTi₂O₆) makes this interpretation unlikely from the given precursors. Although rutile is plausible, the overall composition deviates from expected reaction products."
+}
+}
+
+- Example 2:
+Solid state synthesis: gram-quantity precursors are mixed and heated in a furnace.
+Target: NaMnO2
+Precursors: Na2CO3, MnO2
+Temperature: 1143.15 K (870 °C)
+Dwell Duration: 10.0 hours
+Furnace: Box furnace with ambient air
+
+Interpretations:
+- I_1: NaMnO2 (space group 12, weight fraction 80.00%, fractional_composition = {'Na': 0.25, 'Mn': 0.25, 'O': 0.5}, approximately equal to NaMnO2), Mn2O3 (space group 206, weight fraction 20.00%, fractional_composition = {'Mn': 0.4, 'O': 0.6}, approximately equal to Mn2O3)
+- I_2: NaMnO2 (space group 14, weight fraction 90.00%, fractional_composition = {'Na': 0.25, 'Mn': 0.25, 'O': 0.5}, approximately equal to NaMnO2), Mn2O3 (space group 206, weight fraction 10.00%, fractional_composition = {'Mn': 0.4, 'O': 0.6}, approximately equal to Mn2O3)
+- I_3: NaMnO2 (space group 166, weight fraction 70.00%, fractional_composition = {'Na': 0.25, 'Mn': 0.25, 'O': 0.5}, approximately equal to NaMnO2), Na4Mn9O18 (space group 12, weight fraction 30.00%, fractional_composition = {'Na': 0.129, 'Mn': 0.2903, 'O': 0.5806}, approximately equal to Na2Mn5O9)
+
+Composition balance scores:
+- I_1: 0.900
+- I_2: 0.950
+- I_3: 0.942
+
+
+Expected likelihoods and explanations:
+{
+"I_1": {
+    "Likelihoods": {
+    "NaMnO2 (space group 12)": 0.95,
+    "Mn2O3 (space group 206)": 0.75
+    },
+    "Explanations": {
+    "NaMnO2 (space group 12)": "C2/m (SG 12) is the accepted high-temperature polymorph of NaMnO₂ (O'3-type). It is thermodynamically stable at ~870 °C in air and expected to be the dominant phase from solid-state synthesis using Na₂CO₃ and MnO₂.",
+    "Mn2O3 (space group 206)": "Mn₂O₃ (Ia-3, SG 206) is a plausible secondary phase, forming from excess or unreacted MnO₂ under oxidizing conditions. Its presence at 20% is reasonable in slightly Na-deficient or incomplete reactions."
+    },
+    "Interpretation_Likelihood": 0.94,
+    "Interpretation_Explanation": "This interpretation uses the correct NaMnO₂ structure and includes a reasonable by-product. The phase set is chemically consistent, matches synthesis conditions, and aligns with the high composition balance score."
+},
+
+"I_2": {
+    "Likelihoods": {
+    "NaMnO2 (space group 14)": 0.4,
+    "Mn2O3 (space group 206)": 0.75
+    },
+    "Explanations": {
+    "NaMnO2 (space group 14)": "P2₁/c (SG 14) is not the typical polymorph for NaMnO₂ formed via solid-state reaction. This structure is associated with metastable or tunnel-type forms seen in low-T/hydrothermal methods. Its presence at 90% is unlikely under the given conditions.",
+    "Mn2O3 (space group 206)": "As above, Mn₂O₃ is reasonable as a side product. Its 10% weight is modest and plausible."
+    },
+    "Interpretation_Likelihood": 0.50,
+    "Interpretation_Explanation": "Despite a strong balance score, the dominant NaMnO₂ polymorph is inconsistent with the synthesis temperature and conditions, reducing overall credibility."
+},
+
+"I_3": {
+    "Likelihoods": {
+    "NaMnO2 (space group 166)": 0.6,
+    "Na4Mn9O18 (space group 12)": 0.2
+    },
+    "Explanations": {
+    "NaMnO2 (space group 166)": "R-3m (SG 166) corresponds to the O3-type layered polymorph. It can occur under soft chemistry or electrochemical methods but is less stable than C2/m under high-T solid-state conditions. 70% is on the high side, but not impossible.",
+    "Na4Mn9O18 (space group 12)": "This tunnel phase forms under ion-exchange or hydrothermal synthesis. Its formation at 870 °C in solid-state air synthesis is highly unlikely, especially at 30% weight fraction."
+    },
+    "Interpretation_Likelihood": 0.40,
+    "Interpretation_Explanation": "The inclusion of Na₄Mn₉O₁₈ significantly lowers the plausibility of this interpretation. Although NaMnO₂ R-3m is known, it is not the most stable under these synthesis conditions. Good balance score, but the phase set is not realistic."
+}
+}
+
+- Example 3:
+Solid state synthesis: gram-quantity precursors are mixed and heated in a furnace.
+Target: MgFe2O4
+Precursors: Fe2O3, MgO
+Temperature: 973.15 K (700 °C)
+Dwell Duration: 12.0 hours
+Furnace: Box furnace with ambient air
+
+Interpretations:
+- I_1: MgFe2O4 (space group 62, weight fraction 80.00%, fractional_composition = {'Mg': 0.1429, 'Fe': 0.2857, 'O': 0.5714}, approximately equal to MgFe2O4), Fe2O3 (space group 74, weight fraction 15.00%, fractional_composition = {'Fe': 0.4, 'O': 0.6}, approximately equal to Fe2O3), Fe (space group 225, weight fraction 5.00%, fractional_composition = {'Fe': 1.0}, approximately equal to Fe)
+- I_2: MgFe2O4 (space group 227, weight fraction 85.00%, fractional_composition = {'Mg': 0.1429, 'Fe': 0.2857, 'O': 0.5714}, approximately equal to MgFe2O4), Fe2O3 (space group 167, weight fraction 5.00%, fractional_composition = {'Fe': 0.4, 'O': 0.6}, approximately equal to Fe2O3), MgO (space group 225, weight fraction 5.00%, fractional_composition = {'Mg': 0.5, 'O': 0.5}, approximately equal to MgO), Fe (space group 229, weight fraction 5.00%, fractional_composition = {'Fe': 1.0}, approximately equal to Fe)
+- I_3: MgFe2O4 (space group 227, weight fraction 98.00%, fractional_composition = {'Mg': 0.1429, 'Fe': 0.2857, 'O': 0.5714}, approximately equal to MgFe2O4), Fe (space group 225, weight fraction 2.00%, fractional_composition = {'Fe': 1.0}, approximately equal to Fe)
+
+Composition balance scores:
+- I_1: 0.934
+- I_2: 1.000
+- I_3: 0.994
+
+
+Expected likelihoods and explanations:
+{
+"I_1": {
+    "Likelihoods": {
+    "MgFe2O4 (space group 62)": 0.5,
+    "Fe2O3 (space group 74)": 0.3,
+    "Fe (space group 225)": 0.05
+    },
+    "Explanations": {
+    "MgFe2O4 (space group 62)": "Pnma (SG 62) is not the commonly stable spinel structure for MgFe₂O₄. Fd-3m (SG 227) is expected under these synthesis conditions. This may indicate a misassignment or distortion.",
+    "Fe2O3 (space group 74)": "SG 74 (Pbnm) is not a known stable form for Fe₂O₃. The expected polymorph is hematite (SG 167). Thus, this assignment is chemically questionable.",
+    "Fe (space group 225)": "Metallic Fe (SG 225) is not stable in oxidizing environments like ambient air at 700 °C. It should oxidize to Fe₂O₃ or remain absent."
+    },
+    "Interpretation_Likelihood": 0.30,
+    "Interpretation_Explanation": "Despite a good composition balance, this interpretation includes questionable polymorphs and an implausible metallic Fe phase, reducing overall confidence."
+},
+
+"I_2": {
+    "Likelihoods": {
+    "MgFe2O4 (space group 227)": 0.95,
+    "Fe2O3 (space group 167)": 0.9,
+    "MgO (space group 225)": 0.8,
+    "Fe (space group 229)": 0.05
+    },
+    "Explanations": {
+    "MgFe2O4 (space group 227)": "Fd-3m (SG 227) is the correct and thermodynamically stable structure for MgFe₂O₄ spinel. Formation is expected at 700 °C in air.",
+    "Fe2O3 (space group 167)": "Hematite (SG 167) is the correct and stable Fe₂O₃ polymorph under these conditions. A small residual amount is realistic.",
+    "MgO (space group 225)": "Stable, inert oxide that may persist as a minor unreacted phase in Mg-rich or incompletely reacted systems.",
+    "Fe (space group 229)": "Im-3m metallic Fe is unlikely to form or persist under oxidizing conditions; its inclusion is inconsistent with the synthesis atmosphere."
+    },
+    "Interpretation_Likelihood": 0.70,
+    "Interpretation_Explanation": "This interpretation includes three plausible phases with realistic weight fractions. Metallic Fe remains the only implausible component, slightly lowering the overall score despite a perfect composition balance."
+},
+
+"I_3": {
+    "Likelihoods": {
+    "MgFe2O4 (space group 227)": 0.95,
+    "Fe (space group 225)": 0.05
+    },
+    "Explanations": {
+    "MgFe2O4 (space group 227)": "This is the expected spinel structure for MgFe₂O₄ at 700 °C in air, and it dominates the phase composition. The weight fraction is consistent with nearly complete reaction.",
+    "Fe (space group 225)": "As in other cases, metallic Fe is not expected to survive under oxidizing conditions. Its presence is questionable but minimally weighted."
+    },
+    "Interpretation_Likelihood": 0.80,
+    "Interpretation_Explanation": "This interpretation has high chemical plausibility due to correct phase identification and a very low amount of metallic Fe, which is the only questionable component. Excellent composition balance reinforces its credibility."
+}
+}
+
+- Example 4:
+Solid state synthesis: gram-quantity precursors are mixed and heated in a furnace.
+Target: Ti3O5  
+Precursors: TiO2, C7H6O2  
+Temperature: 1523.15 K (1250°C)  
+Dwell Duration: 4.0 hours  
+Furnace: Tube furnace with flowing Argon (flow rate unknown)
+
+Interpretations:
+- I_1: Ti3O5 (space group 12, weight fraction 98.00%, fractional_composition = {'Ti': 0.375, 'O': 0.625}, approximately equal to Ti3O5), Ti2O3 (space group 167, weight fraction 2.00%, fractional_composition = {'Ti': 0.4, 'O': 0.6}, approximately equal to Ti2O3)
+- I_2: TiO (space group 225, weight fraction 20.00%, fractional_composition = {'Ti': 0.5, 'O': 0.5}, approximately equal to TiO), TiC (space group 225, weight fraction 35.00%, fractional_composition = {'Ti': 0.5, 'C': 0.5}, approximately equal to TiC), Ti3O5 (space group 12, weight fraction 45.00%, fractional_composition = {'Ti': 0.375, 'O': 0.625}, approximately equal to Ti3O5)
+- I_3: Ti3O5 (space group 15, weight fraction 70.00%, fractional_composition = {'Ti': 0.375, 'O': 0.625}, approximately equal to Ti3O5), Ti4O7 (space group 2, weight fraction 30.00%, fractional_composition = {'Ti': 0.3636, 'O': 0.6364}, approximately equal to Ti4O7)
+
+Composition balance scores:
+- I_1: 1.000
+- I_2: 1.000
+- I_3: 1.000
+
+
+Expected likelihoods and explanations:
+{
+"I_1": {
+    "Likelihoods": {
+    "Ti3O5 (space group 12)": 0.95,
+    "Ti2O3 (space group 167)": 0.6
+    },
+    "Explanations": {
+    "Ti3O5 (space group 12)": "P2₁/c (SG 12) is a well-characterized high-temperature polymorph of Ti₃O₅, especially under reducing atmospheres. Its formation at 1250 °C is highly plausible.",
+    "Ti2O3 (space group 167)": "R-3c Ti₂O₃ is a known reduced titanium oxide and may form in small amounts if reduction proceeds further than Ti₃O₅. Its 2% weight fraction is minor but chemically plausible under C-rich conditions."
+    },
+    "Interpretation_Likelihood": 0.94,
+    "Interpretation_Explanation": "A chemically coherent and structurally reasonable interpretation: the dominant Ti₃O₅ polymorph and a small amount of Ti₂O₃ are consistent with reducing synthesis in Ar and near-stoichiometric control."
+},
+
+"I_2": {
+    "Likelihoods": {
+    "TiO (space group 225)": 0.5,
+    "TiC (space group 225)": 0.35,
+    "Ti3O5 (space group 12)": 0.95
+    },
+    "Explanations": {
+    "TiO (space group 225)": "Rock salt TiO forms under very strong reducing conditions, requiring high oxygen deficiency. At 1250 °C with C₇H₆O₂, it's possible but 20% is moderately high unless carbon excess is substantial.",
+    "TiC (space group 225)": "TiC may form from carbothermal reduction if significant free carbon remains. 35% is only plausible if there is excess reductant and the system is oxygen-deficient.",
+    "Ti3O5 (space group 12)": "Same as I_1 — P2₁/c Ti₃O₅ is expected under these synthesis conditions."
+    },
+    "Interpretation_Likelihood": 0.78,
+    "Interpretation_Explanation": "This interpretation includes reasonable phases, but the high combined weight of TiC and TiO (55%) requires unusually reducing conditions. If that level of reduction occurred, the presence of Ti₃O₅ would likely be suppressed."
+},
+
+"I_3": {
+    "Likelihoods": {
+    "Ti3O5 (space group 15)": 0.6,
+    "Ti4O7 (space group 2)": 0.85
+    },
+    "Explanations": {
+    "Ti3O5 (space group 15)": "C2/c (SG 15) is less commonly reported for Ti₃O₅ and may reflect a metastable or less favorable polymorph. 70% is optimistic unless there is specific evidence for this variant.",
+    "Ti4O7 (space group 2)": "Ti₄O₇ is a Magnéli phase that forms under reducing conditions and high temperatures. 30% is plausible, especially if reduction proceeded slightly beyond Ti₃O₅."
+    },
+    "Interpretation_Likelihood": 0.76,
+    "Interpretation_Explanation": "This interpretation includes well-known reduced phases consistent with the synthesis conditions, but the dominant Ti₃O₅ polymorph is questionable. Ti₄O₇ formation is plausible, especially in carbon-rich environments."
+}
+}
+
+- Example 5:
+Solid state synthesis: gram-quantity precursors are mixed and heated in a furnace.
+Target: NiFe2O4  
+Precursors: NiO, Fe2O3  
+Temperature: 1623.15 K (1350°C)  
+Dwell Duration: 6.0 hours  
+Furnace: Box furnace with ambient air
+
+Interpretations:
+- I_1: NiFe2O4 (space group 227, weight fraction 20.00%, fractional_composition = {'Ni': 0.1429, 'Fe': 0.2857, 'O': 0.5714}, approximately equal to NiFe2O4), MgFeAlO4 (space group 227, weight fraction 2.00%, fractional_composition = {'Mg': 0.1429, 'Fe': 0.1429, 'Al': 0.1429, 'O': 0.5714}, approximately equal to MgFeAlO4), MgFe2O4 (space group 227, weight fraction 30.00%, fractional_composition = {'Mg': 0.1429, 'Fe': 0.2857, 'O': 0.5714}, approximately equal to MgFe2O4), Fe2SiO4 (space group 62, weight fraction 48.00%, fractional_composition = {'Fe': 0.2857, 'Si': 0.1429, 'O': 0.5714}, approximately equal to Fe2SiO4)
+- I_2: NiFe2O4 (space group 227, weight fraction 90.00%, fractional_composition = {'Ni': 0.1429, 'Fe': 0.2857, 'O': 0.5714}, approximately equal to NiFe2O4), NiO (space group 225, weight fraction 10.00%, fractional_composition = {'Ni': 0.5, 'O': 0.5}, approximately equal to NiO)
+- I_3: NiFe2O4 (space group 227, weight fraction 70.00%, fractional_composition = {'Ni': 0.1429, 'Fe': 0.2857, 'O': 0.5714}, approximately equal to NiFe2O4), Fe2O3 (space group 167, weight fraction 20.00%, fractional_composition = {'Fe': 0.4, 'O': 0.6}, approximately equal to Fe2O3), NiO (space group 225, weight fraction 10.00%, fractional_composition = {'Ni': 0.5, 'O': 0.5}, approximately equal to NiO)
+
+Composition balance scores:
+- I_1: 0.727
+- I_2: 0.933
+- I_3: 1.000
+
+
+Expected likelihoods and explanations:
+{
+"I_1": {
+    "Likelihoods": {
+    "NiFe2O4 (space group 227)": 0.9,
+    "MgFeAlO4 (space group 227)": 0.05,
+    "MgFe2O4 (space group 227)": 0.1,
+    "Fe2SiO4 (space group 62)": 0.05
+    },
+    "Explanations": {
+    "NiFe2O4 (space group 227)": "The normal spinel phase (Fd-3m, SG 227) is the ground-state structure of NiFe₂O₄ and is expected to form under the synthesis conditions. However, the very low weight fraction (20%) is not consistent with targeting this as the main product.",
+    "MgFeAlO4 (space group 227)": "Unlikely unless contamination from alumina crucibles or grinding media occurred. 2% is trace-level and marginally plausible, but should be flagged.",
+    "MgFe2O4 (space group 227)": "Magnesium ferrite is plausible only with Mg contamination. A 30% presence implies major contamination, which is not expected given the listed precursors.",
+    "Fe2SiO4 (space group 62)": "This olivine phase implies significant Si contamination, likely from the crucible or environment. A 48% weight fraction is chemically inconsistent with the expected products."
+    },
+    "Interpretation_Likelihood": 0.05,
+    "Interpretation_Explanation": "Although NiFe₂O₄ is present, its low weight fraction and the dominance of unlikely or contaminant phases make this interpretation implausible. Most of the composition is inconsistent with the synthesis target."
+},
+
+"I_2": {
+    "Likelihoods": {
+    "NiFe2O4 (space group 227)": 0.95,
+    "NiO (space group 225)": 0.6
+    },
+    "Explanations": {
+    "NiFe2O4 (space group 227)": "This is the correct and stable spinel structure for NiFe₂O₄ and is expected to form under high-temperature conditions in air. A 90% yield is consistent with near-complete reaction.",
+    "NiO (space group 225)": "NiO is a precursor and may persist at grain boundaries or due to incomplete reaction. Its 10% weight is reasonable, especially given the moderate dwell time."
+    },
+    "Interpretation_Likelihood": 0.85,
+    "Interpretation_Explanation": "A highly plausible interpretation, though the absence of Fe₂O₃ suggests incomplete capture of possible unreacted precursors. Still, NiFe₂O₄ dominates, and NiO residue is acceptable."
+},
+
+"I_3": {
+    "Likelihoods": {
+    "NiFe2O4 (space group 227)": 0.9,
+    "Fe2O3 (space group 167)": 0.6,
+    "NiO (space group 225)": 0.6
+    },
+    "Explanations": {
+    "NiFe2O4 (space group 227)": "Same as I_2: this is the expected main product under the synthesis conditions, and a 70% yield is realistic.",
+    "Fe2O3 (space group 167)": "Fe₂O₃ (R-3c, SG 167) is a stable precursor and may remain unreacted. 20% weight fraction is plausible, especially with diffusion-limited kinetics.",
+    "NiO (space group 225)": "As a solid precursor, NiO may persist in small amounts. Its presence alongside Fe₂O₃ indicates partial reaction and is consistent with solid-state synthesis behavior."
+    },
+    "Interpretation_Likelihood": 0.95,
+    "Interpretation_Explanation": "This is the most chemically and compositionally plausible interpretation. NiFe₂O₄ is present in high yield, and both NiO and Fe₂O₃ are reasonable unreacted residues. Combined with the perfect balance score, this is the most likely scenario."
+}
+}

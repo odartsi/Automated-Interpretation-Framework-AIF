@@ -20,10 +20,5 @@ src/*.txt
 src/*.html
 notebooks/data/
 notebooks/example_output/
-*.txt
-*.html
-*.png
-*.svg
-*.html
 notebooks/cifs/
 notebooks/dara_downloaded_cifs/
