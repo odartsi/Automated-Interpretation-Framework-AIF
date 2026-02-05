@@ -1,296 +1,183 @@
 {
-    "TRI_197": {
+    "TRI_11": {
         "I_1": {
             "phases": [
+                "V2O5_11",
                 "CaC2_2",
-                "CaV2O5_59"
+                "CaCO3_166"
             ],
             "phase_cifs": [
-                "cifs/CaC2_2_(icsd_66663)-9.cif",
-                "cifs/CaV2O5_59_(icsd_82689)-0.cif"
+                "cifs/V2O5_11_(cod_2102583)-11.cif",
+                "cifs/CaC2_2_(cod_1540818)-9.cif",
+                "cifs/CaCO3_166_(cod_1547381)-None.cif"
             ],
             "phase_icsd": [
-                "66663",
-                "82689"
+                null,
+                null,
+                null
             ],
             "weight_fraction": [
-                18.708529749062446,
-                81.29147025093756
+                36.064706168427136,
+                43.89455686630513,
+                20.040736965267733
             ],
-            "rwp": 16.16,
-            "search_result_rwp": 18.12,
-            "search_result_score": 0.07713137567569764,
-            "score": 0.06559202026598322,
-            "normalized_rwp": 0.7306666666666667,
-            "missing_peaks": 52,
-            "extra_peaks": 14,
-            "peaks_calculated": 69,
-            "peaks_observed": 104,
-            "signal_above_bkg_score": 12786.720357704755,
-            "bkg_overshoot_score": 851.1453281855557,
+            "rwp": 15.79,
+            "search_result_rwp": 19.29,
+            "search_result_score": 0.16397950427318353,
+            "score": 0.288435758806017,
+            "normalized_rwp": 0.7368333333333333,
+            "missing_peaks": 54,
+            "extra_peaks": 6,
+            "peaks_calculated": 74,
+            "peaks_observed": 113,
+            "signal_above_bkg_score": 10467.073486094003,
+            "bkg_overshoot_score": 988.2130758967269,
             "cell_parameters": {
-                "CaC2_2_(icsd_66663)-9": {
-                    "a": 0.38684,
-                    "b": 0.71744,
-                    "c": 0.73357,
-                    "alpha": [
-                        71.926,
-                        0.021
-                    ],
-                    "beta": 84.0665,
-                    "gamma": [
-                        87.999,
-                        0.059
-                    ]
-                },
-                "CaV2O5_59_(icsd_82689)-0": {
-                    "a": 0.35663,
-                    "b": 1.119,
-                    "c": 0.49909,
+                "V2O5_11_(cod_2102583)-11": {
+                    "a": 0.63415,
+                    "b": 0.361295,
+                    "c": 0.71892,
                     "alpha": 90.0,
-                    "beta": 90.0,
+                    "beta": 88.2676,
                     "gamma": 90.0
+                },
+                "CaC2_2_(cod_1540818)-9": {
+                    "a": 0.40188,
+                    "b": 0.73955,
+                    "c": 0.73647,
+                    "alpha": 72.2537,
+                    "beta": 85.053,
+                    "gamma": [
+                        87.499,
+                        0.048
+                    ]
                 }
             },
-            "interpretation_importance": 23.797044709945688,
-            "balance_score": 0.9984,
+            "interpretation_importance": 100.0,
+            "balance_score": 0.9804,
+            "normalized_score": 0.5514939227946749,
             "LLM_phases_likelihood": {
+                "V2O5 (space group 11)": 0.7,
                 "CaC2 (space group 2)": 0.1,
-                "CaV2O5 (space group 59)": 0.7
+                "CaCO3 (space group 166)": 0.6
             },
             "LLM_phases_explanation": {
-                "CaC2 (space group 2)": "CaC2 is unlikely to form under these conditions. The synthesis atmosphere is reducing, but the presence of V2O5 and the target of CaVO2 suggest that carbide formation is not favored. Additionally, CaC2 is not a typical product in such reactions.",
-                "CaV2O5 (space group 59)": "CaV2O5 is a plausible phase given the precursors and reducing atmosphere. It is a known compound that can form under these conditions, although it is not the target phase."
+                "V2O5 (space group 11)": "V2O5 is a stable phase at 900\u00b0C in air, likely present as unreacted precursor or due to incomplete reaction. Its presence is plausible given the synthesis conditions.",
+                "CaC2 (space group 2)": "CaC2 is highly unlikely to form under these conditions, especially in ambient air, as it is a carbide that would require a reducing atmosphere. Its presence is implausible.",
+                "CaCO3 (space group 166)": "CaCO3 can persist if not fully decomposed, especially if the reaction is incomplete. It is plausible as a residual precursor."
             },
-            "LLM_interpretation_likelihood": 0.4,
-            "LLM_interpretation_explanation": "The presence of CaC2 is highly unlikely, reducing the overall plausibility of this interpretation. While CaV2O5 is plausible, the interpretation lacks the target phase CaVO2 and includes an implausible carbide.",
-            "normalized_score": 0.37164288429038356,
-            "prior_probability": 0.7490666666666667,
-            "fit_quality": 0.610992072541239,
-            "trust_score": 0.584445,
-            "pen_llm": 0.5,
-            "comp_llm": 0.5,
-            "pen_signal": 0.180245,
-            "comp_signal": 0.819755,
-            "pen_overshoot": 0.282868,
-            "comp_overshoot": 0.717132,
-            "pen_ratio": 0.498469,
-            "comp_ratio": 0.501531,
-            "pen_balance": 0.03965,
-            "comp_balance": 0.96035,
-            "pen_peak": 0.861387,
-            "comp_peak": 0.138613,
-            "pen_rwp": 0.546267,
-            "comp_rwp": 0.453733,
+            "LLM_interpretation_likelihood": 0.3,
+            "LLM_interpretation_explanation": "The presence of CaC2 is highly implausible under the given conditions, significantly reducing the overall likelihood. V2O5 and CaCO3 are plausible as unreacted precursors, but the interpretation lacks the expected CaVO2 phase.",
+            "prior_probability": 0.6969000000000001,
+            "fit_quality": 0.6750535298204472,
+            "trust_score": 0.521886,
+            "pen_llm": 0.689974,
+            "comp_llm": 0.310026,
+            "pen_signal": 0.357363,
+            "comp_signal": 0.642637,
+            "pen_overshoot": 0.362446,
+            "comp_overshoot": 0.637554,
+            "pen_ratio": 0.764136,
+            "comp_ratio": 0.235864,
+            "pen_balance": 0.045512,
+            "comp_balance": 0.954488,
+            "pen_peak": 0.595813,
+            "comp_peak": 0.404187,
+            "pen_rwp": 0.531558,
+            "comp_rwp": 0.468442,
             "trustworthy": false,
-            "posterior_probability": 0.349175510096996
+            "posterior_probability": 0.553769232819765
         },
         "I_2": {
             "phases": [
-                "CaV2O5_59",
-                "Ca5V3O13_176"
+                "CaC2_2",
+                "CaCO3_167",
+                "V7O13_2"
             ],
             "phase_cifs": [
-                "cifs/CaV2O5_59_(icsd_82689)-0.cif",
-                "cifs/Ca5V3O13_176_(icsd_760148)-6.cif"
+                "cifs/CaC2_2_(cod_1540818)-9.cif",
+                "cifs/CaCO3_167_(cod_1547370)-0.cif",
+                "cifs/V7O13_2_(cod_1530103)-0.cif"
             ],
             "phase_icsd": [
-                "82689",
-                "760148"
+                null,
+                null,
+                null
             ],
             "weight_fraction": [
-                74.89716894312566,
-                25.10283105687433
+                60.932208450802364,
+                30.067093163199203,
+                9.000698385998438
             ],
-            "rwp": 16.27,
-            "search_result_rwp": 18.88,
-            "search_result_score": 0.046658743813036196,
-            "score": 0.1507639717187302,
-            "normalized_rwp": 0.7288333333333334,
-            "missing_peaks": 57,
-            "extra_peaks": 19,
-            "peaks_calculated": 79,
-            "peaks_observed": 104,
-            "signal_above_bkg_score": 13433.477928100478,
-            "bkg_overshoot_score": 653.0405381787712,
+            "rwp": 17.07,
+            "search_result_rwp": 21.8,
+            "search_result_score": 0.0879585988431169,
+            "score": 0.06474029561920919,
+            "normalized_rwp": 0.7155,
+            "missing_peaks": 67,
+            "extra_peaks": 10,
+            "peaks_calculated": 46,
+            "peaks_observed": 113,
+            "signal_above_bkg_score": 11112.71702129682,
+            "bkg_overshoot_score": 806.7110490441129,
             "cell_parameters": {
-                "a": 0.36761,
-                "b": 1.1297,
-                "c": 0.49909,
-                "alpha": 90.0,
-                "beta": 90.0,
-                "gamma": 90.0
-            },
-            "interpretation_importance": 76.2157494346488,
-            "balance_score": 0.9919,
-            "LLM_phases_likelihood": {
-                "CaV2O5 (space group 59)": 0.7,
-                "Ca5V3O13 (space group 176)": 0.5
-            },
-            "LLM_phases_explanation": {
-                "CaV2O5 (space group 59)": "As in I_1, CaV2O5 is a plausible phase under the given conditions, though not the target phase.",
-                "Ca5V3O13 (space group 176)": "Ca5V3O13 is a less common phase but could form under certain conditions. Its formation is less likely than CaV2O5, but not impossible, especially if the reaction is incomplete or the stoichiometry is slightly off."
-            },
-            "LLM_interpretation_likelihood": 0.55,
-            "LLM_interpretation_explanation": "This interpretation is more plausible than I_1 due to the absence of CaC2. However, it still lacks the target phase CaVO2 and includes a less common phase, Ca5V3O13, which reduces its likelihood.",
-            "normalized_score": 0.43765230236748875,
-            "prior_probability": 0.807775,
-            "fit_quality": 0.6317729896780518,
-            "trust_score": 0.696026,
-            "pen_llm": 0.231475,
-            "comp_llm": 0.768525,
-            "pen_signal": 0.145121,
-            "comp_signal": 0.854879,
-            "pen_overshoot": 0.188688,
-            "comp_overshoot": 0.811312,
-            "pen_ratio": 0.184597,
-            "comp_ratio": 0.815403,
-            "pen_balance": 0.041678,
-            "comp_balance": 0.958322,
-            "pen_peak": 0.78563,
-            "comp_peak": 0.21437,
-            "pen_rwp": 0.550626,
-            "comp_rwp": 0.449374,
-            "trustworthy": true,
-            "posterior_probability": 0.3893491149524039
-        },
-        "I_3": {
-            "phases": [
-                "CaC2_2"
-            ],
-            "phase_cifs": [
-                "cifs/CaC2_2_(icsd_66663)-9.cif"
-            ],
-            "phase_icsd": [
-                "66663"
-            ],
-            "weight_fraction": [
-                100.0
-            ],
-            "rwp": 18.05,
-            "search_result_rwp": 20.01,
-            "search_result_score": -0.0003403979561437741,
-            "score": 0.030591620794814495,
-            "normalized_rwp": 0.6991666666666667,
-            "missing_peaks": 68,
-            "extra_peaks": 18,
-            "peaks_calculated": 38,
-            "peaks_observed": 104,
-            "signal_above_bkg_score": 11140.714169538482,
-            "bkg_overshoot_score": 1273.7496413515626,
-            "cell_parameters": {
-                "a": 0.38612,
-                "b": 0.74035,
-                "c": 0.74157,
-                "alpha": [
-                    71.19,
-                    0.15
-                ],
-                "beta": 87.4977,
-                "gamma": [
-                    87.22,
-                    0.15
-                ]
+                "CaC2_2_(cod_1540818)-9": {
+                    "a": 0.38849,
+                    "b": 0.72943,
+                    "c": 0.73281,
+                    "alpha": 72.2537,
+                    "beta": 84.84,
+                    "gamma": 86.9045
+                },
+                "V7O13_2_(cod_1530103)-0": {
+                    "a": 0.53971,
+                    "b": 0.68951,
+                    "c": 1.10468,
+                    "alpha": [
+                        85.15,
+                        0.029
+                    ],
+                    "beta": 90.068,
+                    "gamma": [
+                        71.729,
+                        0.023
+                    ]
+                }
             },
             "interpretation_importance": 0.0,
-            "balance_score": 0.375,
+            "balance_score": 0.8319,
+            "normalized_score": 0.37100796097967825,
             "LLM_phases_likelihood": {
-                "CaC2 (space group 2)": 0.1
+                "CaC2 (space group 2)": 0.1,
+                "CaCO3 (space group 167)": 0.6,
+                "V7O13 (space group 2)": 0.5
             },
             "LLM_phases_explanation": {
-                "CaC2 (space group 2)": "As previously explained, CaC2 is unlikely to form under these conditions. The reducing atmosphere and presence of V2O5 do not favor carbide formation."
+                "CaC2 (space group 2)": "As in I_1, CaC2 is unlikely to form in ambient air due to its carbide nature, requiring reducing conditions.",
+                "CaCO3 (space group 167)": "CaCO3 can remain as a residual precursor if not fully decomposed, especially in a short reaction time or incomplete reaction.",
+                "V7O13 (space group 2)": "V7O13 is a plausible vanadium oxide phase that can form under oxidizing conditions, though it is less common than V2O5. Its presence is possible but not highly expected."
             },
-            "LLM_interpretation_likelihood": 0.1,
-            "LLM_interpretation_explanation": "This interpretation is highly implausible as it only includes CaC2, which is unlikely to form under the given synthesis conditions. The absence of any vanadium-containing phases further reduces its credibility.",
-            "normalized_score": 0.34601833773945767,
-            "prior_probability": 0.26041666666666663,
-            "fit_quality": 0.5814505570242637,
-            "trust_score": 0.290415,
-            "pen_llm": 0.916827,
-            "comp_llm": 0.083173,
-            "pen_signal": 0.298116,
-            "comp_signal": 0.701884,
-            "pen_overshoot": 0.549009,
-            "comp_overshoot": 0.450991,
-            "pen_ratio": 0.841259,
-            "comp_ratio": 0.158741,
-            "pen_balance": 0.858149,
-            "comp_balance": 0.141851,
-            "pen_peak": 0.884101,
-            "comp_peak": 0.115899,
-            "pen_rwp": 0.619635,
-            "comp_rwp": 0.380365,
+            "LLM_interpretation_likelihood": 0.35,
+            "LLM_interpretation_explanation": "The presence of CaC2 remains implausible, and while V7O13 is a possible phase, the absence of CaVO2 and the presence of unlikely phases reduce the overall plausibility. The composition balance score is lower, indicating a mismatch with the target composition.",
+            "prior_probability": 0.6311083333333333,
+            "fit_quality": 0.6006693203265594,
+            "trust_score": 0.525879,
+            "pen_llm": 0.598688,
+            "comp_llm": 0.401312,
+            "pen_signal": 0.300465,
+            "comp_signal": 0.699535,
+            "pen_overshoot": 0.259461,
+            "comp_overshoot": 0.740539,
+            "pen_ratio": 0.580926,
+            "comp_ratio": 0.419074,
+            "pen_balance": 0.135264,
+            "comp_balance": 0.864736,
+            "pen_peak": 0.861992,
+            "comp_peak": 0.138008,
+            "pen_rwp": 0.582051,
+            "comp_rwp": 0.417949,
             "trustworthy": false,
-            "posterior_probability": 0.11552322274998893
-        },
-        "I_4": {
-            "phases": [
-                "CaCO3_2"
-            ],
-            "phase_cifs": [
-                "cifs/CaCO3_2_(icsd_193082)-3.cif"
-            ],
-            "phase_icsd": [
-                "193082"
-            ],
-            "weight_fraction": [
-                100.0
-            ],
-            "rwp": 17.39,
-            "search_result_rwp": 20.56,
-            "search_result_score": -0.011914460174923154,
-            "score": 0.202231659184716,
-            "normalized_rwp": 0.7101666666666666,
-            "missing_peaks": 52,
-            "extra_peaks": 19,
-            "peaks_calculated": 103,
-            "peaks_observed": 104,
-            "signal_above_bkg_score": 16242.802433990613,
-            "bkg_overshoot_score": 791.7711409284377,
-            "cell_parameters": {
-                "a": 0.63385,
-                "b": 0.72117,
-                "c": 1.21616,
-                "alpha": [
-                    92.002,
-                    0.059
-                ],
-                "beta": 98.215,
-                "gamma": [
-                    108.096,
-                    0.065
-                ]
-            },
-            "interpretation_importance": 100.0,
-            "balance_score": 0.375,
-            "LLM_phases_likelihood": {
-                "CaCO3 (space group 2)": 0.3
-            },
-            "LLM_phases_explanation": {
-                "CaCO3 (space group 2)": "CaCO3 is a precursor and could remain unreacted if the reaction is incomplete. However, the reducing atmosphere and high temperature should lead to its decomposition, making its presence less likely."
-            },
-            "LLM_interpretation_likelihood": 0.2,
-            "LLM_interpretation_explanation": "The presence of unreacted CaCO3 is possible but unlikely given the synthesis conditions. The interpretation lacks any vanadium-containing phases, which are expected given the target and precursors.",
-            "normalized_score": 0.47950770211285376,
-            "prior_probability": 0.3020833333333333,
-            "fit_quality": 0.633280345148729,
-            "trust_score": 0.500062,
-            "pen_llm": 0.832018,
-            "comp_llm": 0.167982,
-            "pen_signal": 0.052296,
-            "comp_signal": 0.947704,
-            "pen_overshoot": 0.25188,
-            "comp_overshoot": 0.74812,
-            "pen_ratio": 0.186861,
-            "comp_ratio": 0.813139,
-            "pen_balance": 0.858149,
-            "comp_balance": 0.141851,
-            "pen_peak": 0.72391,
-            "comp_peak": 0.27609,
-            "pen_rwp": 0.594452,
-            "comp_rwp": 0.405548,
-            "trustworthy": false,
-            "posterior_probability": 0.14595215220061125
+            "posterior_probability": 0.44623076718023513
         }
     }
 }

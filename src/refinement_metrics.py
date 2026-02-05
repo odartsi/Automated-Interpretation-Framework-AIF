@@ -26,9 +26,9 @@ from utils import (
     bkg_overshoot_score,
 )
 import time
-TIME_LIMIT_ = 2000
-TIME_LIMIT = 1200
-MAX_ITER_WITHOUT_NEW_INTERPRETATION = 10
+TIME_LIMIT_ = 200#0
+TIME_LIMIT = 120#0
+MAX_ITER_WITHOUT_NEW_INTERPRETATION = 1#0
 
 def filter_valid_structure_cifs(cif_paths):
     good = []
