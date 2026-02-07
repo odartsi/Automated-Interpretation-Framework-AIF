@@ -55,19 +55,19 @@
             },
             "interpretation_importance": 100.0,
             "balance_score": 0.9804,
+            "normalized_score": 0.5514939227946749,
             "LLM_phases_likelihood": {
-                "V2O5 (space group 11)": 0.8,
+                "V2O5 (space group 11)": 0.7,
                 "CaC2 (space group 2)": 0.1,
-                "CaCO3 (space group 166)": 0.7
+                "CaCO3 (space group 166)": 0.6
             },
             "LLM_phases_explanation": {
-                "V2O5 (space group 11)": "V2O5 is stable in ambient air and likely remains unreacted due to incomplete reaction. It is a common phase at 900\u00b0C.",
-                "CaC2 (space group 2)": "CaC2 is unlikely to form in ambient air as it requires a reducing environment. Its presence is implausible under these conditions.",
-                "CaCO3 (space group 166)": "CaCO3 can remain unreacted or decompose to CaO and CO2. Its presence is plausible if decomposition is incomplete."
+                "V2O5 (space group 11)": "V2O5 is a stable phase at 900\u00b0C in air, likely present as unreacted precursor or due to incomplete reaction. Its presence is plausible given the synthesis conditions.",
+                "CaC2 (space group 2)": "CaC2 is highly unlikely to form under these conditions, especially in ambient air, as it is a carbide that would require a reducing atmosphere. Its presence is implausible.",
+                "CaCO3 (space group 166)": "CaCO3 can persist if not fully decomposed, especially if the reaction is incomplete. It is plausible as a residual precursor."
             },
             "LLM_interpretation_likelihood": 0.3,
-            "LLM_interpretation_explanation": "The presence of CaC2 is highly unlikely in ambient air, significantly reducing the plausibility of this interpretation. V2O5 and CaCO3 are plausible, but the overall phase set does not align well with expected products.",
-            "normalized_score": 0.5514939227946749,
+            "LLM_interpretation_explanation": "The presence of CaC2 is highly implausible under the given conditions, significantly reducing the overall likelihood. V2O5 and CaCO3 are plausible as unreacted precursors, but the interpretation lacks the expected CaVO2 phase.",
             "prior_probability": 0.6969000000000001,
             "fit_quality": 0.6750535298204472,
             "trust_score": 0.521886,
@@ -86,159 +86,9 @@
             "pen_rwp": 0.531558,
             "comp_rwp": 0.468442,
             "trustworthy": false,
-            "posterior_probability": 0.21872744787355722
+            "posterior_probability": 0.553769232819765
         },
         "I_2": {
-            "phases": [
-                "V2O5_11",
-                "CaCO3_166",
-                "C3O_214"
-            ],
-            "phase_cifs": [
-                "cifs/V2O5_11_(cod_2102583)-11.cif",
-                "cifs/CaCO3_166_(cod_1547381)-None.cif",
-                "cifs/C3O_214_(cod_1570671)-None.cif"
-            ],
-            "phase_icsd": [
-                null,
-                null,
-                null
-            ],
-            "weight_fraction": [
-                69.68757473980112,
-                16.85619165998357,
-                13.4562336002153
-            ],
-            "rwp": 17.86,
-            "search_result_rwp": 19.86,
-            "search_result_score": 0.12843466692847685,
-            "score": 0.22365879538977038,
-            "normalized_rwp": 0.7023333333333334,
-            "missing_peaks": 60,
-            "extra_peaks": 3,
-            "peaks_calculated": 49,
-            "peaks_observed": 113,
-            "signal_above_bkg_score": 9551.082113833629,
-            "bkg_overshoot_score": 1602.6041108380552,
-            "cell_parameters": {
-                "a": 0.63435,
-                "b": 0.36139,
-                "c": 0.71196,
-                "alpha": 90.0,
-                "beta": 88.52,
-                "gamma": 90.0
-            },
-            "interpretation_importance": 60.31532328976611,
-            "balance_score": 0.9038999999999999,
-            "LLM_phases_likelihood": {
-                "V2O5 (space group 11)": 0.8,
-                "CaCO3 (space group 166)": 0.7,
-                "C3O (space group 214)": 0.0
-            },
-            "LLM_phases_explanation": {
-                "V2O5 (space group 11)": "As above, V2O5 is stable and likely remains unreacted.",
-                "CaCO3 (space group 166)": "CaCO3 can remain unreacted or partially decompose.",
-                "C3O (space group 214)": "C3O is not a plausible solid phase under these conditions. It is not a recognized stable compound."
-            },
-            "LLM_interpretation_likelihood": 0.2,
-            "LLM_interpretation_explanation": "The inclusion of C3O, a non-existent solid phase, severely undermines this interpretation. While V2O5 and CaCO3 are plausible, the overall interpretation is not credible.",
-            "normalized_score": 0.4972404027766538,
-            "prior_probability": 0.6106083333333333,
-            "fit_quality": 0.6339690231477735,
-            "trust_score": 0.381714,
-            "pen_llm": 0.832018,
-            "comp_llm": 0.167982,
-            "pen_signal": 0.445114,
-            "comp_signal": 0.554886,
-            "pen_overshoot": 0.745283,
-            "comp_overshoot": 0.254717,
-            "pen_ratio": 0.917643,
-            "comp_ratio": 0.082357,
-            "pen_balance": 0.080824,
-            "comp_balance": 0.919176,
-            "pen_peak": 0.694677,
-            "comp_peak": 0.305323,
-            "pen_rwp": 0.612445,
-            "comp_rwp": 0.387555,
-            "trustworthy": false,
-            "posterior_probability": 0.17998046670902704
-        },
-        "I_3": {
-            "phases": [
-                "V2O5_11",
-                "CaCO3_167",
-                "C3O_214"
-            ],
-            "phase_cifs": [
-                "cifs/V2O5_11_(cod_2102583)-11.cif",
-                "cifs/CaCO3_167_(cod_1547380)-0.cif",
-                "cifs/C3O_214_(cod_1570671)-None.cif"
-            ],
-            "phase_icsd": [
-                null,
-                null,
-                null
-            ],
-            "weight_fraction": [
-                55.139320245558146,
-                29.634871700837756,
-                15.225808053604103
-            ],
-            "rwp": 18.25,
-            "search_result_rwp": 20.14,
-            "search_result_score": 0.10810442074852972,
-            "score": 0.19114206283037216,
-            "normalized_rwp": 0.6958333333333333,
-            "missing_peaks": 61,
-            "extra_peaks": 6,
-            "peaks_calculated": 57,
-            "peaks_observed": 113,
-            "signal_above_bkg_score": 9751.102615987187,
-            "bkg_overshoot_score": 1488.0657267628437,
-            "cell_parameters": {
-                "a": 0.63309,
-                "b": 0.361672,
-                "c": 0.70667,
-                "alpha": 90.0,
-                "beta": 91.446,
-                "gamma": 90.0
-            },
-            "interpretation_importance": 46.15682404307167,
-            "balance_score": 0.9775,
-            "LLM_phases_likelihood": {
-                "V2O5 (space group 11)": 0.8,
-                "CaCO3 (space group 167)": 0.7,
-                "C3O (space group 214)": 0.0
-            },
-            "LLM_phases_explanation": {
-                "V2O5 (space group 11)": "V2O5 is stable and likely remains unreacted.",
-                "CaCO3 (space group 167)": "CaCO3 can remain unreacted or partially decompose.",
-                "C3O (space group 214)": "C3O is not a plausible solid phase under these conditions."
-            },
-            "LLM_interpretation_likelihood": 0.2,
-            "LLM_interpretation_explanation": "Similar to I_2, the presence of C3O is implausible, reducing the credibility of this interpretation. V2O5 and CaCO3 are plausible, but the overall phase set is not realistic.",
-            "normalized_score": 0.47039286685561266,
-            "prior_probability": 0.6535416666666667,
-            "fit_quality": 0.620686511174093,
-            "trust_score": 0.391802,
-            "pen_llm": 0.832018,
-            "comp_llm": 0.167982,
-            "pen_signal": 0.42545,
-            "comp_signal": 0.57455,
-            "pen_overshoot": 0.683126,
-            "comp_overshoot": 0.316874,
-            "pen_ratio": 0.904872,
-            "comp_ratio": 0.095128,
-            "pen_balance": 0.04653,
-            "comp_balance": 0.95347,
-            "pen_peak": 0.738243,
-            "comp_peak": 0.261757,
-            "pen_rwp": 0.627148,
-            "comp_rwp": 0.372852,
-            "trustworthy": false,
-            "posterior_probability": 0.188599352443644
-        },
-        "I_4": {
             "phases": [
                 "CaC2_2",
                 "CaCO3_167",
@@ -296,19 +146,19 @@
             },
             "interpretation_importance": 0.0,
             "balance_score": 0.8319,
+            "normalized_score": 0.37100796097967825,
             "LLM_phases_likelihood": {
                 "CaC2 (space group 2)": 0.1,
-                "CaCO3 (space group 167)": 0.7,
+                "CaCO3 (space group 167)": 0.6,
                 "V7O13 (space group 2)": 0.5
             },
             "LLM_phases_explanation": {
-                "CaC2 (space group 2)": "CaC2 is unlikely to form in ambient air, requiring a reducing environment.",
-                "CaCO3 (space group 167)": "CaCO3 can remain unreacted or partially decompose.",
-                "V7O13 (space group 2)": "V7O13 is a possible reduced vanadium oxide phase, but its formation in ambient air is less likely."
+                "CaC2 (space group 2)": "As in I_1, CaC2 is unlikely to form in ambient air due to its carbide nature, requiring reducing conditions.",
+                "CaCO3 (space group 167)": "CaCO3 can remain as a residual precursor if not fully decomposed, especially in a short reaction time or incomplete reaction.",
+                "V7O13 (space group 2)": "V7O13 is a plausible vanadium oxide phase that can form under oxidizing conditions, though it is less common than V2O5. Its presence is possible but not highly expected."
             },
             "LLM_interpretation_likelihood": 0.35,
-            "LLM_interpretation_explanation": "The presence of CaC2 is highly unlikely, and V7O13 is less plausible in ambient air. The interpretation is not consistent with expected products under the given conditions.",
-            "normalized_score": 0.37100796097967825,
+            "LLM_interpretation_explanation": "The presence of CaC2 remains implausible, and while V7O13 is a possible phase, the absence of CaVO2 and the presence of unlikely phases reduce the overall plausibility. The composition balance score is lower, indicating a mismatch with the target composition.",
             "prior_probability": 0.6311083333333333,
             "fit_quality": 0.6006693203265594,
             "trust_score": 0.525879,
@@ -327,95 +177,7 @@
             "pen_rwp": 0.582051,
             "comp_rwp": 0.417949,
             "trustworthy": false,
-            "posterior_probability": 0.17625196757682474
-        },
-        "I_5": {
-            "phases": [
-                "V2O5_11",
-                "CaC2_2",
-                "CaCO3_167"
-            ],
-            "phase_cifs": [
-                "cifs/V2O5_11_(cod_2102583)-11.cif",
-                "cifs/CaC2_2_(cod_1540818)-9.cif",
-                "cifs/CaCO3_167_(cod_1547372)-0.cif"
-            ],
-            "phase_icsd": [
-                null,
-                null,
-                null
-            ],
-            "weight_fraction": [
-                55.62499439607635,
-                23.55407562158721,
-                20.82092998233643
-            ],
-            "rwp": 14.79,
-            "search_result_rwp": 19.38,
-            "search_result_score": 0.16150118073125455,
-            "score": 0.2663020511532748,
-            "normalized_rwp": 0.7535000000000001,
-            "missing_peaks": 58,
-            "extra_peaks": 2,
-            "peaks_calculated": 52,
-            "peaks_observed": 113,
-            "signal_above_bkg_score": 9797.313211776369,
-            "bkg_overshoot_score": 1366.4900920487369,
-            "cell_parameters": {
-                "V2O5_11_(cod_2102583)-11": {
-                    "a": 0.6265,
-                    "b": 0.360332,
-                    "c": 0.72563,
-                    "alpha": 90.0,
-                    "beta": 88.569,
-                    "gamma": 90.0
-                },
-                "CaC2_2_(cod_1540818)-9": {
-                    "a": 0.40188,
-                    "b": 0.73879,
-                    "c": 0.73719,
-                    "alpha": 72.2537,
-                    "beta": 85.075,
-                    "gamma": [
-                        87.574,
-                        0.046
-                    ]
-                }
-            },
-            "interpretation_importance": 98.19376099420664,
-            "balance_score": 0.9964,
-            "LLM_phases_likelihood": {
-                "V2O5 (space group 11)": 0.8,
-                "CaC2 (space group 2)": 0.1,
-                "CaCO3 (space group 167)": 0.7
-            },
-            "LLM_phases_explanation": {
-                "V2O5 (space group 11)": "V2O5 is stable and likely remains unreacted.",
-                "CaC2 (space group 2)": "CaC2 is unlikely to form in ambient air.",
-                "CaCO3 (space group 167)": "CaCO3 can remain unreacted or partially decompose."
-            },
-            "LLM_interpretation_likelihood": 0.4,
-            "LLM_interpretation_explanation": "While V2O5 and CaCO3 are plausible, the presence of CaC2 is highly unlikely, reducing the overall plausibility of this interpretation. However, the composition balance score is high, suggesting some alignment with expected stoichiometry.",
-            "normalized_score": 0.5328839902891142,
-            "prior_probability": 0.7478999999999999,
-            "fit_quality": 0.6799613300963715,
-            "trust_score": 0.488165,
-            "pen_llm": 0.5,
-            "comp_llm": 0.5,
-            "pen_signal": 0.420938,
-            "comp_signal": 0.579062,
-            "pen_overshoot": 0.609205,
-            "comp_overshoot": 0.390795,
-            "pen_ratio": 0.889739,
-            "comp_ratio": 0.110261,
-            "pen_balance": 0.040264,
-            "comp_balance": 0.959736,
-            "pen_peak": 0.631098,
-            "comp_peak": 0.368902,
-            "pen_rwp": 0.491601,
-            "comp_rwp": 0.508399,
-            "trustworthy": false,
-            "posterior_probability": 0.23644076539694697
+            "posterior_probability": 0.44623076718023513
         }
     }
 }
