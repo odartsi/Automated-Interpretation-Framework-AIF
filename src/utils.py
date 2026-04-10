@@ -674,20 +674,12 @@ def calculate_posterior_probability_of_interpretation(interpretations):
 
     if not isinstance(interpretations, dict):
         raise ValueError("Interpretations should be a dictionary or a list containing a dictionary.")
+    # Compute posterior = prior * fit_quality (unnormalized)
 
-    # Step 1: Compute joint = prior * fit_quality
-    joint_probabilities = {}
+    # Compute posterior probability 
     for name, interp in interpretations.items():
         joint = interp["prior_probability"] * interp["fit_quality"]
-        joint_probabilities[name] = joint
-
-    # Step 2: Normalize to get posterior_probability
-    total_joint = sum(joint_probabilities.values())
-    for name in interpretations:
-        if total_joint > 0:
-            interpretations[name]["posterior_probability"] = joint_probabilities[name] / total_joint
-        else:
-            interpretations[name]["posterior_probability"] = 0.0
+        interpretations[name]["posterior_probability"] = joint
 
     return interpretations
 
