@@ -770,7 +770,7 @@ def calculate_fit_quality(interpretations, w_rwp=1, w_score=1):
 
 def flag_interpretation_trustworthiness(
     interpretations: dict,
-    trust_threshold: float = 0.65
+    trust_threshold: float = 0.6
 ) -> dict:
     """
     Adds a boolean 'trustworthy' field to each interpretation based solely on trust_score.
